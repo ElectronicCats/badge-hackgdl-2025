@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "footprints")(type "KiCad")(uri "${KIPRJMOD}/Footprints/footprints.kicad_sym")(options "")(descr ""))
+)
