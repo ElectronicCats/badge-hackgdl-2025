@@ -27,4 +27,4 @@ hardware/**/*.xml
 hardware/**/*.csv
 
 #Ignore backups
-hardware/badge-hackgdl-2025-backups
+/hardware/badge-hackgdl-2025-backups
