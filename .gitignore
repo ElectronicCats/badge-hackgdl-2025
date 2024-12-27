@@ -26,4 +26,5 @@ hardware/**/~*.lck
 hardware/**/*.xml
 hardware/**/*.csv
 
-hardware/Template-KiCAD-Project-CI-backups/
+#Ignore backups
+hardware/badge-hackgdl-2025-backups
