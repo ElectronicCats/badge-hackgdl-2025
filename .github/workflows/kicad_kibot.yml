@@ -19,9 +19,9 @@ jobs:
         # Required - kibot config file
         config: hardware/electroniccats_sch.kibot.yaml
         # optional - schematic file
-        schema: 'hardware/Template-KiCAD-Project-CI.kicad_sch'
+        schema: 'hardware/badge-hackgdl-2025.kicad_sch'
         # optional - pcb file
-        board: 'hardware/Template-KiCAD-Project-CI.kicad_pcb'
+        board: 'hardware/badge-hackgdl-2025.kicad_pcb'
 
     - name: upload assets
       uses: softprops/action-gh-release@v1
@@ -42,9 +42,9 @@ jobs:
         # Required - kibot config file
         config: hardware/electroniccats_pcb.kibot.yaml
         # optional - schematic file
-        schema: 'hardware/Template-KiCAD-Project-CI.kicad_sch'
+        schema: 'hardware/badge-hackgdl-2025.kicad_sch'
         # optional - pcb file
-        board: 'hardware/Template-KiCAD-Project-CI.kicad_pcb'
+        board: 'hardware/badge-hackgdl-2025.kicad_pcb'
 
     - name: upload assets
       uses: softprops/action-gh-release@v1
