@@ -35,3 +35,4 @@ firmware/sdkconfig.old
 firmware/dependencies.lock
 firmware/managed_components/espressif__button/.component_hash
 /firmware/managed_components
+.vscode/settings.json

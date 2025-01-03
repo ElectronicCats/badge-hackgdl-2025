@@ -1,6 +1,5 @@
 #include <stdio.h>
 
-void app_main(void)
-{
-    printf("Hello, world!\n");
-}
+#include "tama_app.h"
+
+void app_main(void) { tama_app_begin(); }
