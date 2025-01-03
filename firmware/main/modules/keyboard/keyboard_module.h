@@ -7,10 +7,10 @@
 #define MIDDLE_BUTTON_PIN 15
 #define RIGHT_BUTTON_PIN 1
 
-#define BACK_BUTTON_MASK 0b0000 << 4
-#define LEFT_BUTTON_MASK 0b0001 << 4
-#define MIDDLE_BUTTON_MASK 0b0010 << 4
-#define RIGHT_BUTTON_MASK 0b0011 << 4
+#define LEFT_BUTTON_MASK 0b0000 << 4
+#define MIDDLE_BUTTON_MASK 0b0001 << 4
+#define RIGHT_BUTTON_MASK 0b0010 << 4
+#define BACK_BUTTON_MASK 0b0011 << 4
 
 #define BUTTON_ACTIVE_LEVEL 0
 
@@ -18,20 +18,18 @@
  * @brief Enum of the available keyboard buttons
  *
  */
-typedef enum
-{
-  BUTTON_BACK = 0,
+typedef enum {
   BUTTON_LEFT,
   BUTTON_MIDDLE,
-  BUTTON_RIGHT
+  BUTTON_RIGHT,
+  BUTTON_BACK,
 } keyboard_buttons_layout_t;
 
 /**
  * @brief Struct to hold the button state
  *
  */
-typedef struct
-{
+typedef struct {
   uint8_t button_pressed;
   uint8_t button_event;
 } button_event_state_t;

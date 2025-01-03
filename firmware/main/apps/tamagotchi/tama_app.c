@@ -33,7 +33,8 @@
 #include "tama_state.h"
 
 #define SPEED_DIVIDER 2
-#define TAMA_DISPLAY_FRAMERATE 3
+#define TAMA_DISPLAY_FREQ 1020700
+#define TAMA_DISPLAY_FRAMERATE 4
 #define AUTOSAVE_INTERVAL_S 10
 
 /**** TamaLib Specific Variables ****/
@@ -46,7 +47,6 @@ static void hal_halt(void);
 static void hal_log(log_level_t level, char *buff, ...);
 static void hal_sleep_until(timestamp_t ts);
 static timestamp_t hal_get_timestamp(void);
-static int hal_handler(void);
 
 static hal_t hal = {
     .halt = &hal_halt,
@@ -68,8 +68,6 @@ static void hal_log(log_level_t level, char *buff, ...) { printf("buff\n"); }
 static void hal_sleep_until(timestamp_t ts) { printf("Sleep\n"); }
 
 static timestamp_t hal_get_timestamp(void) { return (esp_timer_get_time()); }
-
-static int hal_handler(void) { return 0; }
 
 static void dumpStateToSerial() {
   uint16_t i, count = 0;
@@ -97,7 +95,7 @@ static void tamalib_begin() {
 
   tamalib_register_hal(&hal);
   tamalib_set_framerate(TAMA_DISPLAY_FRAMERATE);
-  tamalib_init(1000000);
+  tamalib_init(TAMA_DISPLAY_FREQ);
 
   tama_state_begin();
   tama_state_load(&cpuState);

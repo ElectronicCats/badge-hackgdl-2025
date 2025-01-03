@@ -3,4 +3,5 @@
 
 #include <stdio.h>
 void tama_input_begin();
+int hal_handler();
 #endif
