@@ -28,3 +28,6 @@ hardware/**/*.csv
 
 #Ignore backups
 /hardware/badge-hackgdl-2025-backups
+/firmware/build
+firmware/sdkconfig
+firmware/sdkconfig.old
