@@ -40,7 +40,6 @@
 /**** TamaLib Specific Variables ****/
 static cpu_state_t cpuState;
 static unsigned long lastSaveTimestamp = 0;
-static long last_interaction = 0;
 /************************************/
 
 static void hal_halt(void);

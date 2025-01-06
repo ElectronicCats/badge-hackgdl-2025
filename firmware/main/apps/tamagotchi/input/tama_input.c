@@ -7,6 +7,7 @@
 #include "freertos/task.h"
 
 #include "keyboard_module.h"
+#include "menus_module.h"
 
 typedef struct {
   uint8_t button;
@@ -19,6 +20,10 @@ QueueHandle_t xQueue;
 static void input_cb(uint8_t button, uint8_t event) {
   ButtonEvent_t eventToSend;
   if (event != BUTTON_PRESS_DOWN && event != BUTTON_PRESS_UP) {
+    return;
+  }
+  if (button == BUTTON_BACK && event == BUTTON_PRESS_DOWN) {
+    menus_module_exit_app();
     return;
   }
   eventToSend.button = button;

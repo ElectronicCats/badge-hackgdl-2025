@@ -3,7 +3,6 @@
 #include "buzzer.h"
 #include <driver/gpio.h>
 
-#define PIN_BUZZER GPIO_NUM_2
 #define FREQ_DIVIDER 2
 
 static uint16_t current_freq = 0;
@@ -18,4 +17,6 @@ void hal_play_frequency(bool en) {
   }
 }
 
-void tama_buzzer_begin() { buzzer_begin(PIN_BUZZER); }
+void tama_buzzer_begin() {
+  // buzzer_begin(PIN_BUZZER);
+}
