@@ -4,15 +4,19 @@
 #include <stdbool.h>
 #include <stdio.h>
 
+#include "menus_icons.h"
+
 typedef enum {
   MENU_MAIN = 0,
-  MENU_APPLICATIONS,
+  MENU_WIFI,
+  MENU_BLUETOOTH,
   MENU_TAMAGOTCHI,
 } menu_idx_t;
 
 typedef struct {
   menu_idx_t menu_idx;
   menu_idx_t parent_idx;
+  menu_icon_t *icon;
   const char *display_name;
   const char *entry_cmd;
   uint8_t last_selected_submenu;

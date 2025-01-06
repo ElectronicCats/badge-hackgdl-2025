@@ -8,6 +8,7 @@
 
 #include "keyboard_module.h"
 #include "menus_module.h"
+#include "tama_app.h"
 
 typedef struct {
   uint8_t button;
@@ -23,7 +24,7 @@ static void input_cb(uint8_t button, uint8_t event) {
     return;
   }
   if (button == BUTTON_BACK && event == BUTTON_PRESS_DOWN) {
-    menus_module_exit_app();
+    tama_app_exit();
     return;
   }
   eventToSend.button = button;
@@ -44,6 +45,7 @@ int hal_handler() {
 
 void tama_input_begin() {
   xQueue = xQueueCreate(QUEUE_SIZE, sizeof(ButtonEvent_t));
-  keyboard_module_begin();
-  keyboard_module_set_input_callback(input_cb);
+  // keyboard_module_begin();
+  // keyboard_module_set_input_callback(input_cb);
+  menus_module_set_app_state(true, input_cb);
 }

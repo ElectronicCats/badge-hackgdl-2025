@@ -15,5 +15,4 @@ void app_main(void) {
   display_module_begin();
   keyboard_module_begin();
   menus_module_begin();
-  // tama_app_begin();
 }

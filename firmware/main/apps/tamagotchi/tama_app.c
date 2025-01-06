@@ -32,6 +32,8 @@
 #include "tama_input.h"
 #include "tama_state.h"
 
+#include "menus_module.h"
+
 #define SPEED_DIVIDER 2
 #define TAMA_DISPLAY_FREQ 1020700
 #define TAMA_DISPLAY_FRAMERATE 4
@@ -46,6 +48,7 @@ static void hal_halt(void);
 static void hal_log(log_level_t level, char *buff, ...);
 static void hal_sleep_until(timestamp_t ts);
 static timestamp_t hal_get_timestamp(void);
+static void hal_update_screen();
 
 static hal_t hal = {
     .halt = &hal_halt,
@@ -60,6 +63,8 @@ static hal_t hal = {
     .handler = &hal_handler,
 };
 
+volatile bool is_running = false;
+
 static void hal_halt(void) { printf("Halt!\n"); }
 
 static void hal_log(log_level_t level, char *buff, ...) { printf("buff\n"); }
@@ -67,6 +72,13 @@ static void hal_log(log_level_t level, char *buff, ...) { printf("buff\n"); }
 static void hal_sleep_until(timestamp_t ts) { printf("Sleep\n"); }
 
 static timestamp_t hal_get_timestamp(void) { return (esp_timer_get_time()); }
+
+static void hal_update_screen() {
+  if (!is_running) {
+    return;
+  }
+  tama_display_update_screen();
+}
 
 static void dumpStateToSerial() {
   uint16_t i, count = 0;
@@ -102,7 +114,8 @@ static void tamalib_begin() {
 }
 
 static void tama_app_task() {
-  while (1) {
+  is_running = true;
+  while (is_running) {
     tamalib_mainloop_step_by_step();
     if (esp_timer_get_time() - lastSaveTimestamp >
         AUTOSAVE_INTERVAL_S * 1000000) {
@@ -110,9 +123,17 @@ static void tama_app_task() {
       lastSaveTimestamp = esp_timer_get_time();
     }
   }
+  tama_state_save(&cpuState);
+  vTaskDelete(NULL);
 }
 
 void tama_app_begin() {
   tamalib_begin();
   xTaskCreatePinnedToCore(tama_app_task, "app_task", 4096, NULL, 5, NULL, 0);
+}
+
+void tama_app_exit() {
+  is_running = false;
+  vTaskDelay(pdMS_TO_TICKS(300));
+  menus_module_exit_app();
 }

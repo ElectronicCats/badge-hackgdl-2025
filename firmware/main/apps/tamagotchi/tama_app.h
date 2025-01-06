@@ -4,5 +4,6 @@
 #include <stdio.h>
 
 void tama_app_begin();
+void tama_app_exit();
 
 #endif

@@ -71,7 +71,7 @@ void hal_set_lcd_matrix(uint8_t x, uint8_t y, bool val) {
 
 void hal_set_lcd_icon(uint8_t icon, bool val) { icon_buffer[icon] = val; }
 
-void hal_update_screen() { displayTama(); }
+void tama_display_update_screen() { displayTama(); }
 
 void tama_display_begin() {
   // display_module_begin();
