@@ -10852,6 +10852,24 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC#" "C85713"
+			(at 59.69 185.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "provedor" "LCSC"
+			(at 59.69 185.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "4d53a5c6-10aa-419b-8441-3519ee2773cc")
 		)
@@ -11184,6 +11202,24 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC#" "C15725"
+			(at 52.07 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "provedor" "LCSC"
+			(at 52.07 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "d02977c6-44f9-41ce-b470-e24005b3a69b")
 		)
@@ -11411,6 +11447,15 @@
 				(hide yes)
 			)
 		)
+		(property "provedor" "LCSC"
+			(at 233.68 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "fc5ddd17-9795-4297-a1bb-f0c163bae44c")
 		)
@@ -11479,6 +11524,24 @@
 			)
 		)
 		(property "Description" "OLED display 128x64"
+			(at 41.91 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC#" "C2890596"
+			(at 41.91 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "provedor" "LCSC"
 			(at 41.91 147.32 0)
 			(effects
 				(font
@@ -11832,6 +11895,15 @@
 			)
 		)
 		(property "manf#" "WS2812B-Mini"
+			(at 259.08 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "provedor" "LCSC"
 			(at 259.08 148.59 0)
 			(effects
 				(font
@@ -13184,6 +13256,24 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC#" "C99198"
+			(at 81.28 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "provedor" "LCSC"
+			(at 81.28 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "b095135d-8e1d-412c-9eba-65b1b78f54c3")
 		)
@@ -13385,7 +13475,7 @@
 				)
 			)
 		)
-		(property "Value" ".1uF"
+		(property "Value" "100nF"
 			(at 269.24 132.08 90)
 			(effects
 				(font
@@ -13420,7 +13510,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C478888"
+		(property "LCSC#" "C15725"
 			(at 269.24 135.89 0)
 			(effects
 				(font
@@ -13438,7 +13528,16 @@
 				(hide yes)
 			)
 		)
-		(property "manf#" "0603F104M500NT"
+		(property "manf#" ""
+			(at 269.24 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "provedor" "LCSC"
 			(at 269.24 135.89 0)
 			(effects
 				(font
@@ -13506,6 +13605,24 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 80.01 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC#" "C99198"
+			(at 80.01 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "provedor" "LCSC"
 			(at 80.01 139.7 0)
 			(effects
 				(font
@@ -13875,6 +13992,24 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 59.69 175.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC#" "C23150"
+			(at 59.69 175.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "provedor" "LCSC"
 			(at 59.69 175.26 0)
 			(effects
 				(font
@@ -14365,7 +14500,7 @@
 				(hide yes)
 			)
 		)
-		(property "manf#" "-"
+		(property "manf#" ""
 			(at 81.28 76.2 0)
 			(effects
 				(font
@@ -14374,7 +14509,7 @@
 				(hide yes)
 			)
 		)
-		(property "provedor" "-"
+		(property "provedor" "LCSC"
 			(at 81.28 76.2 0)
 			(effects
 				(font
@@ -14584,7 +14719,7 @@
 				(hide yes)
 			)
 		)
-		(property "manf#" "GRM188R61E106KA73J"
+		(property "manf#" ""
 			(at 125.73 49.53 0)
 			(effects
 				(font
@@ -14708,6 +14843,15 @@
 			)
 		)
 		(property "manf#" "WS2812B-Mini"
+			(at 212.09 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "provedor" "LCSC"
 			(at 212.09 148.59 0)
 			(effects
 				(font
@@ -15654,6 +15798,24 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC#" "C15849"
+			(at 68.58 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "provedor" "LCSC"
+			(at 68.58 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "c9e85ccf-9a56-4cfd-89cc-39437afbe31b")
 		)
@@ -15925,7 +16087,7 @@
 				)
 			)
 		)
-		(property "Value" ".1uF"
+		(property "Value" "100nF"
 			(at 241.3 132.08 90)
 			(effects
 				(font
@@ -15960,7 +16122,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C478888"
+		(property "LCSC#" "C15725"
 			(at 241.3 135.89 0)
 			(effects
 				(font
@@ -15978,7 +16140,16 @@
 				(hide yes)
 			)
 		)
-		(property "manf#" "0603F104M500NT"
+		(property "manf#" ""
+			(at 241.3 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "provedor" "LCSC"
 			(at 241.3 135.89 0)
 			(effects
 				(font
@@ -16233,6 +16404,15 @@
 				(hide yes)
 			)
 		)
+		(property "provedor" "LCSC"
+			(at 199.39 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "0b5c7ea2-e584-4d8e-9586-6839932d147b")
 		)
@@ -16425,6 +16605,24 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
+			(at 52.07 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC#" "C85713"
+			(at 52.07 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "provedor" "LCSC"
 			(at 52.07 107.95 0)
 			(effects
 				(font
@@ -16744,7 +16942,7 @@
 				(hide yes)
 			)
 		)
-		(property "manf#" "MBR120LSF"
+		(property "manf#" ""
 			(at 138.176 109.474 0)
 			(effects
 				(font
@@ -17396,7 +17594,7 @@
 				(hide yes)
 			)
 		)
-		(property "manf#" "GRM188R61E106KA73J"
+		(property "manf#" ""
 			(at 104.14 53.34 0)
 			(effects
 				(font
@@ -17566,6 +17764,24 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC#" "C99198"
+			(at 80.01 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "provedor" "LCSC"
+			(at 80.01 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "d63e27d6-b8bd-4ed9-8696-dd3cc27e0e79")
 		)
@@ -17626,6 +17842,24 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
+			(at 35.56 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC#" "C85713"
+			(at 35.56 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "provedor" "LCSC"
 			(at 35.56 102.87 0)
 			(effects
 				(font
@@ -17796,6 +18030,24 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC#" "C15849"
+			(at 68.58 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "provedor" "LCSC"
+			(at 68.58 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "dd87d975-e64e-473c-8160-0593ed7f40b8")
 		)
@@ -17857,6 +18109,24 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 87.63 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC#" "C99198"
+			(at 87.63 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "provedor" "LCSC"
 			(at 87.63 160.02 0)
 			(effects
 				(font
@@ -18453,7 +18723,7 @@
 				)
 			)
 		)
-		(property "Value" ".1uF"
+		(property "Value" "100nF"
 			(at 219.71 132.08 90)
 			(effects
 				(font
@@ -18488,7 +18758,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C478888"
+		(property "LCSC#" "C15725"
 			(at 219.71 135.89 0)
 			(effects
 				(font
@@ -18506,7 +18776,16 @@
 				(hide yes)
 			)
 		)
-		(property "manf#" "0603F104M500NT"
+		(property "manf#" ""
+			(at 219.71 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "provedor" "LCSC"
 			(at 219.71 135.89 0)
 			(effects
 				(font
@@ -18939,7 +19218,7 @@
 				(hide yes)
 			)
 		)
-		(property "manf#" "MBR120LSFT1G"
+		(property "manf#" ""
 			(at 83.82 45.72 0)
 			(effects
 				(font
