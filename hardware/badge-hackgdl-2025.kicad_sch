@@ -4,6 +4,14 @@
 	(generator_version "8.0")
 	(uuid "570c3069-5a6c-4b3e-98ab-959d221dff05")
 	(paper "A4")
+	(title_block
+		(title "HackGDL 2025")
+		(date "2025-01-06")
+		(rev "1.0")
+		(company "Electronic Cats")
+		(comment 1 "Carlos Adonai")
+		(comment 2 "Andres Sabas")
+	)
 	(lib_symbols
 		(symbol "+3V3_1"
 			(power)
@@ -7907,10 +7915,6 @@
 		(uuid "08193b60-382b-436e-953b-16796f1ce8bc")
 	)
 	(no_connect
-		(at 191.77 39.37)
-		(uuid "1269c463-2cf6-4ca2-aaa9-206eca67c18d")
-	)
-	(no_connect
 		(at 232.41 72.39)
 		(uuid "2dee52c4-a334-40b0-b8b7-64c0d58c3553")
 	)
@@ -7929,10 +7933,6 @@
 	(no_connect
 		(at 191.77 72.39)
 		(uuid "7c7d2e4b-c9ad-4070-9727-eb24fed2bd30")
-	)
-	(no_connect
-		(at 152.4 170.18)
-		(uuid "7eef58de-8227-4b99-9024-479899f57fec")
 	)
 	(no_connect
 		(at 232.41 49.53)
@@ -7973,14 +7973,6 @@
 	(no_connect
 		(at 232.41 39.37)
 		(uuid "cab4293d-df85-433a-947e-c736e756210b")
-	)
-	(no_connect
-		(at 191.77 36.83)
-		(uuid "cabd3913-9ebc-44fa-a558-c26497d88d67")
-	)
-	(no_connect
-		(at 139.7 170.18)
-		(uuid "ccdd14a2-95a3-461b-a282-ffa49eb5bda9")
 	)
 	(no_connect
 		(at 191.77 31.75)
@@ -8534,6 +8526,16 @@
 	)
 	(wire
 		(pts
+			(xy 187.96 39.37) (xy 191.77 39.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "36e95357-5585-4d5b-ab9c-a0d9a84eefe9")
+	)
+	(wire
+		(pts
 			(xy 73.66 162.56) (xy 73.66 165.1)
 		)
 		(stroke
@@ -9084,6 +9086,16 @@
 	)
 	(wire
 		(pts
+			(xy 152.4 170.18) (xy 154.94 170.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "75f2cb43-0591-4ac5-a0b1-6cdd25b8bd1a")
+	)
+	(wire
+		(pts
 			(xy 213.36 99.06) (xy 212.09 99.06)
 		)
 		(stroke
@@ -9241,6 +9253,16 @@
 			(type default)
 		)
 		(uuid "83bba921-94bb-4d97-8ad2-b6727041ff0b")
+	)
+	(wire
+		(pts
+			(xy 137.16 170.18) (xy 139.7 170.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "842dc647-c200-450e-b33a-15f051aad43a")
 	)
 	(wire
 		(pts
@@ -9824,6 +9846,16 @@
 	)
 	(wire
 		(pts
+			(xy 187.96 36.83) (xy 191.77 36.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c1097bf9-8e17-4ce9-a871-772b9c6bbbd8")
+	)
+	(wire
+		(pts
 			(xy 73.66 132.08) (xy 73.66 137.16)
 		)
 		(stroke
@@ -9904,6 +9936,16 @@
 	)
 	(wire
 		(pts
+			(xy 154.94 167.64) (xy 152.4 167.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cccec517-f43e-419a-8b60-40e9449f8f3e")
+	)
+	(wire
+		(pts
 			(xy 171.45 44.45) (xy 171.45 45.593)
 		)
 		(stroke
@@ -9971,6 +10013,16 @@
 			(type default)
 		)
 		(uuid "d3166632-47b2-447e-808b-8048b8fdd718")
+	)
+	(wire
+		(pts
+			(xy 137.16 167.64) (xy 139.7 167.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d38eb62c-c6b8-4e4a-aa63-6a43cdf360fa")
 	)
 	(wire
 		(pts
@@ -10492,6 +10544,17 @@
 		)
 		(uuid "afd2a2af-a233-44ab-9490-623eb9916397")
 	)
+	(label "GPIO1"
+		(at 154.94 170.18 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "06a909e0-3d3f-4cfc-8993-2b78f9ab26d5")
+	)
 	(label "NEOPIXEL"
 		(at 182.88 148.59 0)
 		(fields_autoplaced yes)
@@ -10691,7 +10754,7 @@
 		(uuid "9668c88a-3134-41d5-a28c-17ef89bdf969")
 	)
 	(label "SCL"
-		(at 139.7 167.64 180)
+		(at 137.16 167.64 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -10733,6 +10796,17 @@
 			(justify left bottom)
 		)
 		(uuid "bfec3736-706a-441e-b9ec-64a17cd4ddd4")
+	)
+	(label "GPIO1"
+		(at 187.96 36.83 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "cc1f7fac-7109-4ac2-9c79-ef0ab7f0caee")
 	)
 	(label "Buzz"
 		(at 158.242 120.65 0)
@@ -10778,8 +10852,30 @@
 		)
 		(uuid "dc00f70a-c882-4044-bf60-2106f373e99a")
 	)
+	(label "GPIO2"
+		(at 187.96 39.37 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "df7e54c4-294d-4108-aeee-bd393f996824")
+	)
+	(label "GPIO2"
+		(at 137.16 170.18 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "e2a4d89e-e824-48a4-8491-8bea8f0b9d94")
+	)
 	(label "SDA"
-		(at 152.4 167.64 0)
+		(at 154.94 167.64 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
