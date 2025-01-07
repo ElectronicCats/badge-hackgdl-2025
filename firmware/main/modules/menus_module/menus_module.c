@@ -6,7 +6,6 @@
 #include "esp_log.h"
 #include "menus_screens.h"
 // #include "modals_module.h"
-#include "display_module.h"
 #include "preferences.h"
 // #include "screen_saver.h"
 // #include "sleep_mode.h"

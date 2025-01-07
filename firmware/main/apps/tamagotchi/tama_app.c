@@ -129,8 +129,7 @@ static void tama_app_task() {
 
 void tama_app_begin() {
   tamalib_begin();
-  // xTaskCreatePinnedToCore(tama_app_task, "app_task", 4096, NULL, 5, NULL, 0);
-  xTaskCreate(tama_app_task, "app_task", 8192, NULL, 15, NULL);
+  xTaskCreatePinnedToCore(tama_app_task, "app_task", 4096, NULL, 5, NULL, 0);
 }
 
 void tama_app_exit() {
