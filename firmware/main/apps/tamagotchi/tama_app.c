@@ -35,8 +35,8 @@
 #include "menus_module.h"
 
 #define SPEED_DIVIDER 2
-#define TAMA_DISPLAY_FREQ 1020700
-#define TAMA_DISPLAY_FRAMERATE 4
+#define TAMA_DISPLAY_FREQ 1000000
+#define TAMA_DISPLAY_FRAMERATE 10
 #define AUTOSAVE_INTERVAL_S 10
 
 /**** TamaLib Specific Variables ****/
@@ -129,7 +129,8 @@ static void tama_app_task() {
 
 void tama_app_begin() {
   tamalib_begin();
-  xTaskCreatePinnedToCore(tama_app_task, "app_task", 4096, NULL, 5, NULL, 0);
+  // xTaskCreatePinnedToCore(tama_app_task, "app_task", 4096, NULL, 5, NULL, 0);
+  xTaskCreate(tama_app_task, "app_task", 8192, NULL, 15, NULL);
 }
 
 void tama_app_exit() {

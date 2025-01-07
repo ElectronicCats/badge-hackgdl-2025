@@ -45,7 +45,7 @@ int hal_handler() {
 
 void tama_input_begin() {
   xQueue = xQueueCreate(QUEUE_SIZE, sizeof(ButtonEvent_t));
-  // keyboard_module_begin();
-  // keyboard_module_set_input_callback(input_cb);
-  menus_module_set_app_state(true, input_cb);
+  keyboard_module_begin();
+  keyboard_module_set_input_callback(input_cb);
+  // menus_module_set_app_state(true, input_cb);
 }

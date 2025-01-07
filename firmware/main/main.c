@@ -12,7 +12,8 @@
 void app_main(void) {
   buzzer_begin(PIN_BUZZER);
   preferences_begin();
-  display_module_begin();
-  keyboard_module_begin();
-  menus_module_begin();
+  // display_module_begin();
+  // keyboard_module_begin();
+  // menus_module_begin();
+  tama_app_begin();
 }
