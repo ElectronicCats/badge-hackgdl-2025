@@ -478,16 +478,6 @@ void oled_driver_bitmaps(oled_driver_t *dev, int xpos, int ypos,
       dstBits = 0;
     }
   }
-
-#if 0
-	for (int _seg=ypos;_seg<ypos+width;_seg++) {
-		oled_driver_dump_page(dev, page-1, _seg);
-	}
-	for (int _seg=ypos;_seg<ypos+width;_seg++) {
-		oled_driver_dump_page(dev, page, _seg);
-	}
-#endif
-  oled_driver_show_buffer(dev);
 }
 
 // Set pixel to internal buffer. Not show it.

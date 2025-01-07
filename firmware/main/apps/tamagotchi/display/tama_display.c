@@ -20,9 +20,13 @@ static void drawTamaSelection(uint8_t y) {
     if (icon_buffer[i]) {
       drawTriangle(i * 16 + 5, y);
     }
+    oled_screen_display_bitmap(bitmaps + i * 18, i * 16 - 5, y + 6, 16, 9,
+                               OLED_DISPLAY_NORMAL);
   }
   if (icon_buffer[7]) {
     drawTriangle(7 * 16 + 5, y);
+    oled_screen_display_bitmap(bitmaps + 7 * 18, 7 * 16 - 5, y + 6, 16, 9,
+                               OLED_DISPLAY_NORMAL);
   }
 }
 
