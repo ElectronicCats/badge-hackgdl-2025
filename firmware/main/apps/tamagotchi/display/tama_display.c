@@ -35,7 +35,7 @@ static void drawTamaRow(uint8_t tamaLCD_y, uint8_t ActualLCD_y, uint8_t thick) {
     uint8_t mask = 0b10000000;
     mask = mask >> (i % 8);
     if ((matrix_buffer[tamaLCD_y][i / 8] & mask) != 0) {
-      u8g2_DrawBox(u8g2, i + i + i + 16, ActualLCD_y, 2, thick);
+      u8g2_DrawBox(u8g2, 3 * i + 16, ActualLCD_y, 2, thick);
     }
   }
 }
@@ -45,12 +45,7 @@ static void displayTama() {
   u8g2_ClearBuffer(u8g2);
   drawTamaSelection(49);
   for (j = 0; j < LCD_HEIGHT; j++) {
-    if (j != 5)
-      drawTamaRow(j, j + j + j, 2);
-    if (j == 5) {
-      drawTamaRow(j, j + j + j, 1);
-      drawTamaRow(j, j + j + j + 1, 1);
-    }
+    drawTamaRow(j, 3 * j, 2);
   }
   u8g2_SendBuffer(u8g2);
 }
