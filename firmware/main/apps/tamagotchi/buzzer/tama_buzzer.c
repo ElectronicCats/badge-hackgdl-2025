@@ -3,7 +3,7 @@
 #include "buzzer.h"
 #include <driver/gpio.h>
 
-#define FREQ_DIVIDER 2
+#define FREQ_DIVIDER 1
 
 static uint16_t current_freq = 0;
 void hal_set_frequency(uint32_t freq) { current_freq = freq / FREQ_DIVIDER; }
