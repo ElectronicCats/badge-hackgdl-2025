@@ -633,7 +633,6 @@ void oled_driver_dump_page(oled_driver_t *dev, int page, int seg) {
 void oled_driver_draw_line(oled_driver_t *dev, int x1, int y1, int x2, int y2,
                            bool invert) {
   _oled_driver_line(dev, x1, y1, x2, y2, invert);
-  // oled_driver_show_buffer(dev);
 }
 
 void oled_driver_draw_hline(oled_driver_t *dev, int x, int y, int width,
@@ -641,7 +640,6 @@ void oled_driver_draw_hline(oled_driver_t *dev, int x, int y, int width,
   for (int i = 0; i < width; i++) {
     oled_driver_draw_pixel(dev, x + i, y, invert);
   }
-  // oled_driver_show_buffer(dev);
 }
 
 void oled_driver_draw_vline(oled_driver_t *dev, int x, int y, int height,
@@ -649,7 +647,6 @@ void oled_driver_draw_vline(oled_driver_t *dev, int x, int y, int height,
   for (int i = 0; i < height; i++) {
     oled_driver_draw_pixel(dev, x, y + i, invert);
   }
-  // oled_driver_show_buffer(dev);
 }
 
 void oled_driver_draw_rect(oled_driver_t *dev, int x, int y, int width,

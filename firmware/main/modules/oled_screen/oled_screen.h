@@ -136,7 +136,6 @@ void oled_screen_set_last_buffer();
 void oled_screen_draw_line(int x1, int y1, int x2, int y2, bool invert);
 void oled_screen_draw_vline(int x, int y, int height, bool invert);
 void oled_screen_draw_hline(int x, int y, int width, bool invert);
-void oled_screen_draw_hline(int x, int y, int width, bool invert);
 void oled_screen_draw_box(int x, int y, int width, int height, bool invert);
 
 /**

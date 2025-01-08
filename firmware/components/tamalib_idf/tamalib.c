@@ -15,12 +15,13 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  */
 #include "tamalib.h"
-#include "hw.h"
 #include "cpu.h"
 #include "hal.h"
+#include "hw.h"
 
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
@@ -42,136 +43,114 @@ hal_t *g_hal;
 bool_t tamalib_init(u32_t freq)
 // bool_t tamalib_init(breakpoint_t *breakpoints, u32_t freq)
 {
-	bool_t res = 0;
-	res |= cpu_init(freq);
+  bool_t res = 0;
+  res |= cpu_init(freq);
 
-	//	res |= cpu_init(program, breakpoints, freq);
-	res |= hw_init();
+  //	res |= cpu_init(program, breakpoints, freq);
+  res |= hw_init();
 
-	ts_freq = freq;
+  ts_freq = freq;
 
-	return res;
+  return res;
 }
 
 /*
 void tamalib_release(void)
 {
-	hw_release();
-	cpu_release();
+        hw_release();
+        cpu_release();
 }*/
 
-void tamalib_set_framerate(u8_t framerate)
-{
-	g_framerate = framerate;
-}
+void tamalib_set_framerate(u8_t framerate) { g_framerate = framerate; }
 /*
 u8_t tamalib_get_framerate(void)
 {
 
-	//return g_framerate;
+        //return g_framerate;
   return DEFAULT_FRAMERATE;
 }
 */
-void tamalib_register_hal(hal_t *hal)
-{
-	g_hal = hal;
-}
+void tamalib_register_hal(hal_t *hal) { g_hal = hal; }
 /*
 void tamalib_set_exec_mode(exec_mode_t mode)
 {
-	exec_mode = mode;
-	step_depth = cpu_get_depth();
-	cpu_sync_ref_timestamp();
+        exec_mode = mode;
+        step_depth = cpu_get_depth();
+        cpu_sync_ref_timestamp();
 }
 */
 
-void tamalib_step(void)
-{
-	if (exec_mode == EXEC_MODE_PAUSE)
-	{
-		return;
-	}
+void tamalib_step(void) {
+  if (exec_mode == EXEC_MODE_PAUSE) {
+    return;
+  }
 
-	if (cpu_step())
-	{
-		exec_mode = EXEC_MODE_PAUSE;
-		step_depth = cpu_get_depth();
-	}
-	else
-	{
-		switch (exec_mode)
-		{
-		case EXEC_MODE_PAUSE:
-		case EXEC_MODE_RUN:
-			break;
+  if (cpu_step()) {
+    exec_mode = EXEC_MODE_PAUSE;
+    step_depth = cpu_get_depth();
+  } else {
+    switch (exec_mode) {
+    case EXEC_MODE_PAUSE:
+    case EXEC_MODE_RUN:
+      break;
 
-		case EXEC_MODE_STEP:
-			exec_mode = EXEC_MODE_PAUSE;
-			break;
+    case EXEC_MODE_STEP:
+      exec_mode = EXEC_MODE_PAUSE;
+      break;
 
-		case EXEC_MODE_NEXT:
-			if (cpu_get_depth() <= step_depth)
-			{
-				exec_mode = EXEC_MODE_PAUSE;
-				step_depth = cpu_get_depth();
-			}
-			break;
+    case EXEC_MODE_NEXT:
+      if (cpu_get_depth() <= step_depth) {
+        exec_mode = EXEC_MODE_PAUSE;
+        step_depth = cpu_get_depth();
+      }
+      break;
 
-		case EXEC_MODE_TO_CALL:
-			if (cpu_get_depth() > step_depth)
-			{
-				exec_mode = EXEC_MODE_PAUSE;
-				step_depth = cpu_get_depth();
-			}
-			break;
+    case EXEC_MODE_TO_CALL:
+      if (cpu_get_depth() > step_depth) {
+        exec_mode = EXEC_MODE_PAUSE;
+        step_depth = cpu_get_depth();
+      }
+      break;
 
-		case EXEC_MODE_TO_RET:
-			if (cpu_get_depth() < step_depth)
-			{
-				exec_mode = EXEC_MODE_PAUSE;
-				step_depth = cpu_get_depth();
-			}
-			break;
-		}
-	}
+    case EXEC_MODE_TO_RET:
+      if (cpu_get_depth() < step_depth) {
+        exec_mode = EXEC_MODE_PAUSE;
+        step_depth = cpu_get_depth();
+      }
+      break;
+    }
+  }
 }
 
-void tamalib_mainloop(void)
-{
-	timestamp_t ts;
-	while (!g_hal->handler())
-	{
-		tamalib_step();
-		ts = g_hal->get_timestamp();
-		if (ts - screen_ts >= ts_freq / g_framerate)
-		{
-			screen_ts = ts;
-			g_hal->update_screen();
-		}
-	}
+void tamalib_mainloop(void) {
+  timestamp_t ts;
+  while (!g_hal->handler()) {
+    tamalib_step();
+    ts = g_hal->get_timestamp();
+    if (ts - screen_ts >= ts_freq / g_framerate) {
+      screen_ts = ts;
+      g_hal->update_screen();
+    }
+  }
 }
 
-void tamalib_mainloop_step_by_step(void)
-{
-	timestamp_t ts;
-	static uint16_t i = 0;
+void tamalib_mainloop_step_by_step(void) {
+  timestamp_t ts;
+  static uint16_t i = 0;
 
-	if (!g_hal->handler())
-	{
-		if (exec_mode == EXEC_MODE_RUN)
-		{
-			if (cpu_step())
-			{
-				exec_mode = EXEC_MODE_PAUSE;
-				step_depth = cpu_get_depth();
-			}
-		}
-		ts = g_hal->get_timestamp();
+  if (!g_hal->handler()) {
+    if (exec_mode == EXEC_MODE_RUN) {
+      if (cpu_step()) {
+        exec_mode = EXEC_MODE_PAUSE;
+        step_depth = cpu_get_depth();
+      }
+    }
+    // ts = g_hal->get_timestamp();
 
-		if (ts - screen_ts >= ts_freq / g_framerate)
-		{
-			screen_ts = ts;
-			g_hal->update_screen();
-		}
-	}
+    // if (ts - screen_ts >= ts_freq / g_framerate)
+    // {
+    // 	screen_ts = ts;
+    // 	g_hal->update_screen();
+    // }
+  }
 }
