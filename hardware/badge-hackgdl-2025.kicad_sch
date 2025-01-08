@@ -12195,7 +12195,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C191782"
+		(property "LCSC#" "C309655"
 			(at 50.8 34.29 0)
 			(effects
 				(font
@@ -15255,7 +15255,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "10K"
+		(property "Value" "10k"
 			(at 176.276 40.132 0)
 			(effects
 				(font
@@ -17160,6 +17160,15 @@
 				(hide yes)
 			)
 		)
+		(property "manf#" "356-ESP32-S3WROOM1N4"
+			(at 191.77 24.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "22318d41-79de-4fd5-bf0f-0a679678d875")
 		)
@@ -17515,7 +17524,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" ""
+		(property "LCSC#" "C3975148"
 			(at 147.32 167.64 0)
 			(effects
 				(font
@@ -17533,7 +17542,16 @@
 				(hide yes)
 			)
 		)
-		(property "manf#" "M20-7810345 "
+		(property "manf#" ""
+			(at 147.32 167.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "provedor" "LCSC"
 			(at 147.32 167.64 0)
 			(effects
 				(font
@@ -18610,7 +18628,7 @@
 				(hide yes)
 			)
 		)
-		(property "provedor" "DigiKey"
+		(property "provedor" "MOUSER"
 			(at 130.81 110.49 0)
 			(effects
 				(font
@@ -18704,7 +18722,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C191782"
+		(property "LCSC#" "C309655"
 			(at 50.8 31.75 0)
 			(effects
 				(font
