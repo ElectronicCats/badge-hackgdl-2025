@@ -43,6 +43,7 @@ static void tama_scenes_handler(uint8_t option) {
 
 void tama_scenes_main() {
   general_submenu_menu_t main_menu;
+  main_menu.title = "Tamagotchi App";
   main_menu.options = main_menu_options;
   main_menu.options_count = sizeof(main_menu_options) / sizeof(char *);
   main_menu.select_cb = tama_scenes_handler;
@@ -65,7 +66,9 @@ void tama_scenes_speed() {
   speed_menu.min = 1;
   speed_menu.step = 1;
   speed_menu.value = preferences_get_uchar(SPEED_MEM, SPEED);
+  speed_menu.prefix = "x";
   speed_menu.var_lbl = "Speed";
+  speed_menu.units_lbl = "";
   speed_menu.value_handler = speed_handler;
   speed_menu.exit_cb = tama_scenes_main;
   general_knob(speed_menu);
