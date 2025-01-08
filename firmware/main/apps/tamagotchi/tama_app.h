@@ -5,5 +5,5 @@
 
 void tama_app_begin();
 void tama_app_exit();
-
+void tama_app_set_speed(uint8_t _speed);
 #endif

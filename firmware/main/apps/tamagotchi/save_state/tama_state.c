@@ -31,3 +31,5 @@ void tama_state_save(cpu_state_t *cpuState) {
   preferences_put_bytes(CPU_STATE_MEM, cpuState, sizeof(cpu_state_t));
   preferences_put_bytes(CPU_MEMORY_MEM, cpuState->memory, MEMORY_SIZE);
 }
+
+void tama_state_erase() { preferences_put_uchar(MAGIC_NUMBER_MEM, 0); }

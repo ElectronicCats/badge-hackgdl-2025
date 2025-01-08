@@ -1,7 +1,7 @@
 #include "menus.h"
 
 #include "menus_icons.h"
-#include "tama_app.h"
+#include "tama_scenes.h"
 
 menu_t menus[] = { //////////////////////////////////
     {.display_name = "Must Not See This",
@@ -32,7 +32,7 @@ menu_t menus[] = { //////////////////////////////////
      .parent_idx = MENU_MAIN,
      .icon = &menu_icon_tama,
      .last_selected_submenu = 0,
-     .on_enter_cb = tama_app_begin,
+     .on_enter_cb = tama_scenes_main,
      .on_exit_cb = NULL,
      .is_visible = true}};
 

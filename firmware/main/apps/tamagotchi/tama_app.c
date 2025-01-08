@@ -32,8 +32,8 @@
 #include "tama_input.h"
 #include "tama_state.h"
 
-#include "menus_module.h"
 #include "preferences.h"
+#include "tama_scenes.h"
 
 #define SPEED 1
 #define SPEED_MEM "speed"
@@ -133,7 +133,7 @@ static void tama_app_task() {
       tama_state_save(&cpuState);
       lastSaveTimestamp = esp_timer_get_time();
     }
-    if (!(++i % (6 * SPEED))) {
+    if (!(++i % (6 * speed))) {
       i = 0;
       vTaskDelay(1);
     }
@@ -149,8 +149,8 @@ void tama_app_begin() {
 
 void tama_app_exit() {
   is_running = false;
-  vTaskDelay(pdMS_TO_TICKS(300));
-  menus_module_exit_app();
+  vTaskDelay(pdMS_TO_TICKS(20));
+  tama_scenes_main();
 }
 
 void tama_app_set_speed(uint8_t _speed) { speed = _speed; }
