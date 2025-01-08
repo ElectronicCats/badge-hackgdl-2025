@@ -15674,15 +15674,15 @@
 			(layers "B.Cu" "B.Paste" "B.Mask")
 			(uuid "864eb29d-85a9-4a1b-97cf-dcc3cde80143")
 		)
-		(model "MSK12C02.stp"
+		(model "${KICAD8_3DMODEL_DIR}/Button_Switch_SMD.3dshapes/SW_SPDT_PCM12.step"
 			(offset
-				(xyz 0.04999999999 -0.09999999999 0.6799999969)
+				(xyz 0 0.3 0)
 			)
 			(scale
 				(xyz 1 1 1)
 			)
 			(rotate
-				(xyz 90 -180 -180)
+				(xyz 0 0 0)
 			)
 		)
 	)
