@@ -524,7 +524,7 @@
       "plot": "",
       "pos_files": "",
       "specctra_dsn": "",
-      "step": "badge-hackgdl-2025.step",
+      "step": "../../../TestingKiCAD/badge-hackgdl-2025.step",
       "svg": "",
       "vrml": ""
     },
