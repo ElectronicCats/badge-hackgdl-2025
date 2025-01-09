@@ -1,12 +1,16 @@
 #include "menus.h"
 
+#include "adv_scan_module.h"
 #include "analyzer_scenes.h"
 #include "catdos_module.h"
 #include "deauth_module.h"
 #include "detector_scenes.h"
+#include "hid_module.h"
 #include "menus_icons.h"
+#include "spam_module.h"
 #include "ssid_spam.h"
 #include "tama_scenes.h"
+#include "trackers_module.h"
 
 menu_t menus[] = { //////////////////////////////////
     {.display_name = "Main Menu",
@@ -77,7 +81,7 @@ menu_t menus[] = { //////////////////////////////////
      .parent_idx = MENU_BLUETOOTH_APPS,
      .entry_cmd = "trakers_scan",
      .last_selected_submenu = 0,
-     .on_enter_cb = NULL, // trackers_module_begin
+     .on_enter_cb = trackers_module_begin,
      .on_exit_cb = NULL,
      .is_visible = true},
     {.display_name = "Spam",
@@ -85,7 +89,7 @@ menu_t menus[] = { //////////////////////////////////
      .parent_idx = MENU_BLUETOOTH_APPS,
      .entry_cmd = "spam",
      .last_selected_submenu = 0,
-     .on_enter_cb = NULL, // ble_module_begin
+     .on_enter_cb = ble_module_begin,
      .on_exit_cb = NULL,
      .is_visible = true},
     {.display_name = "HID",
@@ -93,14 +97,14 @@ menu_t menus[] = { //////////////////////////////////
      .parent_idx = MENU_BLUETOOTH_APPS,
      .entry_cmd = "hid",
      .last_selected_submenu = 0,
-     .on_enter_cb = NULL, // hid_module_begin
+     .on_enter_cb = hid_module_begin,
      .on_exit_cb = NULL,
      .is_visible = true},
     {.display_name = "ADV Scanner",
      .menu_idx = MENU_BLUETOOTH_ADV,
      .parent_idx = MENU_BLUETOOTH_APPS,
      .last_selected_submenu = 0,
-     .on_enter_cb = NULL, // adv_scanner_module_begin
+     .on_enter_cb = adv_scanner_module_begin,
      .on_exit_cb = NULL,
      .is_visible = true},
     {.display_name = "Tamagotchi",
