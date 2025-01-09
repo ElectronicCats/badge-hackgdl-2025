@@ -1,6 +1,11 @@
 #include "menus.h"
 
+#include "analyzer_scenes.h"
+#include "catdos_module.h"
+#include "deauth_module.h"
+#include "detector_scenes.h"
 #include "menus_icons.h"
+#include "ssid_spam.h"
 #include "tama_scenes.h"
 
 menu_t menus[] = { //////////////////////////////////
@@ -24,7 +29,7 @@ menu_t menus[] = { //////////////////////////////////
      .parent_idx = MENU_WIFI_APPS,
      .entry_cmd = "analyzer",
      .last_selected_submenu = 0,
-     .on_enter_cb = NULL, // analyzer_scenes_main_menu
+     .on_enter_cb = analyzer_scenes_main_menu,
      .on_exit_cb = NULL,
      .is_visible = true},
     {.display_name = "Deauth",
@@ -32,7 +37,7 @@ menu_t menus[] = { //////////////////////////////////
      .parent_idx = MENU_WIFI_APPS,
      .entry_cmd = "deauth",
      .last_selected_submenu = 0,
-     .on_enter_cb = NULL, // deauth_module_begin
+     .on_enter_cb = deauth_module_begin,
      .on_exit_cb = NULL,
      .is_visible = true},
     {.display_name = "Deauth Scan",
@@ -40,7 +45,7 @@ menu_t menus[] = { //////////////////////////////////
      .parent_idx = MENU_WIFI_APPS,
      .entry_cmd = "deauth_scan",
      .last_selected_submenu = 0,
-     .on_enter_cb = NULL, // detector_scenes_main_menu
+     .on_enter_cb = detector_scenes_main_menu,
      .on_exit_cb = NULL,
      .is_visible = true},
     {.display_name = "DoS",
@@ -48,7 +53,7 @@ menu_t menus[] = { //////////////////////////////////
      .parent_idx = MENU_WIFI_APPS,
      .entry_cmd = "dos",
      .last_selected_submenu = 0,
-     .on_enter_cb = NULL, // catdos_module_begin
+     .on_enter_cb = catdos_module_begin,
      .on_exit_cb = NULL,
      .is_visible = true},
     {.display_name = "SSID Spammer",
@@ -56,7 +61,7 @@ menu_t menus[] = { //////////////////////////////////
      .parent_idx = MENU_WIFI_APPS,
      .entry_cmd = "ssid_spam",
      .last_selected_submenu = 0,
-     .on_enter_cb = NULL, // ssid_spam_begin
+     .on_enter_cb = ssid_spam_begin,
      .on_exit_cb = NULL,
      .is_visible = true},
     {.display_name = "Bluetooth",
