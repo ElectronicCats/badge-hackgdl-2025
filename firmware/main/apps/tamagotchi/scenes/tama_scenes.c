@@ -1,6 +1,7 @@
 #include "tama_scenes.h"
 
 #include "general_knob.h"
+#include "general_radio_selection.h"
 #include "general_submenu.h"
 #include "menus_module.h"
 #include "preferences.h"
@@ -12,6 +13,7 @@
 
 void tama_scenes_main();
 void tama_scenes_speed();
+void tama_scenes_speed2();
 
 ////////////////////////////////////// MAIN MENU
 /////////////////////////////////////////
@@ -36,7 +38,8 @@ static void tama_scenes_handler(uint8_t option) {
     tama_scenes_speed();
     break;
   case MAIN_MENU_ERASE:
-    tama_state_erase();
+    // tama_state_erase();
+    tama_scenes_speed2();
     break;
   }
 }
@@ -51,7 +54,7 @@ void tama_scenes_main() {
   general_submenu(main_menu);
 }
 
-////////////////////////////////////// MAIN MENU
+////////////////////////////////////// Speed Selection
 /////////////////////////////////////////
 
 static void speed_handler(uint8_t speed) {
@@ -72,4 +75,26 @@ void tama_scenes_speed() {
   speed_menu.value_handler = speed_handler;
   speed_menu.exit_cb = tama_scenes_main;
   general_knob(speed_menu);
+}
+
+////////////////////////////////////// Speed Selection
+/////////////////////////////////////////
+
+static char *speed_options[] = {"speed1", "speed2", "speed3", "speed4",
+                                "speed5", "speed6", "speed7", "speed8",
+                                "speed9", "speed10"};
+
+static void speed_handler2(uint8_t speed) { printf("Speed x%d\n", speed); }
+static void speed_exit() { tama_scenes_main(); }
+
+void tama_scenes_speed2() {
+  general_radio_selection_menu_t speed;
+  speed.banner = "Emulation Speed";
+  speed.current_option = preferences_get_uchar(SPEED_MEM, SPEED);
+  speed.options = speed_options;
+  speed.options_count = sizeof(speed_options) / sizeof(char *);
+  speed.select_cb = speed_handler2;
+  speed.exit_cb = speed_exit;
+  speed.style = RADIO_SELECTION_OLD_STYLE;
+  general_radio_selection(speed);
 }

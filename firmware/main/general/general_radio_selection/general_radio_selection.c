@@ -1,6 +1,5 @@
 #include "general_radio_selection.h"
 
-#include "bitmaps_general.h"
 #include "buzzer.h"
 #include "menus_module.h"
 #include "oled_screen.h"
@@ -25,23 +24,27 @@ static void (*list_radio_options)() = NULL;
 
 static void list_radio_options_old_style() {
   general_radio_selection_t *ctx = general_radio_selection_ctx;
-  static uint8_t items_offset = 0;
-  items_offset = MAX(ctx->selected_option - MAX_OPTIONS_NUM + 2, items_offset);
-  items_offset =
-      MIN(MAX(ctx->options_count - MAX_OPTIONS_NUM + 2, 0), items_offset);
-  items_offset = MIN(ctx->selected_option, items_offset);
   oled_screen_clear_buffer();
-  char *str = malloc(20);
-  oled_screen_display_text(ctx->banner, 0, 0, OLED_DISPLAY_NORMAL);
-  for (uint8_t i = 0; i < (MIN(ctx->options_count, MAX_OPTIONS_NUM - 1)); i++) {
-    bool is_selected = i + items_offset == ctx->selected_option;
-    bool is_current = i + items_offset == ctx->current_option;
-    char state = is_current ? 'x' : ' ';
-    sprintf(str, "[%c] %s", state, ctx->options[i + items_offset]);
-    oled_screen_display_text(str, 0, i + ITEMOFFSET, is_selected);
-  }
+
+  char state = ctx->current_option == ctx->selected_option ? 'x' : ' ';
+  char str[17];
+  sprintf(str, "[%c]", state);
+  oled_screen_draw_box(0, 0, 128, 8, OLED_DISPLAY_NORMAL);
+  oled_screen_display_text_center(str, 3, OLED_DISPLAY_NORMAL);
+  oled_screen_display_text_center(ctx->options[ctx->selected_option], 5,
+                                  OLED_DISPLAY_NORMAL);
+
+  oled_screen_draw_box(0, 35, 128, 2, OLED_DISPLAY_NORMAL);
+  oled_screen_draw_box(0, 51, 128, 2, OLED_DISPLAY_NORMAL);
+  // oled_screen_draw_hline(0,38, 128,OLED_DISPLAY_NORMAL);
+  // oled_screen_draw_hline(0,49, 128,OLED_DISPLAY_NORMAL);
+
+  oled_screen_display_text_center(ctx->banner, 0, OLED_DISPLAY_INVERT);
+  snprintf(str, sizeof(str), "<%d/%d>", ctx->selected_option + 1,
+           ctx->options_count);
+  oled_screen_display_text_center(str, 7, OLED_DISPLAY_NORMAL);
+
   oled_screen_display_show();
-  free(str);
 }
 
 static void list_radio_options_new_style() {
@@ -56,8 +59,6 @@ static void list_radio_options_new_style() {
   for (uint8_t i = 0; i < (MIN(ctx->options_count, MAX_OPTIONS_NUM - 1)); i++) {
     bool is_selected = i + items_offset == ctx->selected_option;
     bool is_current = i + items_offset == ctx->current_option;
-    oled_screen_display_bitmap(minino_face, 0, (ctx->selected_option + 2) * 8,
-                               8, 8, OLED_DISPLAY_NORMAL);
     sprintf(str, "%s%s", ctx->options[i + items_offset],
             is_current ? "[curr]" : "");
     oled_screen_display_text(str, is_selected ? 16 : 0, i + 2, is_selected);
@@ -71,7 +72,7 @@ static void input_cb(uint8_t button_name, uint8_t button_event) {
     return;
   }
   switch (button_name) {
-  case BUTTON_LEFT:
+  case BUTTON_BACK:
     void (*exit_cb)() = general_radio_selection_ctx->exit_cb;
     free(general_radio_selection_ctx);
     general_radio_selection_ctx = NULL;
@@ -79,7 +80,7 @@ static void input_cb(uint8_t button_name, uint8_t button_event) {
       exit_cb();
     }
     break;
-  case BUTTON_RIGHT:
+  case BUTTON_MIDDLE:
     general_radio_selection_ctx->current_option =
         general_radio_selection_ctx->selected_option;
     void (*select_cb)() = general_radio_selection_ctx->select_cb;
@@ -89,14 +90,14 @@ static void input_cb(uint8_t button_name, uint8_t button_event) {
     buzzer_play_for(SOUND_DURATION);
     list_radio_options();
     break;
-  case BUTTON_MIDDLE:
+  case BUTTON_LEFT:
     general_radio_selection_ctx->selected_option =
         general_radio_selection_ctx->selected_option == 0
             ? general_radio_selection_ctx->options_count - 1
             : general_radio_selection_ctx->selected_option - 1;
     list_radio_options();
     break;
-  case BUTTON_BACK:
+  case BUTTON_RIGHT:
     general_radio_selection_ctx->selected_option =
         ++general_radio_selection_ctx->selected_option <
                 general_radio_selection_ctx->options_count
