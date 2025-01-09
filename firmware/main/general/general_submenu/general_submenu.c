@@ -20,8 +20,12 @@ static void list_submenu_options() {
   char str[16];
   snprintf(str, sizeof(str), "<%d/%d>", ctx->selected_option + 1,
            ctx->options_count);
-  oled_screen_display_text_center(str, 6, OLED_DISPLAY_NORMAL);
-  oled_screen_display_text_center(ctx->options[ctx->selected_option], 7,
+
+  oled_screen_draw_box(0, 28, 128, 2, OLED_DISPLAY_NORMAL);
+  oled_screen_draw_box(0, 41, 128, 2, OLED_DISPLAY_NORMAL);
+
+  oled_screen_display_text_center(str, 7, OLED_DISPLAY_INVERT);
+  oled_screen_display_text_center(ctx->options[ctx->selected_option], 4,
                                   OLED_DISPLAY_NORMAL);
   oled_screen_display_show();
 }

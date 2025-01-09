@@ -27,9 +27,10 @@ void menus_screens_display_menus(menus_manager_t *ctx) {
   char str[16];
   snprintf(str, sizeof(str), "<%d/%d>", ctx->selected_submenu + 1,
            ctx->submenus_count);
-  oled_screen_display_text_center(str, 6, OLED_DISPLAY_NORMAL);
+  oled_screen_display_text_center(str, 7, OLED_DISPLAY_INVERT);
+
   oled_screen_draw_box(0, 0, 128, 8, OLED_DISPLAY_NORMAL);
   oled_screen_display_text_center(parent_name, 0, OLED_DISPLAY_INVERT);
-  oled_screen_display_text_center(display_name, 7, OLED_DISPLAY_NORMAL);
+  oled_screen_display_text_center(display_name, 6, OLED_DISPLAY_NORMAL);
   oled_screen_display_show();
 }
