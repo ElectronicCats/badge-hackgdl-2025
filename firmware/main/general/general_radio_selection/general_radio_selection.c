@@ -36,8 +36,6 @@ static void list_radio_options_old_style() {
 
   oled_screen_draw_box(0, 35, 128, 2, OLED_DISPLAY_NORMAL);
   oled_screen_draw_box(0, 51, 128, 2, OLED_DISPLAY_NORMAL);
-  // oled_screen_draw_hline(0,38, 128,OLED_DISPLAY_NORMAL);
-  // oled_screen_draw_hline(0,49, 128,OLED_DISPLAY_NORMAL);
 
   oled_screen_display_text_center(ctx->banner, 0, OLED_DISPLAY_INVERT);
   snprintf(str, sizeof(str), "<%d/%d>", ctx->selected_option + 1,
