@@ -139,16 +139,20 @@ void detector_scenes_channel() {
 
 //////////////////////////   Help Menu   //////////////////////////
 
-static const char *help_text =
-    "Detect deauth packets in the air and display the count of packets per "
-    "channel.";
+static const char *help_text = "Detect deauth "
+                               "packets in the"
+                               "air and       "
+                               "display the   "
+                               "count of      "
+                               "packets per   "
+                               "channel.";
 
 static void help_exit() { detector_scenes_main_menu(); }
 
 void detector_scenes_help() {
   general_scrolling_text_ctx help;
   memset(&help, 0, sizeof(help));
-  help.banner = "< Back";
+  help.banner = "Help";
   help.text = help_text;
   help.scroll_type = GENERAL_SCROLLING_TEXT_CLAMPED;
   help.window_type = GENERAL_SCROLLING_TEXT_WINDOW;

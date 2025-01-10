@@ -20,6 +20,7 @@ typedef struct {
   uint16_t current_idx;
   uint8_t window_type;
   uint8_t scroll_type;
+  uint8_t pages;
   void (*select_cb)();
   void (*exit_cb)();
   void (*finish_cb)();

@@ -7,6 +7,8 @@
 
 #include <string.h>
 
+#define LINES_PER_PAGE 3
+
 general_scrolling_text_ctx *scroll_text_ctx;
 
 #define MAX_LINE_LENGTH 14
@@ -84,39 +86,38 @@ static void scroll_text_draw_window() {
   }
   oled_screen_clear_buffer();
   if (scroll_text_ctx->banner) {
-    oled_screen_display_text(scroll_text_ctx->banner, 0, 0,
-                             OLED_DISPLAY_NORMAL);
+    oled_screen_display_text_center(scroll_text_ctx->banner, 0,
+                                    OLED_DISPLAY_NORMAL);
   }
 
   oled_screen_display_card_border();
-#ifdef CONFIG_RESOLUTION_128X64
-  uint16_t items_per_screen = 3;
-  uint16_t screen_title = 2;
-#else
-  uint16_t items_per_screen = 2;
-  uint16_t screen_title = 0;
-#endif
 
-  uint16_t end_index = scroll_text_ctx->current_idx + items_per_screen;
-  if (end_index > scroll_text_ctx->text_len) {
-    end_index = scroll_text_ctx->text_len;
-  }
+  char str[17];
+  snprintf(str, sizeof(str), "%d/%d", scroll_text_ctx->current_idx + 1,
+           scroll_text_ctx->pages);
+  uint8_t arrows_x = 62 - strlen(str) * 4;
+  oled_screen_draw_box(arrows_x - 8, 56, strlen(str) * 8 + 16, 8,
+                       OLED_DISPLAY_INVERT);
+  oled_screen_display_text_center(str, 7, OLED_DISPLAY_NORMAL);
 
   if (!(scroll_text_ctx->scroll_type == GENERAL_SCROLLING_TEXT_CLAMPED &&
         !scroll_text_ctx->current_idx)) {
-    oled_screen_display_bitmap(simple_up_arrow_bmp, 118, 28, 8, 8,
+    oled_screen_display_bitmap(simple_left_arrow_bmp, arrows_x - 8, 56, 8, 8,
                                OLED_DISPLAY_NORMAL);
   }
   if (!(scroll_text_ctx->scroll_type == GENERAL_SCROLLING_TEXT_CLAMPED &&
-        scroll_text_ctx->current_idx >= scroll_text_ctx->text_len - 1)) {
-    oled_screen_display_bitmap(simple_down_arrow_bmp, 118, 36, 8, 8,
+        scroll_text_ctx->current_idx >= scroll_text_ctx->pages - 1)) {
+    oled_screen_display_bitmap(simple_right_arrow_bmp,
+                               arrows_x + strlen(str) * 8, 56, 8, 8,
                                OLED_DISPLAY_NORMAL);
   }
 
-  for (uint16_t i = scroll_text_ctx->current_idx; i < end_index; i++) {
-    oled_screen_display_text(scroll_text_ctx->text_arr[i], 3,
-                             (i - scroll_text_ctx->current_idx) +
-                                 (1 + screen_title),
+  uint8_t start_idx = scroll_text_ctx->current_idx * LINES_PER_PAGE;
+  uint8_t page = 0;
+  for (uint16_t i = start_idx;
+       i < start_idx + LINES_PER_PAGE && i < scroll_text_ctx->text_len;
+       i++, page++) {
+    oled_screen_display_text(scroll_text_ctx->text_arr[i], 2, 3 + page,
                              OLED_DISPLAY_NORMAL);
   }
   oled_screen_display_show();
@@ -146,7 +147,7 @@ static void scroll_text_ctx_free() {
 static void button_up_handler() {
   if (scroll_text_ctx->current_idx == 0) {
     if (scroll_text_ctx->scroll_type == GENERAL_SCROLLING_TEXT_INFINITE) {
-      scroll_text_ctx->current_idx = scroll_text_ctx->text_len - 1;
+      scroll_text_ctx->current_idx = scroll_text_ctx->pages - 1;
     } else {
       return;
     }
@@ -157,7 +158,7 @@ static void button_up_handler() {
 }
 
 static void button_down_handler() {
-  if (scroll_text_ctx->current_idx >= scroll_text_ctx->text_len - 1) {
+  if (scroll_text_ctx->current_idx >= scroll_text_ctx->pages - 1) {
     if (scroll_text_ctx->finish_cb) {
       scroll_text_ctx->finish_cb();
     }
@@ -177,22 +178,22 @@ static void scrolling_text_input_cb(uint8_t button_name, uint8_t button_event) {
     return;
   }
   switch (button_name) {
-  case BUTTON_LEFT:
+  case BUTTON_BACK:
     void (*exit_cb)() = scroll_text_ctx->exit_cb;
     scroll_text_ctx_free();
     if (exit_cb) {
       exit_cb();
     }
     break;
-  case BUTTON_RIGHT:
+  case BUTTON_MIDDLE:
     if (scroll_text_ctx->select_cb) {
       scroll_text_ctx->select_cb();
     }
     break;
-  case BUTTON_MIDDLE:
+  case BUTTON_LEFT:
     button_up_handler();
     break;
-  case BUTTON_BACK:
+  case BUTTON_RIGHT:
     button_down_handler();
     break;
   default:
@@ -211,6 +212,10 @@ void general_scrolling_text(general_scrolling_text_ctx ctx) {
   scroll_text_ctx->finish_cb = ctx.finish_cb;
   scroll_text_ctx->text_arr =
       split_text(scroll_text_ctx->text, &scroll_text_ctx->text_len);
+
+  uint8_t pages = scroll_text_ctx->text_len / LINES_PER_PAGE;
+  pages += pages * LINES_PER_PAGE < scroll_text_ctx->text_len;
+  scroll_text_ctx->pages = pages;
 
   menus_module_set_app_state(true, scrolling_text_input_cb);
   scroll_text_draw();

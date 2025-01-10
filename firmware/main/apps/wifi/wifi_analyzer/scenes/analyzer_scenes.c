@@ -2,6 +2,7 @@
 
 #include "general_radio_selection.h"
 #include "general_screens.h"
+#include "general_scrolling_text.h"
 #include "general_submenu.h"
 #include "menus_module.h"
 #include "wifi_analyzer.h"
@@ -73,19 +74,24 @@ void analyzer_scenes_channel() {
 }
 
 //////////////////////////   HELP MENU   ///////////////////////////////
-static const char *wifi_analizer_help[] = {
-    "This tool",      "allows you to",   "analyze the",
-    "WiFi networks",  "around you.",     "",
-    "You can select", "the channel and", "the destination",
-    "to save the",    "results.",
+static const char *wifi_analizer_help = {
+    "This tool     "
+    "allows you to "
+    "analyze the   "
+    "WiFi networks "
+    "around you.   "
+    "You can select"
+    "the channel in"
+    "settings menu.",
 };
 
-static const general_menu_t analyzer_help_menu = {
-    .menu_items = wifi_analizer_help,
-    .menu_count = 11,
-    .menu_level = GENERAL_TREE_APP_MENU};
-
 void wifi_analyzer_help() {
-  general_register_scrolling_menu(&analyzer_help_menu);
-  general_screen_display_scrolling_text_handler(analyzer_scenes_main_menu);
+  general_scrolling_text_ctx help;
+  memset(&help, 0, sizeof(help));
+  help.banner = "Analyzer Help";
+  help.scroll_type = GENERAL_SCROLLING_TEXT_CLAMPED;
+  help.window_type = GENERAL_SCROLLING_TEXT_WINDOW;
+  help.text = wifi_analizer_help;
+  help.exit_cb = analyzer_scenes_main_menu;
+  general_scrolling_text(help);
 }

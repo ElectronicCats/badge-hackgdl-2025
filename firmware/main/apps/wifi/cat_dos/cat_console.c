@@ -27,7 +27,7 @@
 #include "soc/soc_caps.h"
 
 static const char *TAG = "cat_console";
-#define PROMPT_STR "minino"
+#define PROMPT_STR "HackGotchi"
 
 static ctrl_c_callback_t ctrl_c_callback = NULL;
 
@@ -60,7 +60,7 @@ static void initialize_console(void) {
   esp_console_repl_config_t repl_config = ESP_CONSOLE_REPL_CONFIG_DEFAULT();
   // initialize_filesystem();
   // repl_config.history_save_path = HISTORY_FILE_PATH;
-  repl_config.prompt = "minino>";
+  repl_config.prompt = "HackGotchi>";
 
   esp_console_dev_usb_serial_jtag_config_t usbjtag_config =
       ESP_CONSOLE_DEV_USB_SERIAL_JTAG_CONFIG_DEFAULT();
@@ -91,7 +91,7 @@ void cat_console_begin() {
   const char *prompt = LOG_COLOR_I PROMPT_STR "> " LOG_RESET_COLOR;
 
   printf("\n"
-         "Welcome to the Minino Console.\n"
+         "Welcome to the HackGotchi Console.\n"
          "Type 'help' to get the list of commands.\n"
          "Use UP/DOWN arrows to navigate through command history.\n"
          "Press TAB when typing command name to auto-complete.\n"
