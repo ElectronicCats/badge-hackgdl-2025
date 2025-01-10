@@ -605,19 +605,19 @@ static void catdos_module_state_machine(uint8_t button_name,
   switch (catdos_state) {
   case CATDOS_STATE_CONFIG_WIFI: {
     switch (button_name) {
-    case BUTTON_LEFT:
+    case BUTTON_BACK:
       menus_module_restart();
       break;
-    case BUTTON_RIGHT:
+    case BUTTON_MIDDLE:
       ESP_LOGI(CATDOS_TAG, "Selected item: %d", selected_item);
       catdos_module_connect_wifi();
       break;
-    case BUTTON_MIDDLE:
+    case BUTTON_LEFT:
       selected_item =
           (selected_item == 0) ? total_items - 1 : selected_item - 1;
       catdos_module_display_wifi();
       break;
-    case BUTTON_BACK:
+    case BUTTON_RIGHT:
       selected_item =
           (selected_item == total_items - 1) ? 0 : selected_item + 1;
       catdos_module_display_wifi();

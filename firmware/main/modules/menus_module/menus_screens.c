@@ -20,8 +20,8 @@ void menus_screens_display_menus(menus_manager_t *ctx) {
 
   if (menu->icon != NULL) {
     menu_icon_t *icon = menu->icon;
-    oled_screen_display_bitmap(icon->icon, 63 - icon->width / 2, 12,
-                               icon->width, icon->height, OLED_DISPLAY_NORMAL);
+    oled_screen_buffer_bitmap(icon->icon, 63 - icon->width / 2, 12, icon->width,
+                              icon->height, OLED_DISPLAY_NORMAL);
   }
 
   char str[16];

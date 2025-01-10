@@ -128,11 +128,16 @@ void oled_screen_clear_line(int x, int page, bool invert) {
   xSemaphoreGive(oled_mutex);
 }
 
-void oled_screen_display_bitmap(const uint8_t *bitmap, int x, int y, int width,
-                                int height, bool invert) {
+void oled_screen_buffer_bitmap(const uint8_t *bitmap, int x, int y, int width,
+                               int height, bool invert) {
   xSemaphoreTake(oled_mutex, portMAX_DELAY);
   oled_driver_bitmaps(&dev, x, y, bitmap, width, height, invert);
   xSemaphoreGive(oled_mutex);
+}
+void oled_screen_display_bitmap(const uint8_t *bitmap, int x, int y, int width,
+                                int height, bool invert) {
+  oled_screen_buffer_bitmap(bitmap, x, y, width, height, invert);
+  oled_screen_display_show();
 }
 
 void oled_screen_draw_pixel(int x, int y, bool invert) {
