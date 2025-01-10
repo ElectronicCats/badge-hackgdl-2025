@@ -44,3 +44,4 @@ void wifi_analyzer_help();
 
 void analyzer_scenes_destination();
 void analyzer_scenes_channel();
+void wifi_module_summary_exit_cb();

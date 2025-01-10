@@ -13,3 +13,4 @@ typedef enum {
 
 void analyzer_scenes_main_menu();
 void analyzer_scenes_settings();
+void analyzer_scenes_summary(char **list, uint16_t list_size);

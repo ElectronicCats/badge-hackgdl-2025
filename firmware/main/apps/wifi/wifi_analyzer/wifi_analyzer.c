@@ -33,7 +33,7 @@ static char *wifi_analizer_summary_2[120] = {
 };
 
 static void wifi_module_input_cb(uint8_t button_name, uint8_t button_event);
-static void wifi_module_summary_exit_cb();
+void wifi_module_summary_exit_cb();
 
 uint16_t get_summary_rows_count() {
   uint8_t num_items = 0;
@@ -98,7 +98,7 @@ esp_err_t wifi_module_init_sniffer() {
   // led_control_run_effect(led_control_zigbee_scanning);
   return ESP_OK;
 }
-static void wifi_module_summary_exit_cb() {
+void wifi_module_summary_exit_cb() {
   if (analizer_initialized) {
     wifi_sniffer_close_file();
   }
@@ -107,13 +107,14 @@ static void wifi_module_summary_exit_cb() {
 
 void wifi_module_analyzer_run_exit() {
   analyzer_summary_menu.menu_items = wifi_analizer_summary_2;
-  analyzer_summary_menu.menu_level = GENERAL_TREE_APP_MENU;
+  // analyzer_summary_menu.menu_level = GENERAL_TREE_APP_MENU;
   wifi_sniffer_stop();
   // led_control_stop();
   wifi_sniffer_load_summary();
-  analyzer_summary_menu.menu_count = get_summary_rows_count();
-  general_register_scrolling_menu(&analyzer_summary_menu);
-  general_screen_display_scrolling_text_handler(wifi_module_summary_exit_cb);
+  // analyzer_summary_menu.menu_count = get_summary_rows_count();
+  analyzer_scenes_summary(wifi_analizer_summary_2, get_summary_rows_count());
+  // general_register_scrolling_menu(&analyzer_summary_menu);
+  // general_screen_display_scrolling_text_handler(wifi_module_summary_exit_cb);
 }
 
 void wifi_module_analyzer_summary_exit() { wifi_sniffer_close_file(); }
@@ -189,13 +190,13 @@ void wifi_module_analizer_summary_cb(FILE *pcap_file) {
 
   // Load header information
   uint32_t summary_index = 1; // Skip scroll text flag and Summary title
-  wifi_analizer_summary_2[summary_index++] = "----------------";
+  wifi_analizer_summary_2[summary_index++] = "--------------";
   wifi_analizer_summary_2[summary_index++] = "Magic Number:";
   wifi_analizer_summary_2[summary_index++] = magic_number_str;
   wifi_analizer_summary_2[summary_index++] = major_version_str;
   wifi_analizer_summary_2[summary_index++] = snaplen_str;
   wifi_analizer_summary_2[summary_index++] = link_type_str;
-  wifi_analizer_summary_2[summary_index++] = "----------------";
+  wifi_analizer_summary_2[summary_index++] = "--------------";
 
   uint32_t packet_num = 0;
   pcap_packet_header_t packet_header;

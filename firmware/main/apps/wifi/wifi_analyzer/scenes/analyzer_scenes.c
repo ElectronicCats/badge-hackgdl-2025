@@ -12,6 +12,7 @@ static analyzer_scenes_e current_scene;
 
 void analyzer_scenes_main_menu();
 void analyzer_scenes_channel();
+void analyzer_scenes_summary(char **list, uint16_t list_size);
 
 analyzer_scenes_e analyzer_get_current_scene() { return current_scene; }
 
@@ -94,4 +95,17 @@ void wifi_analyzer_help() {
   help.text = wifi_analizer_help;
   help.exit_cb = analyzer_scenes_main_menu;
   general_scrolling_text(help);
+}
+
+//////////////////////////   SUMMARY MENU   ///////////////////////////////
+void analyzer_scenes_summary(char **list, uint16_t list_size) {
+  general_scrolling_text_ctx summary;
+  memset(&summary, 0, sizeof(summary));
+  summary.banner = "Information";
+  summary.scroll_type = GENERAL_SCROLLING_TEXT_INFINITE;
+  summary.window_type = GENERAL_SCROLLING_TEXT_WINDOW;
+  summary.text_arr = list;
+  summary.text_len = list_size;
+  summary.exit_cb = wifi_module_summary_exit_cb;
+  general_scrolling_text_array(summary);
 }
