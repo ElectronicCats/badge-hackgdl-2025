@@ -12,8 +12,7 @@ static void ble_screens_display_scanning_animation() {
 
 void ble_screens_start_scanning_animation() {
   oled_screen_clear();
-  oled_screen_display_text_center("< Back", 0, OLED_DISPLAY_NORMAL);
-  oled_screen_display_text_center("BLE SPAM", 1, OLED_DISPLAY_NORMAL);
+  oled_screen_display_text_center("BLE SPAM", 0, OLED_DISPLAY_NORMAL);
 #ifdef CONFIG_RESOLUTION_128X64
   animations_task_run(ble_screens_display_scanning_animation, 100, NULL);
 #endif
