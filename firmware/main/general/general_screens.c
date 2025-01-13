@@ -199,7 +199,7 @@ void genera_screen_display_card_information(char *title, char *body) {
   oled_screen_display_show();
 }
 
-void genera_screen_display_notify_information(char *title, char *body) {
+void general_screen_display_notify_information(char *title, char *body) {
   general_clear_screen();
   general_screen_display_breadcrumb();
   int page = ITEM_PAGE_OFFSET;
