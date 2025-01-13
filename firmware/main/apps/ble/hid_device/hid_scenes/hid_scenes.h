@@ -5,5 +5,6 @@
 
 void hid_scenes_main_menu();
 void hid_scenes_control_menu(uint8_t selected);
+void hid_scenes_notification(char *head, char *body, uint32_t duration_ms);
 
 #endif // _HID_SCENES_H_

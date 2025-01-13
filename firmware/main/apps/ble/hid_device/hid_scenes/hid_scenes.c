@@ -2,12 +2,14 @@
 
 #include "string.h"
 
+#include "general_notification.h"
 #include "general_submenu.h"
 #include "hid_module.h"
 #include "menus_module.h"
 
 void hid_scenes_main_menu();
 void hid_scenes_control_menu(uint8_t selected);
+void hid_scenes_notification(char *head, char *body, uint32_t duration_ms);
 
 /////////////// MAIN MENU //////////////
 typedef enum { NAME_OPTION, MAC_OPTION, START_OPTION } main_menu_options_e;
@@ -80,4 +82,14 @@ void hid_scenes_control_menu(uint8_t selected) {
   control_menu.exit_cb = control_exit_cb;
   control_menu.selected_option = selected;
   general_submenu(control_menu);
+}
+
+/////////////// NOTIFICATION MENU //////////////
+void hid_scenes_notification(char *head, char *body, uint32_t duration_ms) {
+  general_notification_ctx_t notification;
+  memset(&notification, 0, sizeof(notification));
+  notification.head = head;
+  notification.body = body;
+  notification.duration_ms = duration_ms;
+  general_notification(notification);
 }
