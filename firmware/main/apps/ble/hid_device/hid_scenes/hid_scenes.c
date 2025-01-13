@@ -5,7 +5,8 @@
 #include "general_notification.h"
 #include "general_submenu.h"
 #include "hid_module.h"
-#include "menus_module.h"
+#include "menus_module.h"'
+#include "oled_screen.h"
 
 void hid_scenes_main_menu();
 void hid_scenes_control_menu(uint8_t selected);
@@ -94,7 +95,11 @@ void hid_scenes_notification(char *head, char *body, uint32_t duration_ms) {
   notification.head = head;
   notification.body = body;
   notification.duration_ms = duration_ms;
+
+  oled_screen_get_last_buffer();
   general_notification(notification);
+  oled_screen_set_last_buffer();
+  oled_screen_display_show();
 }
 
 /////////////// NOTIFICATION HANDLER MENU //////////////

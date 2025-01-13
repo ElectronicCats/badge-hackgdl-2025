@@ -11,7 +11,7 @@ general_notification_ctx_t *notification_ctx = NULL;
 static void free_ctx();
 
 static void notification_handler(uint8_t button, uint8_t event) {
-  if (button != BUTTON_LEFT && event != BUTTON_PRESS_DOWN) {
+  if (button != BUTTON_BACK || event != BUTTON_PRESS_DOWN) {
     return;
   }
   void (*exit_cb)() = notification_ctx->on_exit;
