@@ -8,6 +8,18 @@
 #include "oled_screen.h"
 
 general_notification_ctx_t *notification_ctx = NULL;
+static void free_ctx();
+
+static void notification_handler(uint8_t button, uint8_t event) {
+  if (button != BUTTON_LEFT && event != BUTTON_PRESS_DOWN) {
+    return;
+  }
+  void (*exit_cb)() = notification_ctx->on_exit;
+  free_ctx();
+  if (exit_cb) {
+    exit_cb();
+  }
+}
 
 static void draw_notification() {
   oled_screen_clear();
@@ -39,23 +51,38 @@ void general_notification(general_notification_ctx_t ctx) {
   notification_ctx = calloc(1, sizeof(general_notification_ctx_t));
   notification_ctx->head = ctx.head;
   notification_ctx->body = ctx.body;
-  notification_ctx->on_start_cb = ctx.on_start_cb;
-  notification_ctx->on_end_cb = ctx.on_end_cb;
+  notification_ctx->on_enter = ctx.on_enter;
+  notification_ctx->on_exit = ctx.on_exit;
   notification_ctx->duration_ms = ctx.duration_ms;
 
-  oled_screen_get_last_buffer();
   menus_module_disable_input();
-  if (notification_ctx->on_start_cb) {
-    notification_ctx->on_start_cb();
+  if (notification_ctx->on_enter) {
+    notification_ctx->on_enter();
   }
   draw_notification();
   vTaskDelay(pdMS_TO_TICKS(notification_ctx->duration_ms));
   menus_module_enable_input();
-  oled_screen_set_last_buffer();
-  oled_screen_display_show();
-  void (*exit_cb)() = notification_ctx->on_end_cb;
+  void (*exit_cb)() = notification_ctx->on_exit;
   free_ctx();
   if (exit_cb) {
     exit_cb();
   }
+}
+
+void general_notification_handler(general_notification_ctx_t ctx) {
+  if (notification_ctx) {
+    free_ctx();
+  }
+  notification_ctx = calloc(1, sizeof(general_notification_ctx_t));
+  notification_ctx->head = ctx.head;
+  notification_ctx->body = ctx.body;
+  notification_ctx->on_enter = ctx.on_enter;
+  notification_ctx->on_exit = ctx.on_exit;
+  notification_ctx->duration_ms = ctx.duration_ms;
+
+  if (notification_ctx->on_enter) {
+    notification_ctx->on_enter();
+  }
+  draw_notification();
+  menus_module_set_app_state(true, notification_handler);
 }

@@ -10,6 +10,7 @@
 void hid_scenes_main_menu();
 void hid_scenes_control_menu(uint8_t selected);
 void hid_scenes_notification(char *head, char *body, uint32_t duration_ms);
+void hid_scenes_notification_handler(char *head, char *body);
 
 /////////////// MAIN MENU //////////////
 typedef enum { NAME_OPTION, MAC_OPTION, START_OPTION } main_menu_options_e;
@@ -19,8 +20,10 @@ static const char *main_menu_options[] = {"Device name", "Device MAC", "Start"};
 static void main_menu_cb(uint8_t selection) {
   switch (selection) {
   case NAME_OPTION:
+    hid_module_name();
     break;
   case MAC_OPTION:
+    hid_module_mac();
     break;
   case START_OPTION:
     hid_module_start();
@@ -92,4 +95,16 @@ void hid_scenes_notification(char *head, char *body, uint32_t duration_ms) {
   notification.body = body;
   notification.duration_ms = duration_ms;
   general_notification(notification);
+}
+
+/////////////// NOTIFICATION HANDLER MENU //////////////
+static void on_exit_cb() { hid_scenes_main_menu(); }
+
+void hid_scenes_notification_handler(char *head, char *body) {
+  general_notification_ctx_t notification;
+  memset(&notification, 0, sizeof(notification));
+  notification.head = head;
+  notification.body = body;
+  notification.on_exit = on_exit_cb;
+  general_notification_handler(notification);
 }
