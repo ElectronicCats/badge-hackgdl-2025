@@ -54,17 +54,17 @@ void module_update_tracker_name(char *tracker_name, uint16_t index) {
 
 void module_display_scanning() {
   // led_control_run_effect(led_control_pulse_leds);
-  genera_screen_display_notify_information("Searching", "Devices");
+  general_screen_display_notify_information("Searching", "Devices");
 }
 
 void module_display_tracker_information(char *title, char *body) {
   // led_control_run_effect(led_control_pulse_leds);
-  genera_screen_display_card_information(title, body);
+  general_screen_display_card_information(title, body);
 }
 
 void module_display_device_detected(char *device_name) {
   // led_control_run_effect(led_control_pulse_leds);
-  genera_screen_display_notify_information("Device found", device_name);
+  general_screen_display_notify_information("Device found", device_name);
   vTaskDelay(500 / portTICK_PERIOD_MS);
   general_screen_display_menu(hid_current_item);
 }

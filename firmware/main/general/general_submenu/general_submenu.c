@@ -76,6 +76,8 @@ void general_submenu(general_submenu_menu_t radio_selection_menu) {
       radio_selection_menu.options_count;
   general_radio_selection_ctx->select_cb = radio_selection_menu.select_cb;
   general_radio_selection_ctx->exit_cb = radio_selection_menu.exit_cb;
+  general_radio_selection_ctx->selected_option =
+      radio_selection_menu.selected_option;
   menus_module_set_app_state(true, input_cb);
   list_submenu_options();
 }

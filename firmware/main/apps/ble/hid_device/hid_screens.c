@@ -5,8 +5,8 @@
 #include <stdint.h>
 #include <string.h>
 // #include "led_events.h"
+#include "hid_scenes.h"
 #include "oled_screen.h"
-
 static uint16_t hid_current_item = 0;
 
 static const general_menu_t hid_menu = {
@@ -37,28 +37,31 @@ void hid_module_register_menu(menu_tree_t menu) {
 
 void hid_module_display_device_information(char *title, char *body) {
   // led_control_run_effect(led_control_pulse_leds);
-  genera_screen_display_card_information(title, body);
+  general_screen_display_card_information(title, body);
 }
 
 void hid_module_display_notify_volumen_up() {
   // led_control_run_effect(led_control_pulse_led_right);
   general_screen_display_notify_information("Notify", "Volumen Up");
   vTaskDelay(500 / portTICK_PERIOD_MS);
-  general_screen_display_menu(hid_current_item);
+  // general_screen_display_menu(hid_current_item);
+  hid_scenes_control_menu(0);
 }
 
 void hid_module_display_notify_volumen_down() {
   // led_control_run_effect(led_control_pulse_led_left);
   general_screen_display_notify_information("Notify", "Volumen Down");
   vTaskDelay(500 / portTICK_PERIOD_MS);
-  general_screen_display_menu(hid_current_item);
+  // general_screen_display_menu(hid_current_item);
+  hid_scenes_control_menu(1);
 }
 
 void hid_module_display_notify_play_pause() {
   // led_control_run_effect(led_control_ble_tracking);
   general_screen_display_notify_information("Notify", "Play/Pause");
   vTaskDelay(500 / portTICK_PERIOD_MS);
-  general_screen_display_menu(hid_current_item);
+  // general_screen_display_menu(hid_current_item);
+  hid_scenes_control_menu(2);
 }
 
 void hid_module_display_device_pairing() {
@@ -70,22 +73,25 @@ void hid_module_display_device_connection(bool status) {
   // led_control_stop();
   if (status) {
     general_screen_display_notify_information("Notify", "Connected");
+    vTaskDelay(1000 / portTICK_PERIOD_MS);
+    hid_scenes_control_menu(0);
   } else {
-    general_register_menu(&hid_menu);
+    // general_register_menu(&hid_menu);
     general_screen_display_notify_information("Notify", "Disconnected");
+    vTaskDelay(1000 / portTICK_PERIOD_MS);
+    hid_scenes_main_menu();
   }
-  vTaskDelay(1000 / portTICK_PERIOD_MS);
-  hid_current_item = 0;
-  general_screen_display_menu(hid_current_item);
+  // hid_current_item = 0;
+  // general_screen_display_menu(hid_current_item);
 }
 
 void hid_module_display_device_name() {
   // led_control_run_effect(led_control_pulse_leds);
-  genera_screen_display_card_information("HID Device", "HIDNAME");
+  general_screen_display_card_information("HID Device", "HIDNAME");
 }
 void hid_module_display_device_mac() {
   // led_control_run_effect(led_control_pulse_leds);
-  genera_screen_display_card_information("HID Device", "MACADDD");
+  general_screen_display_card_information("HID Device", "MACADDD");
 }
 
 void hid_module_display_menu(uint16_t current_item) {

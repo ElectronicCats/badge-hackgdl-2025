@@ -179,10 +179,10 @@ void general_screen_display_card_information_handler(char *title, char *body,
   menu_exit_function = callback_exit;
   menu_restore_function = callback_restore;
   menus_module_set_app_state(true, general_screen_cb_modal);
-  genera_screen_display_card_information(title, body);
+  general_screen_display_card_information(title, body);
 }
 
-void genera_screen_display_card_information(char *title, char *body) {
+void general_screen_display_card_information(char *title, char *body) {
   general_register_menu(&card_info_menu_ctx);
   general_clear_screen();
   general_screen_display_breadcrumb();
@@ -201,7 +201,7 @@ void genera_screen_display_card_information(char *title, char *body) {
 
 void general_screen_display_notify_information(char *title, char *body) {
   general_clear_screen();
-  general_screen_display_breadcrumb();
+  // general_screen_display_breadcrumb();
   int page = ITEM_PAGE_OFFSET;
   oled_screen_display_card_border();
   oled_screen_display_text_center(title, page, OLED_DISPLAY_NORMAL);

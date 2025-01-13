@@ -224,6 +224,11 @@ void ble_hid_get_device_name(char *device_name) {
 void ble_hid_get_device_mac(uint8_t *mac) { esp_read_mac(mac, ESP_MAC_BT); }
 
 void ble_hid_begin() {
+  if (sec_conn) {
+    hid_event_callback(true);
+    return;
+  }
+
   esp_err_t ret;
 
   // Initialize NVS.
