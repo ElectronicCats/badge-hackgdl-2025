@@ -6111,7 +6111,7 @@
 						(type default)
 					)
 					(fill
-						(type outline)
+						(type none)
 					)
 				)
 				(arc
@@ -6123,7 +6123,7 @@
 						(type default)
 					)
 					(fill
-						(type none)
+						(type outline)
 					)
 				)
 				(arc
@@ -6233,6 +6233,17 @@
 						(type none)
 					)
 				)
+				(circle
+					(center 0 -5.842)
+					(radius 1.27)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
 				(polyline
 					(pts
 						(xy 0 -5.842) (xy 0 4.318)
@@ -6243,17 +6254,6 @@
 					)
 					(fill
 						(type none)
-					)
-				)
-				(circle
-					(center 0 -5.842)
-					(radius 1.27)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type outline)
 					)
 				)
 				(rectangle
@@ -11649,15 +11649,6 @@
 				(hide yes)
 			)
 		)
-		(property "Proveedor" "LCSC"
-			(at 233.68 148.59 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(property "manf#" "WS2812B-Mini"
 			(at 233.68 148.59 0)
 			(effects
@@ -12000,15 +11991,6 @@
 				(hide yes)
 			)
 		)
-		(property "Proveedor" "LCSC"
-			(at 210.82 105.41 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(property "DNP" ""
 			(at 210.82 105.41 0)
 			(effects
@@ -12097,15 +12079,6 @@
 			)
 		)
 		(property "LCSC#" "C527089"
-			(at 259.08 148.59 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Proveedor" "LCSC"
 			(at 259.08 148.59 0)
 			(effects
 				(font
@@ -12208,15 +12181,6 @@
 			)
 		)
 		(property "LCSC#" "C15725"
-			(at 265.43 101.6 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Proveedor" "LCSC"
 			(at 265.43 101.6 0)
 			(effects
 				(font
@@ -12413,15 +12377,6 @@
 				(hide yes)
 			)
 		)
-		(property "Proveedor" "LCSC"
-			(at 237.49 88.9 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(property "DNP" ""
 			(at 237.49 88.9 0)
 			(effects
@@ -12575,15 +12530,6 @@
 			)
 		)
 		(property "LCSC#" "C15849"
-			(at 156.21 22.987 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Proveedor" "LCSC"
 			(at 156.21 22.987 0)
 			(effects
 				(font
@@ -12836,15 +12782,6 @@
 				(hide yes)
 			)
 		)
-		(property "Proveedor" "JLCPCB"
-			(at 116.84 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "acce58ee-c8c4-4b35-af4e-51df3a37f513")
 		)
@@ -12924,15 +12861,6 @@
 			)
 		)
 		(property "LCSC#" "C15725"
-			(at 165.1 69.85 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Proveedor" "LCSC"
 			(at 165.1 69.85 0)
 			(effects
 				(font
@@ -13037,15 +12965,6 @@
 				(hide yes)
 			)
 		)
-		(property "Proveedor" "LCSC"
-			(at 236.22 116.84 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(property "DNP" ""
 			(at 236.22 116.84 0)
 			(effects
@@ -13134,15 +13053,6 @@
 			)
 		)
 		(property "LCSC#" "C85713"
-			(at 172.466 22.606 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Proveedor" "LCSC"
 			(at 172.466 22.606 0)
 			(effects
 				(font
@@ -13322,15 +13232,6 @@
 			)
 		)
 		(property "provedor" "LCSC"
-			(at 78.74 49.53 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Proveedor" "JLCPCB"
 			(at 78.74 49.53 0)
 			(effects
 				(font
@@ -13636,15 +13537,6 @@
 				(hide yes)
 			)
 		)
-		(property "Proveedor" "LCSC"
-			(at 265.43 93.98 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(property "DNP" ""
 			(at 265.43 93.98 0)
 			(effects
@@ -13731,15 +13623,6 @@
 			)
 		)
 		(property "LCSC#" "C15725"
-			(at 269.24 135.89 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Proveedor" "LCSC"
 			(at 269.24 135.89 0)
 			(effects
 				(font
@@ -13919,15 +13802,6 @@
 			)
 		)
 		(property "LCSC#" "C455281"
-			(at 236.22 109.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Proveedor" "LCSC"
 			(at 236.22 109.22 0)
 			(effects
 				(font
@@ -14379,15 +14253,6 @@
 				(hide yes)
 			)
 		)
-		(property "Proveedor" "LCSC"
-			(at 210.82 96.52 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(property "DNP" ""
 			(at 210.82 96.52 0)
 			(effects
@@ -14447,7 +14312,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Footprints:MSK12C02"
+		(property "Footprint" "Footprints:JS102011SAQN"
 			(at 95.25 45.72 0)
 			(effects
 				(font
@@ -14474,7 +14339,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C431540"
+		(property "LCSC#" "C221660"
 			(at 95.25 45.72 0)
 			(effects
 				(font
@@ -14492,16 +14357,7 @@
 				(hide yes)
 			)
 		)
-		(property "provedor" "MOUSER"
-			(at 95.25 45.72 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Proveedor" "JLCPCB"
+		(property "provedor" "LCSC"
 			(at 95.25 45.72 0)
 			(effects
 				(font
@@ -14966,15 +14822,6 @@
 				(hide yes)
 			)
 		)
-		(property "Proveedor" "JLCPCB"
-			(at 125.73 49.53 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "5214f32f-f204-4dab-abea-fc73e5647e32")
 		)
@@ -15045,15 +14892,6 @@
 			)
 		)
 		(property "LCSC#" "C527089"
-			(at 212.09 148.59 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Proveedor" "LCSC"
 			(at 212.09 148.59 0)
 			(effects
 				(font
@@ -15416,15 +15254,6 @@
 			)
 		)
 		(property "LCSC#" "C99198"
-			(at 171.45 41.91 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Proveedor" "LCSC"
 			(at 171.45 41.91 0)
 			(effects
 				(font
@@ -15938,15 +15767,6 @@
 				(hide yes)
 			)
 		)
-		(property "Proveedor" "JLCPCB"
-			(at 86.36 39.37 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "ef6d22de-142f-47d9-9896-e06be26cbeac")
 		)
@@ -16106,15 +15926,6 @@
 			)
 		)
 		(property "LCSC#" "C15725"
-			(at 164.719 50.165 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Proveedor" "LCSC"
 			(at 164.719 50.165 0)
 			(effects
 				(font
@@ -16343,15 +16154,6 @@
 			)
 		)
 		(property "LCSC#" "C15725"
-			(at 241.3 135.89 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Proveedor" "LCSC"
 			(at 241.3 135.89 0)
 			(effects
 				(font
@@ -17059,15 +16861,6 @@
 				(hide yes)
 			)
 		)
-		(property "Proveedor" "LCSC"
-			(at 164.846 60.96 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(property "DNP" ""
 			(at 164.846 60.96 0)
 			(effects
@@ -17248,15 +17041,6 @@
 				(hide yes)
 			)
 		)
-		(property "Proveedor" "MOUSER"
-			(at 191.77 24.13 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(property "DNP" ""
 			(at 191.77 24.13 0)
 			(effects
@@ -17267,15 +17051,6 @@
 			)
 		)
 		(property "provedor" "MOUSER"
-			(at 191.77 24.13 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MOUSER#" "ESP32-S3-WROOM-1-N8R2"
 			(at 191.77 24.13 0)
 			(effects
 				(font
@@ -17657,15 +17432,6 @@
 				(hide yes)
 			)
 		)
-		(property "Proveedor" "DIGIKEY"
-			(at 147.32 167.64 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(property "manf#" ""
 			(at 147.32 167.64 0)
 			(effects
@@ -17851,15 +17617,6 @@
 			)
 		)
 		(property "LCSC#" "C85713"
-			(at 104.14 53.34 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Proveedor" "JLCPCB"
 			(at 104.14 53.34 0)
 			(effects
 				(font
@@ -18518,15 +18275,6 @@
 				(hide yes)
 			)
 		)
-		(property "Proveedor" "LCSC"
-			(at 237.49 96.52 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(property "DNP" ""
 			(at 237.49 96.52 0)
 			(effects
@@ -19005,15 +18753,6 @@
 				(hide yes)
 			)
 		)
-		(property "Proveedor" "LCSC"
-			(at 219.71 135.89 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(property "manf#" ""
 			(at 219.71 135.89 0)
 			(effects
@@ -19110,15 +18849,6 @@
 				(hide yes)
 			)
 		)
-		(property "Proveedor" "LCSC"
-			(at 163.83 22.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(property "DNP" ""
 			(at 163.83 22.86 0)
 			(effects
@@ -19205,15 +18935,6 @@
 			)
 		)
 		(property "LCSC#" "C455281"
-			(at 164.465 45.593 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Proveedor" "LCSC"
 			(at 164.465 45.593 0)
 			(effects
 				(font
@@ -19457,15 +19178,6 @@
 			)
 		)
 		(property "manf#" ""
-			(at 83.82 45.72 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Proveedor" "JLCPCB"
 			(at 83.82 45.72 0)
 			(effects
 				(font
