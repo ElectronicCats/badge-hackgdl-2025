@@ -3472,23 +3472,23 @@
 				)
 			)
 			(symbol "ESP32-S3-WROOM-1-N8_1_1"
-				(polyline
-					(pts
-						(xy 7.62 5.08) (xy 7.62 -55.88)
-					)
+				(rectangle
+					(start 7.62 5.08)
+					(end 33.02 -55.88)
 					(stroke
-						(width 0.127)
+						(width 0)
 						(type default)
 					)
 					(fill
 						(type background)
 					)
 				)
-				(rectangle
-					(start 7.62 5.08)
-					(end 33.02 -55.88)
+				(polyline
+					(pts
+						(xy 7.62 5.08) (xy 7.62 -55.88)
+					)
 					(stroke
-						(width 0)
+						(width 0.127)
 						(type default)
 					)
 					(fill
@@ -8219,6 +8219,10 @@
 		(uuid "9b6c12d2-657b-4e27-a3de-1ec5e7ccf3f3")
 	)
 	(no_connect
+		(at 191.77 31.75)
+		(uuid "9db56028-33e2-419c-bd06-56502f9c4e0b")
+	)
+	(no_connect
 		(at 232.41 54.61)
 		(uuid "a2160505-ca61-47b4-bd33-d65300c7998e")
 	)
@@ -11625,7 +11629,7 @@
 				(hide yes)
 			)
 		)
-		(property "manf#" "WS2812B-Mini"
+		(property "manf#" ""
 			(at 233.68 148.59 0)
 			(effects
 				(font
@@ -12063,7 +12067,7 @@
 				(hide yes)
 			)
 		)
-		(property "manf#" "WS2812B-Mini"
+		(property "manf#" ""
 			(at 259.08 148.59 0)
 			(effects
 				(font
@@ -12250,7 +12254,7 @@
 				(hide yes)
 			)
 		)
-		(property "manf#" "ERJ3RBD5101V"
+		(property "manf#" ""
 			(at 50.8 34.29 0)
 			(effects
 				(font
@@ -12344,7 +12348,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C455281"
+		(property "LCSC#" "C318884"
 			(at 237.49 88.9 0)
 			(effects
 				(font
@@ -12731,7 +12735,7 @@
 				(hide yes)
 			)
 		)
-		(property "manf#" "XC6220B331MR-G "
+		(property "manf#" ""
 			(at 116.84 48.26 0)
 			(effects
 				(font
@@ -13504,7 +13508,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C455281"
+		(property "LCSC#" "C318884"
 			(at 265.43 93.98 0)
 			(effects
 				(font
@@ -13777,7 +13781,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C455281"
+		(property "LCSC#" "C318884"
 			(at 236.22 109.22 0)
 			(effects
 				(font
@@ -14220,7 +14224,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C455281"
+		(property "LCSC#" "C318884"
 			(at 210.82 96.52 0)
 			(effects
 				(font
@@ -14876,7 +14880,7 @@
 				(hide yes)
 			)
 		)
-		(property "manf#" "WS2812B-Mini"
+		(property "manf#" ""
 			(at 212.09 148.59 0)
 			(effects
 				(font
@@ -15587,7 +15591,7 @@
 				(hide yes)
 			)
 		)
-		(property "manf#" "TYPE-C-31-M-31"
+		(property "manf#" ""
 			(at 30.48 41.91 0)
 			(effects
 				(font
@@ -16393,7 +16397,7 @@
 				(hide yes)
 			)
 		)
-		(property "manf#" "RTT03471JTP"
+		(property "manf#" ""
 			(at 199.39 148.59 0)
 			(effects
 				(font
@@ -16828,7 +16832,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C455281"
+		(property "LCSC#" "C318884"
 			(at 164.846 60.96 0)
 			(effects
 				(font
@@ -18561,7 +18565,7 @@
 				(hide yes)
 			)
 		)
-		(property "manf#" "ERJ3RBD5101V"
+		(property "manf#" ""
 			(at 50.8 31.75 0)
 			(effects
 				(font
@@ -18910,7 +18914,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C455281"
+		(property "LCSC#" "C318884"
 			(at 164.465 45.593 0)
 			(effects
 				(font
