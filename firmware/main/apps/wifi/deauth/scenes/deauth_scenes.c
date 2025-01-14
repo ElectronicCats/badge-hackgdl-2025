@@ -6,7 +6,7 @@
 #include "menus_module.h"
 
 void deauth_scenes_main_menu();
-void deauth_scenes_ap_selection();
+void deauth_scenes_ap_selection(char **ap_names, uint8_t ap_count);
 void deauth_scenes_attack_selection();
 
 /////////////// MAIN MENU ///////////
@@ -55,13 +55,14 @@ void deauth_scenes_main_menu() {
 }
 
 /////////////// AP SELECTION ///////////
-void deauth_scenes_ap_selection() {
+void deauth_scenes_ap_selection(char **ap_names, uint8_t ap_count) {
   general_radio_selection_menu_t ap = {0};
   ap.banner = "Select AP";
-  ap.options = NULL;
-  ap.options_count = NULL;
+  ap.options = ap_names;
+  ap.options_count = ap_count;
   ap.current_option = 0;
-  ap.select_cb = NULL;
+  ap.select_cb = deauth_module_set_ap;
+  ap.exit_cb = deauth_scenes_main_menu;
 
   general_radio_selection(ap);
 }

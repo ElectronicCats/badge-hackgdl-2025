@@ -58,7 +58,7 @@ static void scanning_task() {
   while (ap_records->count < (DEFAULT_SCAN_LIST_SIZE / 2) &&
          scan_count < SCAN_RETRIES) {
     wifi_scanner_module_scan();
-    vTaskDelay(5000 / portTICK_PERIOD_MS);
+    vTaskDelay(20 / portTICK_PERIOD_MS);
     scan_count++;
   }
   ap_records = wifi_scanner_get_ap_records();
@@ -146,12 +146,19 @@ void deauth_module_scan() {
   deauth_run_scan_task();
   // menus_module_set_app_state(true, deauth_module_cb_event);
 }
-void deauth_module_select_ap(uint8_t selection) {
+
+static char *ap_names[20] = {0};
+
+void deauth_module_select_ap() {
   // menus_module_set_app_state(true, deauth_module_cb_event_select_ap);
-  deauth_display_scanned_ap(ap_records->records, ap_records->count,
-                            current_item);
+  // deauth_display_scanned_ap(ap_records->records, ap_records->count,
+  //                           current_item);
+  for (uint8_t i = 0; i < ap_records->count; i++) {
+    ap_names[i] = (char *)ap_records->records[i].ssid;
+  }
+  deauth_scenes_ap_selection(ap_names, ap_records->count);
 }
-void deauth_module_select_attack(uint8_t selection) {
+void deauth_module_select_attack() {
   // menus_module_set_app_state(true, deauth_module_cb_event_attacks);
   deauth_display_attacks(current_item, menu_stadistics);
 }
@@ -264,7 +271,6 @@ void deauth_module_set_ap(uint8_t selection) {
   menu_stadistics.selected_ap = ap_records->records[selection];
   // menus_module_set_app_state(true, deauth_module_cb_event);
   // deauth_display_menu(current_item, menu_stadistics);
-  deauth_scenes_main_menu();
 }
 
 // static void deauth_module_cb_event_select_ap(uint8_t button_name,
