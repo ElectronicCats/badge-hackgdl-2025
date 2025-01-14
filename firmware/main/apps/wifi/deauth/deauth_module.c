@@ -36,7 +36,7 @@ typedef struct {
 static wifi_module_t current_wifi_state;
 static scanned_ap_records_t *ap_records;
 static uint16_t current_item = 0;
-static menu_stadistics_t menu_stadistics;
+static menu_stadistics_t menu_stadistics = {0};
 
 // static void deauth_module_cb_event(uint8_t button_name, uint8_t
 // button_event); static void deauth_module_cb_event_select_ap(uint8_t
@@ -44,8 +44,8 @@ static menu_stadistics_t menu_stadistics;
 //                                              uint8_t button_event);
 // static void deauth_module_cb_event_attacks(uint8_t button_name,
 //                                            uint8_t button_event);
-// static void deauth_module_cb_event_run(uint8_t button_name,
-//                                        uint8_t button_event);
+static void deauth_module_cb_event_run(uint8_t button_name,
+                                       uint8_t button_event);
 // static void deauth_module_cb_event_captive_portal(uint8_t button_name,
 //                                                   uint8_t button_event);
 
@@ -97,13 +97,14 @@ static void deauth_handle_attacks() {
         menu_stadistics.attack,
         &ap_records->records[menu_stadistics.selected_ap]);
     ESP_LOGI("deauth", "Attack: %d", menu_stadistics.attack);
-    // menus_module_set_app_state(true, deauth_module_cb_event_run);
+    menus_module_set_app_state(true, deauth_module_cb_event_run);
     current_item = 0;
     break;
   case CAPTIVEPORTAL:
     current_item = 0;
     // menus_module_set_app_state(true, deauth_module_cb_event_captive_portal);
-    deauth_display_captive_portals(current_item, menu_stadistics);
+    // deauth_display_captive_portals(current_item, menu_stadistics);
+    deauth_scenes_portal_selection();
     break;
   default:
     break;
@@ -361,31 +362,28 @@ void deauth_module_run_exit() {
   deauth_display_menu(current_item, menu_stadistics);
   deauth_scenes_main_menu();
 }
-// static void deauth_module_cb_event_run(uint8_t button_name,
-//                                        uint8_t button_event)
-// {
-//   if (button_event != BUTTON_PRESS_DOWN)
-//   {
-//     return;
-//   }
-//   switch (button_name)
-//   {
-//   case BUTTON_LEFT:
-//     current_item = 0;
-//     // captive_portal_stop();
-//     // led_control_stop();
-//     animations_task_stop();
-//     wifi_attacks_module_stop();
-//     menus_module_set_app_state(true, deauth_module_cb_event);
-//     deauth_display_menu(current_item, menu_stadistics);
-//     break;
-//   case BUTTON_MIDDLE:
-//   case BUTTON_BACK:
-//   case BUTTON_RIGHT:
-//   default:
-//     break;
-//   }
-// }
+static void deauth_module_cb_event_run(uint8_t button_name,
+                                       uint8_t button_event) {
+  if (button_event != BUTTON_PRESS_DOWN) {
+    return;
+  }
+  switch (button_name) {
+  case BUTTON_LEFT:
+    // captive_portal_stop();
+    // led_control_stop();
+    animations_task_stop();
+    wifi_attacks_module_stop();
+    // menus_module_set_app_state(true, deauth_module_cb_event);
+    // deauth_display_menu(current_item, menu_stadistics);
+    deauth_scenes_main_menu();
+    break;
+  case BUTTON_MIDDLE:
+  case BUTTON_BACK:
+  case BUTTON_RIGHT:
+  default:
+    break;
+  }
+}
 
 void deauth_module_set_captive_portal_settings(uint8_t selection) {
   // led_control_run_effect(led_control_wifi_scanning);

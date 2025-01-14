@@ -9,6 +9,7 @@ void deauth_scenes_main_menu();
 void deauth_scenes_ap_selection(char **ap_names, uint8_t ap_count,
                                 uint8_t selected);
 void deauth_scenes_attack_selection(uint16_t selected);
+void deauth_scenes_portal_selection();
 
 static uint8_t last_main_selection = 0;
 
@@ -74,7 +75,6 @@ void deauth_scenes_ap_selection(char **ap_names, uint8_t ap_count,
 }
 
 /////////////// ATTACK SELECTION ///////////
-
 static const char *deauth_attacks[] = {"Broadcast", "Rogue AP", "Combined",
                                        "Captive Portal"};
 
@@ -88,4 +88,18 @@ void deauth_scenes_attack_selection(uint16_t selected) {
   attack.exit_cb = deauth_scenes_main_menu;
 
   general_radio_selection(attack);
+}
+
+/////////////// ATTACK SELECTION ///////////
+static const char *captive_portals[] = {"Google", "Wifi Pass"};
+
+void deauth_scenes_portal_selection() {
+  general_submenu_menu_t captive_portal = {0};
+  captive_portal.title = "Captive Portal";
+  captive_portal.options = captive_portals;
+  captive_portal.options_count = sizeof(captive_portals) / sizeof(char *);
+  captive_portal.select_cb = NULL;
+  captive_portal.exit_cb = deauth_scenes_main_menu;
+
+  general_submenu(captive_portal);
 }
