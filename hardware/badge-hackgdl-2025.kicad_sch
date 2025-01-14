@@ -3472,23 +3472,23 @@
 				)
 			)
 			(symbol "ESP32-S3-WROOM-1-N8_1_1"
-				(rectangle
-					(start 7.62 5.08)
-					(end 33.02 -55.88)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
 				(polyline
 					(pts
 						(xy 7.62 5.08) (xy 7.62 -55.88)
 					)
 					(stroke
 						(width 0.127)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(rectangle
+					(start 7.62 5.08)
+					(end 33.02 -55.88)
+					(stroke
+						(width 0)
 						(type default)
 					)
 					(fill
@@ -6111,7 +6111,7 @@
 						(type default)
 					)
 					(fill
-						(type none)
+						(type outline)
 					)
 				)
 				(arc
@@ -6123,7 +6123,7 @@
 						(type default)
 					)
 					(fill
-						(type outline)
+						(type none)
 					)
 				)
 				(arc
@@ -6159,7 +6159,7 @@
 						(type default)
 					)
 					(fill
-						(type outline)
+						(type none)
 					)
 				)
 				(arc
@@ -6171,7 +6171,7 @@
 						(type default)
 					)
 					(fill
-						(type none)
+						(type outline)
 					)
 				)
 				(polyline
@@ -17871,7 +17871,7 @@
 				)
 			)
 		)
-		(property "Value" "0.5A"
+		(property "Value" "1A"
 			(at 53.34 24.2824 0)
 			(effects
 				(font
@@ -17906,7 +17906,7 @@
 				(hide yes)
 			)
 		)
-		(property "manf#" "06D0750D"
+		(property "manf#" ""
 			(at 53.34 26.67 0)
 			(effects
 				(font
@@ -17924,7 +17924,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" " C182438"
+		(property "LCSC#" "C151139"
 			(at 53.34 26.67 0)
 			(effects
 				(font
