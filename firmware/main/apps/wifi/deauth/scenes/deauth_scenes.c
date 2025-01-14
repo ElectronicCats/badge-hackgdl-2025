@@ -10,6 +10,8 @@ void deauth_scenes_ap_selection(char **ap_names, uint8_t ap_count,
                                 uint8_t selected);
 void deauth_scenes_attack_selection(uint16_t selected);
 
+static uint8_t last_main_selection = 0;
+
 /////////////// MAIN MENU ///////////
 typedef enum {
   SCAN_OPTION,
@@ -26,6 +28,7 @@ static const char *main_menu_options[] = {
 };
 
 static void main_menu_handler(uint8_t selection) {
+  last_main_selection = selection;
   switch (selection) {
   case SCAN_OPTION:
     deauth_module_scan();
@@ -49,6 +52,7 @@ void deauth_scenes_main_menu() {
   main_menu.title = "DEAUTH";
   main_menu.options = main_menu_options;
   main_menu.options_count = sizeof(main_menu_options) / sizeof(char *);
+  main_menu.selected_option = last_main_selection;
   main_menu.select_cb = main_menu_handler;
   main_menu.exit_cb = menus_module_restart;
 
