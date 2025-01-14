@@ -45,7 +45,7 @@ static void main_menu_exit_handler() { menus_module_exit_app(); }
 
 void analyzer_scenes_main_menu() {
   current_scene = ANALYZER_MAIN_SCENE;
-  general_submenu_menu_t main_menu;
+  general_submenu_menu_t main_menu = {0};
   main_menu.title = "Wifi Analyzer";
   main_menu.options = analizer_main_options;
   main_menu.options_count = sizeof(analizer_main_options) / sizeof(char *);
@@ -87,7 +87,7 @@ static const char *wifi_analizer_help = {
 };
 
 void wifi_analyzer_help() {
-  general_scrolling_text_ctx help;
+  general_scrolling_text_ctx help = {0};
   memset(&help, 0, sizeof(help));
   help.banner = "Analyzer Help";
   help.scroll_type = GENERAL_SCROLLING_TEXT_CLAMPED;
@@ -99,7 +99,7 @@ void wifi_analyzer_help() {
 
 //////////////////////////   SUMMARY MENU   ///////////////////////////////
 void analyzer_scenes_summary(char **list, uint16_t list_size) {
-  general_scrolling_text_ctx summary;
+  general_scrolling_text_ctx summary = {0};
   memset(&summary, 0, sizeof(summary));
   summary.banner = "Information";
   summary.scroll_type = GENERAL_SCROLLING_TEXT_INFINITE;

@@ -34,10 +34,10 @@ static void main_menu_cb(uint8_t selection) {
   }
 }
 
-static void hid_exit_cb() { menus_module_exit_app(); }
+static void hid_exit_cb() { menus_module_restart(); }
 
 void hid_scenes_main_menu() {
-  general_submenu_menu_t main_menu;
+  general_submenu_menu_t main_menu = {0};
   memset(&main_menu, 0, sizeof(main_menu));
   main_menu.title = "HID device";
   main_menu.options = main_menu_options;
@@ -77,7 +77,7 @@ static void control_cb(uint8_t selection) {
 static void control_exit_cb() { hid_scenes_main_menu(); }
 
 void hid_scenes_control_menu(uint8_t selected) {
-  general_submenu_menu_t control_menu;
+  general_submenu_menu_t control_menu = {0};
   memset(&control_menu, 0, sizeof(control_menu));
   control_menu.title = "Media Control";
   control_menu.options = control_options;
@@ -106,7 +106,7 @@ void hid_scenes_notification(char *head, char *body, uint32_t duration_ms) {
 static void on_exit_cb() { hid_scenes_main_menu(); }
 
 void hid_scenes_notification_handler(char *head, char *body) {
-  general_notification_ctx_t notification;
+  general_notification_ctx_t notification = {0};
   memset(&notification, 0, sizeof(notification));
   notification.head = head;
   notification.body = body;

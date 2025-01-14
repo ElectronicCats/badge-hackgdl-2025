@@ -21,4 +21,6 @@ void module_display_tracker_information(char *title, char *body);
 void module_update_scan_state(bool scanning);
 void module_add_tracker_to_list(char *tracker_name);
 void module_update_tracker_name(char *tracker_name, uint16_t index);
+
+void trakers_screens_list_trakers();
 #endif // TRACKERS_SCREENS_H

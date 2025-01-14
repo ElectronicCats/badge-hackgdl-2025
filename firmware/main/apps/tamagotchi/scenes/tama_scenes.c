@@ -61,7 +61,7 @@ static void speed_handler(uint8_t speed) {
 }
 
 void tama_scenes_speed() {
-  general_knob_ctx_t speed_menu;
+  general_knob_ctx_t speed_menu = {0};
   speed_menu.help_lbl = "Emulation speed";
   speed_menu.max = 10;
   speed_menu.min = 1;

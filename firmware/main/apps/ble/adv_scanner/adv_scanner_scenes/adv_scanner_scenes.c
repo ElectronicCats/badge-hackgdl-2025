@@ -42,7 +42,7 @@ static void main_menu_handler(uint8_t selection) {
 static void main_menu_exit_cb() { menus_module_restart(); }
 
 void adv_scanner_scenes_main_menu() {
-  general_submenu_menu_t main_menu;
+  general_submenu_menu_t main_menu = {0};
   memset(&main_menu, 0, sizeof(main_menu));
   main_menu.title = "ADV Scanner";
   main_menu.options = main_menu_options;
@@ -61,7 +61,7 @@ static void scan_type_handler(uint8_t selection) {
 }
 
 void adv_scanner_scenes_scan_type() {
-  general_radio_selection_menu_t scan_type;
+  general_radio_selection_menu_t scan_type = {0};
   memset(&scan_type, 0, sizeof(general_radio_selection_menu_t));
   scan_type.banner = "Scan Type";
   scan_type.options = scan_type_items;
@@ -83,7 +83,7 @@ static void scan_filter_handler(uint8_t selection) {
 
 void adv_scanner_scenes_scan_filter() {
 
-  general_radio_selection_menu_t scan_filter;
+  general_radio_selection_menu_t scan_filter = {0};
   memset(&scan_filter, 0, sizeof(general_radio_selection_menu_t));
   scan_filter.banner = "ADV Filter";
   scan_filter.options = scan_filter_items;

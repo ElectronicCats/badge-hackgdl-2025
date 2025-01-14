@@ -72,7 +72,7 @@ static void main_menu_handler(uint8_t selection) {
 static void main_menu_exit() { menus_module_exit_app(); }
 
 void detector_scenes_main_menu() {
-  general_submenu_menu_t main_menu;
+  general_submenu_menu_t main_menu = {0};
   main_menu.title = "Deauth Detector";
   main_menu.options = main_menu_options;
   main_menu.options_count = sizeof(main_menu_options) / sizeof(char *);
@@ -100,7 +100,7 @@ static void settings_handler(uint8_t scan_mode) {
 static void settings_exit() { detector_scenes_main_menu(); }
 
 void detector_scenes_settings() {
-  general_radio_selection_menu_t settings;
+  general_radio_selection_menu_t settings = {0};
   settings.banner = "Scan Mode";
   settings.options = settings_options;
   settings.options_count = sizeof(settings_options) / sizeof(char *);
@@ -124,7 +124,7 @@ static void channel_handler(uint8_t channel) {
 static void channel_exit() { detector_scenes_settings(); }
 
 void detector_scenes_channel() {
-  general_radio_selection_menu_t settings;
+  general_radio_selection_menu_t settings = {0};
   settings.banner = "Select Channel";
   settings.options = channel_options;
   settings.options_count = sizeof(channel_options) / sizeof(char *);
@@ -150,7 +150,7 @@ static const char *help_text = "Detect deauth "
 static void help_exit() { detector_scenes_main_menu(); }
 
 void detector_scenes_help() {
-  general_scrolling_text_ctx help;
+  general_scrolling_text_ctx help = {0};
   memset(&help, 0, sizeof(help));
   help.banner = "Help";
   help.text = help_text;
