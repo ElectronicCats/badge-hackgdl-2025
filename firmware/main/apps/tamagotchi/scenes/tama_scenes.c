@@ -43,7 +43,7 @@ static void tama_scenes_handler(uint8_t option) {
 }
 
 void tama_scenes_main() {
-  general_submenu_menu_t main_menu;
+  general_submenu_menu_t main_menu = {0};
   main_menu.title = "Tamagotchi App";
   main_menu.options = main_menu_options;
   main_menu.options_count = sizeof(main_menu_options) / sizeof(char *);

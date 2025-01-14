@@ -7,7 +7,6 @@
 static general_knob_ctx_t *knob_ctx = NULL;
 
 static void knob_exit() {
-  menus_module_exit_app();
   if (knob_ctx->exit_cb) {
     knob_ctx->exit_cb();
     free(knob_ctx);
