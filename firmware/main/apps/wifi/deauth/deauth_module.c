@@ -368,7 +368,7 @@ static void deauth_module_cb_event_run(uint8_t button_name,
     return;
   }
   switch (button_name) {
-  case BUTTON_LEFT:
+  case BUTTON_BACK:
     // captive_portal_stop();
     // led_control_stop();
     animations_task_stop();
@@ -377,9 +377,6 @@ static void deauth_module_cb_event_run(uint8_t button_name,
     // deauth_display_menu(current_item, menu_stadistics);
     deauth_scenes_main_menu();
     break;
-  case BUTTON_MIDDLE:
-  case BUTTON_BACK:
-  case BUTTON_RIGHT:
   default:
     break;
   }
@@ -394,7 +391,7 @@ void deauth_module_set_captive_portal_settings(uint8_t selection) {
   deauth_display_captive_waiting();
   xTaskCreate(captive_portal_begin, "captive_portal_start", 4096, NULL, 5,
               NULL);
-  // menus_module_set_app_state(true, deauth_module_cb_event_run);
+  menus_module_set_app_state(true, deauth_module_cb_event_run);
 }
 
 // static void deauth_module_cb_event_captive_portal(uint8_t button_name,

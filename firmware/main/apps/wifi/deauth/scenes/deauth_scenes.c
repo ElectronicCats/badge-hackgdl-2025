@@ -90,7 +90,7 @@ void deauth_scenes_attack_selection(uint16_t selected) {
   general_radio_selection(attack);
 }
 
-/////////////// ATTACK SELECTION ///////////
+/////////////// CAPTIVE PORTAL SELECTION ///////////
 static const char *captive_portals[] = {"Google", "Wifi Pass"};
 
 void deauth_scenes_portal_selection() {
@@ -98,7 +98,7 @@ void deauth_scenes_portal_selection() {
   captive_portal.title = "Captive Portal";
   captive_portal.options = captive_portals;
   captive_portal.options_count = sizeof(captive_portals) / sizeof(char *);
-  captive_portal.select_cb = NULL;
+  captive_portal.select_cb = deauth_module_set_captive_portal_settings;
   captive_portal.exit_cb = deauth_scenes_main_menu;
 
   general_submenu(captive_portal);
