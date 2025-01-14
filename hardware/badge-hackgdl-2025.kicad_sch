@@ -3472,23 +3472,23 @@
 				)
 			)
 			(symbol "ESP32-S3-WROOM-1-N8_1_1"
-				(polyline
-					(pts
-						(xy 7.62 5.08) (xy 7.62 -55.88)
-					)
+				(rectangle
+					(start 7.62 5.08)
+					(end 33.02 -55.88)
 					(stroke
-						(width 0.127)
+						(width 0)
 						(type default)
 					)
 					(fill
 						(type background)
 					)
 				)
-				(rectangle
-					(start 7.62 5.08)
-					(end 33.02 -55.88)
+				(polyline
+					(pts
+						(xy 7.62 5.08) (xy 7.62 -55.88)
+					)
 					(stroke
-						(width 0)
+						(width 0.127)
 						(type default)
 					)
 					(fill
@@ -6159,7 +6159,7 @@
 						(type default)
 					)
 					(fill
-						(type none)
+						(type outline)
 					)
 				)
 				(arc
@@ -6171,7 +6171,7 @@
 						(type default)
 					)
 					(fill
-						(type outline)
+						(type none)
 					)
 				)
 				(polyline
@@ -8155,6 +8155,10 @@
 		(uuid "fe297ddc-9e9b-4978-bcda-d757a93a6b34")
 	)
 	(no_connect
+		(at 232.41 31.75)
+		(uuid "03fb8a4d-6f2c-4cf7-a146-029c92508384")
+	)
+	(no_connect
 		(at 191.77 46.99)
 		(uuid "08e60431-c27f-4cab-bb70-d4d8e0c8e76b")
 	)
@@ -8171,6 +8175,10 @@
 		(uuid "19584786-7993-4a56-9fe6-3cc8b227deb5")
 	)
 	(no_connect
+		(at 232.41 36.83)
+		(uuid "31d1a3a9-f1b1-483b-904e-061cc63b85dc")
+	)
+	(no_connect
 		(at 191.77 41.91)
 		(uuid "4003053c-5333-4d60-9c29-2501a8a98889")
 	)
@@ -8183,6 +8191,10 @@
 		(uuid "59e3b49f-a7a6-4b5f-af6b-0c146055e37a")
 	)
 	(no_connect
+		(at 232.41 34.29)
+		(uuid "61aefd5c-557e-4ae2-b080-2a1b172e99d2")
+	)
+	(no_connect
 		(at 232.41 46.99)
 		(uuid "64459a8c-241b-437c-8ac1-15024ec5fe8c")
 	)
@@ -8193,6 +8205,10 @@
 	(no_connect
 		(at 191.77 69.85)
 		(uuid "74bf3347-9167-458b-8f19-124800a2e5c2")
+	)
+	(no_connect
+		(at 232.41 29.21)
+		(uuid "8197a899-fe48-4e5d-af03-b7ea80d4dedb")
 	)
 	(no_connect
 		(at 232.41 49.53)
@@ -10520,16 +10536,6 @@
 		)
 		(uuid "ea42eb38-f661-4ba7-aa41-1736b943b39f")
 	)
-	(wire
-		(pts
-			(xy 232.41 36.83) (xy 234.95 36.83)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "eab01d90-bd66-46c5-9b77-17495733a4b4")
-	)
 	(polyline
 		(pts
 			(xy 63.5 12.7) (xy 63.5 82.55)
@@ -10629,16 +10635,6 @@
 			(type default)
 		)
 		(uuid "f4c6d2dc-7dcb-4ec2-85be-37663072edb8")
-	)
-	(wire
-		(pts
-			(xy 232.41 34.29) (xy 234.95 34.29)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f628555c-43ca-4745-b2c0-fda463dfa29f")
 	)
 	(polyline
 		(pts
@@ -10770,16 +10766,6 @@
 		)
 		(uuid "363e75ed-ad1a-4053-9e06-1e628a355a3c")
 	)
-	(label "RXD"
-		(at 234.95 36.83 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "3888ffd1-5ef0-41e7-9c40-59bede9e43d8")
-	)
 	(label "RIGHT"
 		(at 189.23 72.39 180)
 		(effects
@@ -10869,16 +10855,6 @@
 			(justify right bottom)
 		)
 		(uuid "895d58ee-fafe-4d6f-b5a0-e363dac9ecb9")
-	)
-	(label "TXD"
-		(at 234.95 34.29 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "965162a4-d22e-4e4b-a77b-dd7097db9052")
 	)
 	(label "Buzz"
 		(at 233.68 74.93 0)
