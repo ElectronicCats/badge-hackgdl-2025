@@ -29,7 +29,7 @@ enum {
 
 typedef struct {
   uint16_t count;
-  wifi_ap_record_t selected_ap;
+  uint8_t selected_ap;
   uint16_t attack;
 } menu_stadistics_t;
 

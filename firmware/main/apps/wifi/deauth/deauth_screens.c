@@ -62,48 +62,49 @@ void deauth_display_attacking_animation() {
   idx = ++idx > (BITMAPS_MICHI_PUNCH_FRAME - 1) ? 0 : idx;
 }
 
-void deauth_display_menu(uint16_t current_item,
-                         menu_stadistics_t menu_stadistics) {
-  oled_screen_clear_buffer();
-  oled_screen_display_text("< Exit", 0, 0, OLED_DISPLAY_NORMAL);
+// void deauth_display_menu(uint16_t current_item,
+//                          menu_stadistics_t menu_stadistics) {
+//   oled_screen_clear_buffer();
+//   oled_screen_display_text("< Exit", 0, 0, OLED_DISPLAY_NORMAL);
 
-  int position = 1;
-  uint16_t start_item = (current_item / ITEMSPERSCREEN) * ITEMSPERSCREEN;
+//   int position = 1;
+//   uint16_t start_item = (current_item / ITEMSPERSCREEN) * ITEMSPERSCREEN;
 
-  for (uint16_t i = start_item;
-       i < start_item + ITEMSPERSCREEN && i < MENUCOUNT; i++) {
-    if (deauth_menu[i] == NULL) {
-      break;
-    }
-    char item[18];
-    if (i == SCAN) {
-      snprintf(item, 18, "%s......[%d]", deauth_menu[i], menu_stadistics.count);
-    } else if (i == SELECT) {
-      if (menu_stadistics.selected_ap.bssid[0] != 0) {
-        snprintf(item, 18, "%s.....[OK]", deauth_menu[i]);
-      } else {
-        snprintf(item, 18, "%s...[NOT]", deauth_menu[i]);
-      }
-    } else if (i == DEAUTH) {
-      if (menu_stadistics.attack == 99) {
-        snprintf(item, 18, "%s...[NOT]", deauth_menu[i]);
-      } else {
-        snprintf(item, 18, "%s....[%s]", deauth_menu[i],
-                 deauth_attacks_short[menu_stadistics.attack]);
-      }
-    } else {
-      snprintf(item, 18, "%s", deauth_menu[i]);
-    }
+//   for (uint16_t i = start_item;
+//        i < start_item + ITEMSPERSCREEN && i < MENUCOUNT; i++) {
+//     if (deauth_menu[i] == NULL) {
+//       break;
+//     }
+//     char item[18];
+//     if (i == SCAN) {
+//       snprintf(item, 18, "%s......[%d]", deauth_menu[i],
+//       menu_stadistics.count);
+//     } else if (i == SELECT) {
+//       if (menu_stadistics.selected_ap.bssid[0] != 0) {
+//         snprintf(item, 18, "%s.....[OK]", deauth_menu[i]);
+//       } else {
+//         snprintf(item, 18, "%s...[NOT]", deauth_menu[i]);
+//       }
+//     } else if (i == DEAUTH) {
+//       if (menu_stadistics.attack == 99) {
+//         snprintf(item, 18, "%s...[NOT]", deauth_menu[i]);
+//       } else {
+//         snprintf(item, 18, "%s....[%s]", deauth_menu[i],
+//                  deauth_attacks_short[menu_stadistics.attack]);
+//       }
+//     } else {
+//       snprintf(item, 18, "%s", deauth_menu[i]);
+//     }
 
-    if (i == current_item) {
-      deauth_display_selected_item(item, position);
-    } else {
-      oled_screen_display_text(item, 0, position, OLED_DISPLAY_NORMAL);
-    }
-    position = position + ITEMOFFSET;
-  }
-  oled_screen_display_show();
-}
+//     if (i == current_item) {
+//       deauth_display_selected_item(item, position);
+//     } else {
+//       oled_screen_display_text(item, 0, position, OLED_DISPLAY_NORMAL);
+//     }
+//     position = position + ITEMOFFSET;
+//   }
+//   oled_screen_display_show();
+// }
 
 void deauth_display_scanned_ap(wifi_ap_record_t *ap_records,
                                uint16_t scanned_records,

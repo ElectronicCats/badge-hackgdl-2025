@@ -6,8 +6,9 @@
 #include "menus_module.h"
 
 void deauth_scenes_main_menu();
-void deauth_scenes_ap_selection(char **ap_names, uint8_t ap_count);
-void deauth_scenes_attack_selection();
+void deauth_scenes_ap_selection(char **ap_names, uint8_t ap_count,
+                                uint8_t selected);
+void deauth_scenes_attack_selection(uint16_t selected);
 
 /////////////// MAIN MENU ///////////
 typedef enum {
@@ -55,12 +56,13 @@ void deauth_scenes_main_menu() {
 }
 
 /////////////// AP SELECTION ///////////
-void deauth_scenes_ap_selection(char **ap_names, uint8_t ap_count) {
+void deauth_scenes_ap_selection(char **ap_names, uint8_t ap_count,
+                                uint8_t selected) {
   general_radio_selection_menu_t ap = {0};
   ap.banner = "Select AP";
   ap.options = ap_names;
   ap.options_count = ap_count;
-  ap.current_option = 0;
+  ap.current_option = selected;
   ap.select_cb = deauth_module_set_ap;
   ap.exit_cb = deauth_scenes_main_menu;
 
@@ -68,13 +70,18 @@ void deauth_scenes_ap_selection(char **ap_names, uint8_t ap_count) {
 }
 
 /////////////// ATTACK SELECTION ///////////
-void deauth_scenes_attack_selection() {
+
+static const char *deauth_attacks[] = {"Broadcast", "Rogue AP", "Combined",
+                                       "Captive Portal"};
+
+void deauth_scenes_attack_selection(uint16_t selected) {
   general_radio_selection_menu_t attack = {0};
   attack.banner = "Select Attack";
-  attack.options = NULL;
-  attack.options_count = NULL;
-  attack.current_option = 0;
-  attack.select_cb = NULL;
+  attack.options = deauth_attacks;
+  attack.options_count = sizeof(deauth_attacks) / sizeof(char *);
+  attack.current_option = selected;
+  attack.select_cb = deauth_module_set_attack;
+  attack.exit_cb = deauth_scenes_main_menu;
 
   general_radio_selection(attack);
 }

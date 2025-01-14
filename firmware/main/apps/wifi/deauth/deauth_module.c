@@ -13,7 +13,7 @@
 #include "wifi_scanner.h"
 
 #define DEFAULT_SCAN_LIST_SIZE CONFIG_SCAN_MAX_AP
-#define SCAN_RETRIES 5
+#define SCAN_RETRIES 2
 
 typedef enum {
   DEAUTH_STATE_IDLE = 0,
@@ -93,8 +93,9 @@ static void deauth_handle_attacks() {
     deauth_display_attaking_text();
     animations_task_run(&deauth_display_attacking_animation, 200, NULL);
     ESP_LOGI("deauth", "Attack: %d", menu_stadistics.attack);
-    wifi_attack_handle_attacks(menu_stadistics.attack,
-                               &menu_stadistics.selected_ap);
+    wifi_attack_handle_attacks(
+        menu_stadistics.attack,
+        &ap_records->records[menu_stadistics.selected_ap]);
     ESP_LOGI("deauth", "Attack: %d", menu_stadistics.attack);
     // menus_module_set_app_state(true, deauth_module_cb_event_run);
     current_item = 0;
@@ -131,7 +132,7 @@ void deauth_module_begin() {
 
   // menus_module_set_app_state(true, deauth_module_cb_event);
 
-  menu_stadistics.attack = 99;
+  // menu_stadistics.attack = 99;
 
   // led_control_run_effect(led_control_wifi_scanning);
 }
@@ -156,14 +157,16 @@ void deauth_module_select_ap() {
   for (uint8_t i = 0; i < ap_records->count; i++) {
     ap_names[i] = (char *)ap_records->records[i].ssid;
   }
-  deauth_scenes_ap_selection(ap_names, ap_records->count);
+  deauth_scenes_ap_selection(ap_names, ap_records->count,
+                             menu_stadistics.selected_ap);
 }
 void deauth_module_select_attack() {
   // menus_module_set_app_state(true, deauth_module_cb_event_attacks);
-  deauth_display_attacks(current_item, menu_stadistics);
+  // deauth_display_attacks(current_item, menu_stadistics);
+  deauth_scenes_attack_selection(menu_stadistics.attack);
 }
 void deauth_module_run() {
-  if (menu_stadistics.selected_ap.bssid[0] == 0) {
+  if (ap_records->records[menu_stadistics.selected_ap].bssid[0] == 0) {
     deauth_display_warning_not_ap_selected();
     vTaskDelay(1500 / portTICK_PERIOD_MS);
     // deauth_display_menu(current_item, menu_stadistics);
@@ -268,7 +271,7 @@ void deauth_module_exit() {
 // }
 
 void deauth_module_set_ap(uint8_t selection) {
-  menu_stadistics.selected_ap = ap_records->records[selection];
+  menu_stadistics.selected_ap = selection;
   // menus_module_set_app_state(true, deauth_module_cb_event);
   // deauth_display_menu(current_item, menu_stadistics);
 }
@@ -313,7 +316,6 @@ void deauth_module_set_attack(uint8_t selection) {
   menu_stadistics.attack = selection;
   // menus_module_set_app_state(true, deauth_module_cb_event);
   // deauth_display_menu(current_item, menu_stadistics);
-  deauth_scenes_main_menu();
 }
 
 // static void deauth_module_cb_event_attacks(uint8_t button_name,
@@ -388,7 +390,8 @@ void deauth_module_run_exit() {
 void deauth_module_set_captive_portal_settings(uint8_t selection) {
   // led_control_run_effect(led_control_wifi_scanning);
   captive_portal_set_portal(selection);
-  captive_portal_set_config_ssid(menu_stadistics.selected_ap);
+  captive_portal_set_config_ssid(
+      ap_records->records[menu_stadistics.selected_ap]);
   captive_portal_register_cb(deauth_display_captive_portal_creds);
   deauth_display_captive_waiting();
   xTaskCreate(captive_portal_begin, "captive_portal_start", 4096, NULL, 5,
