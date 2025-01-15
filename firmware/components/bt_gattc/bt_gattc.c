@@ -3,6 +3,8 @@
 #include "esp_log.h"
 #include "inttypes.h"
 
+#include <string.h>
+
 // GATT Client
 static char remote_device_name[MAX_REMOTE_DEVICE_NAME];
 static bool search_by_name = false;

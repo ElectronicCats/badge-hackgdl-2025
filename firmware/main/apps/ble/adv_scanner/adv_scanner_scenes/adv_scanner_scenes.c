@@ -14,6 +14,8 @@ void adv_scanner_scenes_scan_type();
 void adv_scanner_scenes_scan_filter();
 void adv_scanner_scenes_scanning_card(char *head, char *body);
 
+static uint8_t last_main_selection = 0;
+
 ///////////////// MAIN MENU /////////////
 static enum {
   MAIN_SCAN_TYPE_OPTION,
@@ -24,6 +26,7 @@ static enum {
 static const char *main_menu_options[] = {"Scan Type", "ADV Filter", "Start"};
 
 static void main_menu_handler(uint8_t selection) {
+  last_main_selection = selection;
   switch (selection) {
   case MAIN_SCAN_TYPE_OPTION:
     adv_scanner_scenes_scan_type();
@@ -47,6 +50,7 @@ void adv_scanner_scenes_main_menu() {
   main_menu.title = "ADV Scanner";
   main_menu.options = main_menu_options;
   main_menu.options_count = sizeof(main_menu_options) / sizeof(char *);
+  main_menu.selected_option = last_main_selection;
   main_menu.select_cb = main_menu_handler;
   main_menu.exit_cb = main_menu_exit_cb;
 

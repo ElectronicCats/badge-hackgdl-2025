@@ -16,10 +16,10 @@ static const uint32_t SOUND_DURATION = 100;
 static general_radio_selection_t *general_radio_selection_ctx;
 
 static void list_radio_options_old_style();
-static void list_radio_options_new_style();
+// static void list_radio_options_new_style();
 
 static void *list_radio_options_styles[] = {list_radio_options_old_style,
-                                            list_radio_options_new_style};
+                                            list_radio_options_old_style};
 static void (*list_radio_options)() = NULL;
 
 static void list_radio_options_old_style() {
@@ -45,25 +45,26 @@ static void list_radio_options_old_style() {
   oled_screen_display_show();
 }
 
-static void list_radio_options_new_style() {
-  general_radio_selection_t *ctx = general_radio_selection_ctx;
-  static uint8_t items_offset = 0;
-  items_offset = MAX(ctx->selected_option - 4, items_offset);
-  items_offset = MIN(MAX(ctx->options_count - 4, 0), items_offset);
-  items_offset = MIN(ctx->selected_option, items_offset);
-  oled_screen_clear_buffer();
-  char *str = malloc(20);
-  oled_screen_display_text(ctx->banner, 0, 0, OLED_DISPLAY_NORMAL);
-  for (uint8_t i = 0; i < (MIN(ctx->options_count, MAX_OPTIONS_NUM - 1)); i++) {
-    bool is_selected = i + items_offset == ctx->selected_option;
-    bool is_current = i + items_offset == ctx->current_option;
-    sprintf(str, "%s%s", ctx->options[i + items_offset],
-            is_current ? "[curr]" : "");
-    oled_screen_display_text(str, is_selected ? 16 : 0, i + 2, is_selected);
-  }
-  oled_screen_display_show();
-  free(str);
-}
+// static void list_radio_options_new_style() {
+//   general_radio_selection_t *ctx = general_radio_selection_ctx;
+//   static uint8_t items_offset = 0;
+//   items_offset = MAX(ctx->selected_option - 4, items_offset);
+//   items_offset = MIN(MAX(ctx->options_count - 4, 0), items_offset);
+//   items_offset = MIN(ctx->selected_option, items_offset);
+//   oled_screen_clear_buffer();
+//   char *str = malloc(20);
+//   oled_screen_display_text(ctx->banner, 0, 0, OLED_DISPLAY_NORMAL);
+//   for (uint8_t i = 0; i < (MIN(ctx->options_count, MAX_OPTIONS_NUM - 1));
+//   i++) {
+//     bool is_selected = i + items_offset == ctx->selected_option;
+//     bool is_current = i + items_offset == ctx->current_option;
+//     sprintf(str, "%s%s", ctx->options[i + items_offset],
+//             is_current ? "[curr]" : "");
+//     oled_screen_display_text(str, is_selected ? 16 : 0, i + 2, is_selected);
+//   }
+//   oled_screen_display_show();
+//   free(str);
+// }
 
 static void input_cb(uint8_t button_name, uint8_t button_event) {
   if (button_event != BUTTON_PRESS_DOWN) {

@@ -5,6 +5,8 @@
 #include "esp_log.h"
 #include "inttypes.h"
 
+#include <string.h>
+
 static TaskHandle_t trackers_scan_timer_task = NULL;
 static bluetooth_traker_scanner_cb_t display_records_cb = NULL;
 static int trackers_scan_duration = 0;

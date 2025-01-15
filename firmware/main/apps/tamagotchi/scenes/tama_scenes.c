@@ -14,6 +14,8 @@
 void tama_scenes_main();
 void tama_scenes_speed();
 
+static uint8_t last_main_selection = 0;
+
 ////////////////////////////////////// MAIN MENU
 /////////////////////////////////////////
 typedef enum {
@@ -29,6 +31,7 @@ static const char *main_menu_options[] = {
 };
 
 static void tama_scenes_handler(uint8_t option) {
+  last_main_selection = option;
   switch (option) {
   case MAIN_MENU_PLAY:
     tama_app_begin();
@@ -47,6 +50,7 @@ void tama_scenes_main() {
   main_menu.title = "Tamagotchi App";
   main_menu.options = main_menu_options;
   main_menu.options_count = sizeof(main_menu_options) / sizeof(char *);
+  main_menu.selected_option = last_main_selection;
   main_menu.select_cb = tama_scenes_handler;
   main_menu.exit_cb = menus_module_exit_app;
   general_submenu(main_menu);

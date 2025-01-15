@@ -13,6 +13,8 @@ void detector_scenes_settings();
 void detector_scenes_channel();
 void detector_scenes_help();
 
+static uint8_t last_main_selection = 0;
+
 static void detector_scenes_scanning() {
   oled_screen_clear();
   oled_screen_display_text_center("Channel | Count", 0, OLED_DISPLAY_NORMAL);
@@ -53,6 +55,7 @@ void detector_scenes_show_table(uint16_t *deauth_packets_count_list) {
 static enum { RUN_OPTION, SETTINGS_OPTION, HELP_OPTION } main_menu_options_e;
 static const char *main_menu_options[] = {"Run", "Settings", "Help"};
 static void main_menu_handler(uint8_t selection) {
+  last_main_selection = selection;
   switch (selection) {
   case RUN_OPTION:
     deauth_detector_begin();
@@ -76,6 +79,7 @@ void detector_scenes_main_menu() {
   main_menu.title = "Deauth Detector";
   main_menu.options = main_menu_options;
   main_menu.options_count = sizeof(main_menu_options) / sizeof(char *);
+  main_menu.selected_option = last_main_selection;
   main_menu.select_cb = main_menu_handler;
   main_menu.exit_cb = main_menu_exit;
   general_submenu(main_menu);
@@ -151,7 +155,6 @@ static void help_exit() { detector_scenes_main_menu(); }
 
 void detector_scenes_help() {
   general_scrolling_text_ctx help = {0};
-  memset(&help, 0, sizeof(help));
   help.banner = "Help";
   help.text = help_text;
   help.scroll_type = GENERAL_SCROLLING_TEXT_CLAMPED;

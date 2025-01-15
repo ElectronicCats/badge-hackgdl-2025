@@ -13,12 +13,15 @@ void hid_scenes_control_menu(uint8_t selected);
 void hid_scenes_notification(char *head, char *body, uint32_t duration_ms);
 void hid_scenes_notification_handler(char *head, char *body);
 
+static uint8_t last_main_selection = 0;
+
 /////////////// MAIN MENU //////////////
 typedef enum { NAME_OPTION, MAC_OPTION, START_OPTION } main_menu_options_e;
 
 static const char *main_menu_options[] = {"Device name", "Device MAC", "Start"};
 
 static void main_menu_cb(uint8_t selection) {
+  last_main_selection = selection;
   switch (selection) {
   case NAME_OPTION:
     hid_module_name();
@@ -42,6 +45,7 @@ void hid_scenes_main_menu() {
   main_menu.title = "HID device";
   main_menu.options = main_menu_options;
   main_menu.options_count = sizeof(main_menu_options) / sizeof(char *);
+  main_menu.selected_option = last_main_selection;
   main_menu.select_cb = main_menu_cb;
   main_menu.exit_cb = hid_exit_cb;
   general_submenu(main_menu);

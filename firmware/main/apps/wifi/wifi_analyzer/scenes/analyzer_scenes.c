@@ -15,6 +15,7 @@ void analyzer_scenes_channel();
 void analyzer_scenes_summary(char **list, uint16_t list_size);
 
 analyzer_scenes_e analyzer_get_current_scene() { return current_scene; }
+static uint8_t last_main_selection = 0;
 
 //////////////////////////   MAIN MENU   ///////////////////////////////
 static enum {
@@ -26,6 +27,7 @@ static enum {
 char *analizer_main_options[] = {"Start", "Settings", "Help"};
 
 static void main_menu_selection_handler(uint8_t selection) {
+  last_main_selection = selection;
   switch (selection) {
   case ANALYZER_START_OPTION:
     wifi_analyzer_run();
@@ -49,6 +51,7 @@ void analyzer_scenes_main_menu() {
   main_menu.title = "Wifi Analyzer";
   main_menu.options = analizer_main_options;
   main_menu.options_count = sizeof(analizer_main_options) / sizeof(char *);
+  main_menu.selected_option = last_main_selection;
   main_menu.select_cb = main_menu_selection_handler;
   main_menu.exit_cb = main_menu_exit_handler;
   general_submenu(main_menu);
