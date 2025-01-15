@@ -3472,23 +3472,23 @@
 				)
 			)
 			(symbol "ESP32-S3-WROOM-1-N8_1_1"
-				(rectangle
-					(start 7.62 5.08)
-					(end 33.02 -55.88)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
 				(polyline
 					(pts
 						(xy 7.62 5.08) (xy 7.62 -55.88)
 					)
 					(stroke
 						(width 0.127)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(rectangle
+					(start 7.62 5.08)
+					(end 33.02 -55.88)
+					(stroke
+						(width 0)
 						(type default)
 					)
 					(fill
@@ -6159,7 +6159,7 @@
 						(type default)
 					)
 					(fill
-						(type none)
+						(type outline)
 					)
 				)
 				(arc
@@ -6171,7 +6171,7 @@
 						(type default)
 					)
 					(fill
-						(type outline)
+						(type none)
 					)
 				)
 				(polyline
@@ -18480,7 +18480,7 @@
 				(hide yes)
 			)
 		)
-		(property "provedor" "MOUSER"
+		(property "provedor" "JLCPCB"
 			(at 130.81 110.49 0)
 			(effects
 				(font
