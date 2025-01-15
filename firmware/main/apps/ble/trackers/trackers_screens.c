@@ -17,7 +17,6 @@ void trakers_screens_list_trakers() {
     if (!list_trackers[count]) {
       break;
     }
-    printf("Roberto Tiene La Culpa\n");
     count++;
   }
   if (count) {
@@ -33,7 +32,6 @@ void module_add_tracker_to_list(char *tracker_name) {
     if (!list_trackers[count]) {
       break;
     }
-    printf("Roberto Tiene La Culpa\n");
     count++;
   }
   list_trackers[count] = tracker_name;

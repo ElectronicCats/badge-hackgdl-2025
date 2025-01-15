@@ -13,3 +13,9 @@ typedef struct {
 extern menu_icon_t menu_icon_wifi;
 extern menu_icon_t menu_icon_bt;
 extern menu_icon_t menu_icon_tama;
+
+extern menu_icon_t menu_icon_analyzer;
+extern menu_icon_t menu_icon_deauth;
+extern menu_icon_t menu_icon_deauth_scan;
+extern menu_icon_t menu_icon_dos;
+extern menu_icon_t menu_icon_ssid_spam;

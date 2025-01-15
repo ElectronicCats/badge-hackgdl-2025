@@ -37,7 +37,6 @@ static void module_handle_trackers(tracker_profile_t record) {
   int device_exists = trackers_scanner_find_profile_by_mac(
       scanned_airtags, trackers_count, record.mac_address);
   if (device_exists == -1) {
-    printf("Kevin Tiene La Culpa\n");
     module_add_tracker_to_list(record.name);
     module_display_device_detected(record.name);
     trackers_scanner_add_tracker_profile(&scanned_airtags, &trackers_count,
