@@ -13,7 +13,7 @@ static char *list_trackers[20];
 
 void trakers_screens_list_trakers() {
   uint8_t count = 0;
-  while (count && count < 20) {
+  while (count < 20) {
     if (!list_trackers[count]) {
       break;
     }
@@ -28,7 +28,7 @@ void trakers_screens_list_trakers() {
 
 void module_add_tracker_to_list(char *tracker_name) {
   uint8_t count = 0;
-  while (count && count < 20) {
+  while (count < 20) {
     if (!list_trackers[count]) {
       break;
     }
