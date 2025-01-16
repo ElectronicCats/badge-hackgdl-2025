@@ -18,9 +18,6 @@ void menus_screens_display_menus(menus_manager_t *ctx) {
   char *parent_name = parent->display_name;
   char *display_name = menu->display_name;
 
-  oled_screen_draw_rect(48, 11, 34, 34, OLED_DISPLAY_NORMAL);
-  oled_screen_draw_hline(46, 46, 35, OLED_DISPLAY_NORMAL);
-  oled_screen_draw_vline(46, 12, 34, OLED_DISPLAY_NORMAL);
   if (menu->icon != NULL) {
     menu_icon_t *icon = menu->icon;
     oled_screen_buffer_bitmap(icon->icon, 63 - icon->width / 2, 12, icon->width,

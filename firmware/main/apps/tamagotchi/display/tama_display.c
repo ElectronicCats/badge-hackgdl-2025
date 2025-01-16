@@ -26,24 +26,22 @@ void print_matrix_buffer() {
 }
 
 static void drawTriangle(uint8_t x, uint8_t y) {
-  oled_screen_draw_hline(x + 1, y + 1, 5, OLED_DISPLAY_NORMAL);
-  oled_screen_draw_hline(x + 2, y + 2, 3, OLED_DISPLAY_NORMAL);
-  oled_screen_draw_hline(x + 3, y + 3, 1, OLED_DISPLAY_NORMAL);
+  oled_screen_draw_hline(x + 1, y + 2, 5, OLED_DISPLAY_NORMAL);
+  oled_screen_draw_hline(x + 2, y + 3, 3, OLED_DISPLAY_NORMAL);
+  oled_screen_draw_hline(x + 3, y + 4, 1, OLED_DISPLAY_NORMAL);
 }
 
-static void drawTamaSelection(uint8_t y) {
+static void drawTamaSelection() {
   uint8_t i;
-  for (i = 0; i < 7; i++) {
+  for (i = 0; i < 8; i++) {
     if (icon_buffer[i]) {
-      drawTriangle(i * 16 + 5, y);
+      drawTriangle(i / 4 ? 120 : 1, i % 4 * 16);
     }
-    oled_screen_buffer_bitmap(bitmaps + i * 18, i * 16 - 5, y + 6, 16, 9,
-                              OLED_DISPLAY_NORMAL);
-  }
-  if (icon_buffer[7]) {
-    drawTriangle(7 * 16 + 5, y);
-    oled_screen_buffer_bitmap(bitmaps + 7 * 18, 7 * 16 - 5, y + 6, 16, 9,
-                              OLED_DISPLAY_NORMAL);
+    if (i == 7 && !icon_buffer[7]) {
+      return;
+    }
+    oled_screen_buffer_bitmap(bitmaps + i * 18, i / 4 ? 109 : -9,
+                              i % 4 * 16 + 6, 16, 9, OLED_DISPLAY_NORMAL);
   }
 }
 
@@ -53,16 +51,20 @@ static void drawTamaRow(uint8_t tamaLCD_y, uint8_t ActualLCD_y) {
     uint8_t mask = 0b10000000;
     mask = mask >> (i % 8);
     if ((matrix_buffer[tamaLCD_y][i / 8] & mask) != 0) {
-      oled_screen_draw_box(3 * i + 16, ActualLCD_y, 2, 2, OLED_DISPLAY_NORMAL);
+      oled_screen_draw_box(3 * i + 16, ActualLCD_y + 12, 2, 2,
+                           OLED_DISPLAY_NORMAL);
     }
   }
 }
 static void displayTama() {
   oled_screen_clear_buffer();
+  drawTamaSelection();
+  oled_screen_draw_rect(12, 8, 103, 55, OLED_DISPLAY_NORMAL);
   for (uint8_t j = 0; j < LCD_HEIGHT; j++) {
     drawTamaRow(j, 3 * j);
   }
-  drawTamaSelection(49);
+  oled_screen_draw_box(12, 0, 103, 8, OLED_DISPLAY_NORMAL);
+  oled_screen_display_text_center("NickName", 0, OLED_DISPLAY_INVERT);
   oled_screen_display_show();
   // vTaskDelay(65);
 }
