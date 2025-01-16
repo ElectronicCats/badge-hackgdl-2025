@@ -19,3 +19,8 @@ extern menu_icon_t menu_icon_deauth;
 extern menu_icon_t menu_icon_deauth_scan;
 extern menu_icon_t menu_icon_dos;
 extern menu_icon_t menu_icon_ssid_spam;
+
+extern menu_icon_t menu_icon_trakers;
+extern menu_icon_t menu_icon_spam;
+extern menu_icon_t menu_icon_hid;
+extern menu_icon_t menu_icon_adv_scanner;

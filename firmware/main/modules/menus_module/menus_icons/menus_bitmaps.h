@@ -12,3 +12,8 @@ extern const unsigned char menu_wifi_deauth_bmp_32x32[];
 extern const unsigned char menu_wifi_deauth_detector_bmp_32x32[];
 extern const unsigned char menu_wifi_dos_bmp_32x32[];
 extern const unsigned char menu_wifi_ssid_spamer_bmp_32x32[];
+
+extern const unsigned char menu_ble_trakers_bmp_32x32[];
+extern const unsigned char menu_ble_spam_bmp_32x32[];
+extern const unsigned char menu_ble_hid_bmp_32x32[];
+extern const unsigned char menu_ble_adv_scanner_bmp_32x32[];
