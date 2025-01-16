@@ -24,7 +24,7 @@ typedef enum {
 static const char *main_menu_options[] = {
     "SCAN",
     "SELECT AP",
-    "ATTACK",
+    "SELECT ATTACK",
     "RUN",
 };
 

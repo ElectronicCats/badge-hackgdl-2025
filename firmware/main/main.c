@@ -4,6 +4,7 @@
 #include "cat_console.h"
 #include "keyboard_module.h"
 #include "menus_module.h"
+#include "neopixels_module.h"
 #include "oled_screen.h"
 #include "preferences.h"
 
@@ -11,6 +12,7 @@
 
 void app_main(void) {
   buzzer_begin(PIN_BUZZER);
+  neopixels_module_begin();
   preferences_begin();
   keyboard_module_begin();
   oled_screen_begin();

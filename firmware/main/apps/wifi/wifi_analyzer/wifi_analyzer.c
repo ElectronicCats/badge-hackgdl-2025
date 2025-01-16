@@ -15,6 +15,7 @@
 #include "general_screens.h"
 // #include "led_events.h"
 #include "menus_module.h"
+#include "neopixels_events.h"
 #include "oled_screen.h"
 // #include "sd_card.h"
 #include "wifi_analyzer.h"
@@ -95,6 +96,7 @@ esp_err_t wifi_module_init_sniffer() {
     out_of_mem_handler();
     return err;
   }
+  neopixel_events_run_event(neopixel_scanning_event);
   // led_control_run_effect(led_control_zigbee_scanning);
   return ESP_OK;
 }
@@ -109,6 +111,7 @@ void wifi_module_analyzer_run_exit() {
   analyzer_summary_menu.menu_items = wifi_analizer_summary_2;
   // analyzer_summary_menu.menu_level = GENERAL_TREE_APP_MENU;
   wifi_sniffer_stop();
+  neopixel_events_stop_event();
   // led_control_stop();
   wifi_sniffer_load_summary();
   // analyzer_summary_menu.menu_count = get_summary_rows_count();

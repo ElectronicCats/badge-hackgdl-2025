@@ -8,6 +8,7 @@
 // #include "led_events.h"
 #include "deauth_scenes.h"
 #include "menus_module.h"
+#include "neopixels_events.h"
 #include "wifi_attacks.h"
 #include "wifi_controller.h"
 #include "wifi_scanner.h"
@@ -69,6 +70,7 @@ static void scanning_task() {
   // deauth_display_menu(current_item, menu_stadistics);
   deauth_scenes_main_menu();
   current_wifi_state.state = DEAUTH_STATE_MENU;
+  neopixel_events_stop_event();
   // led_control_stop();
   vTaskDelete(NULL);
 }
@@ -84,6 +86,7 @@ static void deauth_run_scan_task() {
 static void deauth_handle_attacks() {
   wifi_attacks_module_stop();
   // led_control_run_effect(led_control_wifi_attacking);
+  neopixel_events_run_event(neopixel_scanning_event);
 
   switch (menu_stadistics.attack) {
   case BROADCAST:
@@ -136,6 +139,7 @@ void deauth_module_begin() {
   // menu_stadistics.attack = 99;
 
   // led_control_run_effect(led_control_wifi_scanning);
+  neopixel_events_run_event(neopixel_scanning_event);
 }
 
 void deauth_module_scan() {
@@ -356,6 +360,7 @@ void deauth_module_set_attack(uint8_t selection) {
 void deauth_module_run_exit() {
   // captive_portal_stop();
   // led_control_stop();
+  neopixel_events_stop_event();
   animations_task_stop();
   wifi_attacks_module_stop();
   // menus_module_set_app_state(true, deauth_module_cb_event);
@@ -371,6 +376,7 @@ static void deauth_module_cb_event_run(uint8_t button_name,
   case BUTTON_BACK:
     // captive_portal_stop();
     // led_control_stop();
+    neopixel_events_stop_event();
     animations_task_stop();
     wifi_attacks_module_stop();
     // menus_module_set_app_state(true, deauth_module_cb_event);
@@ -384,6 +390,7 @@ static void deauth_module_cb_event_run(uint8_t button_name,
 
 void deauth_module_set_captive_portal_settings(uint8_t selection) {
   // led_control_run_effect(led_control_wifi_scanning);
+  neopixel_events_run_event(neopixel_scanning_event);
   captive_portal_set_portal(selection);
   captive_portal_set_config_ssid(
       ap_records->records[menu_stadistics.selected_ap]);

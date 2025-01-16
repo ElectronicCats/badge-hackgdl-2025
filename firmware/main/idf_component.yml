@@ -1,7 +1,7 @@
 ## IDF Component Manager Manifest File
 dependencies:
   espressif/button: "^3.2.0"
-
+  espressif/led_strip: "^2.4.1"
   espressif/console:
     path: ../components/console
   # # Put list of dependencies here
