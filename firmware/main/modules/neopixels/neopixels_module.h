@@ -2,7 +2,7 @@
 
 #include "esp_err.h"
 
-#define MAX_LED_NUMBER 4
+#define MAX_LED_NUMBER 3
 /**
  * @brief Initialize the neopixels module
  */
