@@ -521,7 +521,7 @@
       "gencad": "",
       "idf": "",
       "netlist": "",
-      "plot": "",
+      "plot": "Gerbers2/",
       "pos_files": "",
       "specctra_dsn": "",
       "step": "../../../TestingKiCAD/badge-hackgdl-2025.step",
