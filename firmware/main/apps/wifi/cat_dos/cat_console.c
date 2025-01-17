@@ -26,6 +26,8 @@
 #include "preferences.h"
 #include "soc/soc_caps.h"
 
+#include "tama_cmd.h"
+
 static const char *TAG = "cat_console";
 #define PROMPT_STR "HackGotchi"
 
@@ -81,6 +83,7 @@ void cat_console_begin() {
   /* Register commands */
   esp_console_register_help_command();
   register_wifi();
+  tama_cmd_nickname_cmd();
   // cmd_control_register_launch_cmd();
   // cmd_control_register_uart_bridge_commands();
   // cmd_control_register_system_commands();

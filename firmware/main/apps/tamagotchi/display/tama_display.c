@@ -4,11 +4,14 @@
 #include "hw.h"
 
 #include "oled_screen.h"
+#include <string.h>
+
+static char nickname[TAMA_DISPLAY_MAX_NICKNAME_LEN] = "NickName";
 
 static uint8_t matrix_buffer[LCD_HEIGHT][LCD_WIDTH / 8] = {{0}};
 static bool_t icon_buffer[ICON_NUM] = {0};
 
-void print_matrix_buffer() {
+static void print_matrix_buffer() {
   for (uint8_t y = 0; y < 16; y++) {
     for (uint8_t byte_index = 0; byte_index < 4; byte_index++) {
       uint8_t byte = matrix_buffer[y][byte_index];
@@ -35,7 +38,7 @@ static void drawTamaSelection() {
   uint8_t i;
   for (i = 0; i < 8; i++) {
     if (icon_buffer[i]) {
-      drawTriangle(i / 4 ? 120 : 1, i % 4 * 16);
+      drawTriangle(i / 4 ? 119 : 1, i % 4 * 16);
     }
     if (i == 7 && !icon_buffer[7]) {
       return;
@@ -64,7 +67,7 @@ static void displayTama() {
     drawTamaRow(j, 3 * j);
   }
   oled_screen_draw_box(12, 0, 103, 8, OLED_DISPLAY_NORMAL);
-  oled_screen_display_text_center("NickName", 0, OLED_DISPLAY_INVERT);
+  oled_screen_display_text_center(nickname, 0, OLED_DISPLAY_INVERT);
   oled_screen_display_show();
   // vTaskDelay(65);
 }
@@ -92,4 +95,8 @@ void tama_display_update_screen() {
 
 void tama_display_begin() {
   // oled_screen_begin();
+}
+
+void tama_display_set_nickname(char *new_nickname) {
+  strncpy(nickname, new_nickname, TAMA_DISPLAY_MAX_NICKNAME_LEN - 1);
 }
