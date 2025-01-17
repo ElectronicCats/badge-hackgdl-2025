@@ -3,8 +3,14 @@
 #include "bitmaps.h"
 #include "hw.h"
 
-#include "oled_screen.h"
 #include <string.h>
+
+#include "oled_screen.h"
+#include "preferences.h"
+
+#define NICKNAME_MEM "nickname"
+#define MAGIC_NICKNAME_MEM "mnickname"
+#define MAGIC_NICKNAME 12
 
 static char nickname[TAMA_DISPLAY_MAX_NICKNAME_LEN] = "NickName";
 
@@ -95,8 +101,14 @@ void tama_display_update_screen() {
 
 void tama_display_begin() {
   // oled_screen_begin();
+  if (preferences_get_uchar(MAGIC_NICKNAME_MEM, 0) == MAGIC_NICKNAME) {
+    preferences_get_bytes(NICKNAME_MEM, nickname,
+                          TAMA_DISPLAY_MAX_NICKNAME_LEN);
+  }
 }
 
 void tama_display_set_nickname(char *new_nickname) {
   strncpy(nickname, new_nickname, TAMA_DISPLAY_MAX_NICKNAME_LEN - 1);
+  preferences_put_bytes(NICKNAME_MEM, nickname, TAMA_DISPLAY_MAX_NICKNAME_LEN);
+  preferences_put_uchar(MAGIC_NICKNAME_MEM, MAGIC_NICKNAME);
 }

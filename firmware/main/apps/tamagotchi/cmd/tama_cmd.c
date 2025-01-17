@@ -18,7 +18,7 @@ static int set_tama_nickname(int argc, char **argv) {
   int nerrors = arg_parse(argc, argv, (void **)&nickname_args);
   if (strlen(nickname_args.nickname->sval[0]) >
       TAMA_DISPLAY_MAX_NICKNAME_LEN - 1) {
-    ESP_LOGI(TAG,
+    ESP_LOGE(TAG,
              "NickName lenght is longer than 12 chars, it will be truncated");
   }
   tama_display_set_nickname(nickname_args.nickname->sval[0]);
@@ -31,7 +31,7 @@ void tama_cmd_nickname_cmd() {
 
   esp_console_cmd_t tama_nickname_cmd = {
       .command = "tama_nickname",
-      .help = "Set Tamagotchi NickName without spaces, Max lenght is 12",
+      .help = "Set Tamagotchi NickName without spaces, Max lenght is 12 chars",
       .category = "Tamagotchi",
       .hint = NULL,
       .func = &set_tama_nickname,
