@@ -1,86 +1,120 @@
 #include "espnow_conn.h"
 
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
 #include <stdio.h>
+#include <string.h>
 
 #include "esp_log.h"
+#include "esp_mac.h"
 #include "esp_system.h"
 #include "esp_wifi.h"
-#include "espnow_storage.h"
-#include "espnow_utils.h"
+#include "nvs_flash.h"
 
-#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(4, 4, 0)
-#include "esp_mac.h"
-#endif
+#define TAG "ESPNOW_CONN"
 
-static const char *TAG = "espnow_conn";
+#define MAC_SIZE 6
+#define ESPNOW_PMK "cat1234567890123"
 
-espnow_conn_rx_cb_t badge_connect_recv_cb = NULL;
+static espnow_conn_rx_cb_t espnow_conn_rx_cb = NULL;
+static uint8_t broadcast_mac[MAC_SIZE] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
 
-esp_err_t badge_connect_recv(uint8_t *src_addr, void *payload,
-                             size_t payload_size, wifi_pkt_rx_ctrl_t *rx_ctrl);
+// static void dump_mac(uint8_t *mac, const char *str)
+// {
+//   printf("%s: %02X:%02X:%02X:%02X:%02X:%02X\n", str, mac[0], mac[1], mac[2],
+//   mac[3], mac[4], mac[5]);
+// }
 
-void espnow_conn_begin() {
-  espnow_config_t espnow_config = ESPNOW_INIT_CONFIG_DEFAULT();
-  espnow_init(&espnow_config);
-  espnow_set_config_for_data_type(ESPNOW_DATA_TYPE_DATA, true,
-                                  badge_connect_recv);
+static void wifi_init(void) {
+  ESP_ERROR_CHECK(esp_netif_init());
+  ESP_ERROR_CHECK(esp_event_loop_create_default());
+  wifi_init_config_t cfg = WIFI_INIT_CONFIG_DEFAULT();
+  ESP_ERROR_CHECK(esp_wifi_init(&cfg));
+  ESP_ERROR_CHECK(esp_wifi_set_storage(WIFI_STORAGE_RAM));
+  ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_AP));
+  ESP_ERROR_CHECK(esp_wifi_start());
+  ESP_ERROR_CHECK(esp_wifi_set_channel(1, WIFI_SECOND_CHAN_NONE));
 }
 
-void espnow_conn_deinit() {
-  espnow_deinit();
-  esp_wifi_stop();
-  esp_wifi_deinit();
-  ESP_LOGI(TAG, "Badge connect module deinitialized");
-}
-
-void espnow_conn_send(uint8_t *addr, void *data, size_t data_size) {
-  uint8_t *payload = (uint8_t *)malloc(data_size);
-  if (!payload) {
-    ESP_LOGE(TAG, "Failed to allocate memory for data");
+static void espnow_recv_cb(const esp_now_recv_info_t *recv_info,
+                           const uint8_t *data, int data_len) {
+  if (!recv_info || !data || data_len <= 0) {
+    ESP_LOGE(TAG, "Receive callback argument error");
     return;
   }
 
-  memcpy(payload, data, data_size);
+  uint8_t *mac_addr = recv_info->src_addr;
+  uint8_t *des_addr = recv_info->des_addr;
 
-  espnow_frame_head_t frame_head = {
-      .retransmit_count = 5,
-      .broadcast = true,
-  };
+  // dump_mac(des_addr, "DES MAC");
+  // dump_mac(mac_addr, "SRC MAC");
 
-  esp_err_t ret = espnow_send(ESPNOW_DATA_TYPE_DATA, addr, payload, data_size,
-                              &frame_head, portMAX_DELAY);
-  free(payload);
+  espnow_conn_rx_data_t msg = {0};
+  msg.rx_info = recv_info;
+  msg.data = data;
+  msg.len = data_len;
+
+  if (espnow_conn_rx_cb) {
+    espnow_conn_rx_cb(&msg);
+  }
+
+  // printf("COUNT: %d\n", *(uint8_t *)msg.data);
 }
 
-esp_err_t badge_connect_recv(uint8_t *src_addr, void *payload,
-                             size_t payload_size, wifi_pkt_rx_ctrl_t *rx_ctrl) {
-  ESP_PARAM_CHECK(src_addr);
-  ESP_PARAM_CHECK(payload);
-  ESP_PARAM_CHECK(payload_size);
-  ESP_PARAM_CHECK(rx_ctrl);
-
-  char *data = malloc(payload_size);
-  if (!data) {
-    ESP_LOGE(TAG, "Failed to allocate memory for received data");
-    return ESP_FAIL;
+void espnow_conn_send(uint8_t *addr, void *data, size_t len) {
+  esp_err_t err = esp_now_send(addr, data, len);
+  if (err != ESP_OK) {
+    ESP_LOGE(TAG, "ERR: %s\n", esp_err_to_name(err));
   }
+}
 
-  memcpy(data, payload, payload_size);
+void espnow_conn_add_peer(uint8_t *mac) {
+  esp_now_peer_info_t peer = {0};
+  peer.channel = 1;
+  peer.ifidx = ESP_IF_WIFI_AP;
+  peer.encrypt = false;
+  memcpy(peer.peer_addr, mac, MAC_SIZE);
+  ESP_ERROR_CHECK(esp_now_add_peer(&peer));
+}
 
-  espnow_conn_rx_data_t msg = {
-      .src_addr = src_addr,
-      .data = (void *)data,
-      .data_size = payload_size,
-      .rx_ctrl = rx_ctrl,
-  };
+static esp_err_t espnow_init() {
+  ESP_ERROR_CHECK(esp_now_init());
+  ESP_ERROR_CHECK(esp_now_register_recv_cb(espnow_recv_cb));
+  ESP_ERROR_CHECK(esp_now_set_pmk((uint8_t *)ESPNOW_PMK));
 
-  if (badge_connect_recv_cb) {
-    badge_connect_recv_cb(&msg);
-  }
-  free(data);
+  espnow_conn_add_peer(broadcast_mac);
   return ESP_OK;
 }
 
-void espnow_conn_set_rx_cb(espnow_conn_rx_cb_t cb) {
-  badge_connect_recv_cb = cb;
+void espnow_conn_deinit() {
+  esp_now_deinit();
+  esp_wifi_deinit();
 }
+
+// static void sender_task()
+// {
+//   uint8_t x = 0;
+//   while (1)
+//   {
+//     espnow_conn_send(dest_mac, &x, 1);
+//     x++;
+//     vTaskDelay(pdMS_TO_TICKS(500));
+//   }
+// }
+
+void espnow_conn_begin() {
+  esp_err_t ret = nvs_flash_init();
+  if (ret == ESP_ERR_NVS_NO_FREE_PAGES ||
+      ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
+    ESP_ERROR_CHECK(nvs_flash_erase());
+    ret = nvs_flash_init();
+  }
+  ESP_ERROR_CHECK(ret);
+
+  wifi_init();
+  espnow_init();
+
+  // xTaskCreate(sender_task, "task", 2048, NULL, 10, NULL);
+}
+
+void espnow_conn_set_rx_cb(espnow_conn_rx_cb_t cb) { espnow_conn_rx_cb = cb; }
