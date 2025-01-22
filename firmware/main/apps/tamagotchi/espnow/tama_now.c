@@ -93,7 +93,5 @@ void tama_now_begin() {
   espnow_conn_begin();
   espnow_conn_set_rx_cb(cmd_handler);
 
-  tama_friends_begin();
-
   xTaskCreate(adv_task, "adv_task", 2048, NULL, 5, NULL);
 }

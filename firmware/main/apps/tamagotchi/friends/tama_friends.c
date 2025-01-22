@@ -3,6 +3,7 @@
 #include <string.h>
 
 #include "preferences.h"
+#include "tama_scenes.h"
 
 tama_friends_ctx_t *tama_friends_ctx = NULL;
 uint8_t empty_mac[MAC_SIZE] = {0, 0, 0, 0, 0, 0};
@@ -55,6 +56,10 @@ static void tama_friends_alloc() {
 void tama_friends_begin() {
   // preferences_begin();
 
+  if (tama_friends_ctx) {
+    return;
+  }
+
   tama_friends_alloc();
 
   if (preferences_get_uchar(MAGIC_FRIEND_MEM, 0) != MAGIC_FRIEND_NUM) {
@@ -101,3 +106,7 @@ void tama_friends_add(const char *friend_name, const uint8_t *friend_mac) {
 }
 
 tama_friends_ctx_t *tama_friends_get_ctx() { return tama_friends_ctx; }
+
+void tama_friends_show_list() {
+  tama_scenes_friends_list(tama_friends_ctx->friends_str);
+}

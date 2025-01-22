@@ -25,5 +25,6 @@ void tama_friends_begin();
 uint16_t tama_friends_get_count();
 void tama_friends_add(const char *friend_name, const uint8_t *friend_mac);
 tama_friends_ctx_t *tama_friends_get_ctx();
+void tama_friends_show_list();
 
 #endif
