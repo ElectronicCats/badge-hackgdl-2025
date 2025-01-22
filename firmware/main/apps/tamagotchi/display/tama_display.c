@@ -112,3 +112,5 @@ void tama_display_set_nickname(char *new_nickname) {
   preferences_put_bytes(NICKNAME_MEM, nickname, TAMA_DISPLAY_MAX_NICKNAME_LEN);
   preferences_put_uchar(MAGIC_NICKNAME_MEM, MAGIC_NICKNAME);
 }
+
+char *tama_display_get_nickname() { return nickname; }

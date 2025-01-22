@@ -13,11 +13,9 @@
 
 #define TAG "ESPNOW_CONN"
 
-#define MAC_SIZE 6
 #define ESPNOW_PMK "cat1234567890123"
 
 static espnow_conn_rx_cb_t espnow_conn_rx_cb = NULL;
-static uint8_t broadcast_mac[MAC_SIZE] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
 
 // static void dump_mac(uint8_t *mac, const char *str)
 // {
@@ -61,14 +59,21 @@ static void espnow_recv_cb(const esp_now_recv_info_t *recv_info,
   // printf("COUNT: %d\n", *(uint8_t *)msg.data);
 }
 
-void espnow_conn_send(uint8_t *addr, void *data, size_t len) {
-  esp_err_t err = esp_now_send(addr, data, len);
-  if (err != ESP_OK) {
-    ESP_LOGE(TAG, "ERR: %s\n", esp_err_to_name(err));
+static void remove_peer(uint8_t *mac) {
+  if (mac == NULL) {
+    ESP_LOGE(TAG, "Invalid MAC address");
+    return;
   }
+
+  esp_now_del_peer(mac);
 }
 
-void espnow_conn_add_peer(uint8_t *mac) {
+static void add_peer(uint8_t *mac) {
+  if (mac == NULL) {
+    ESP_LOGE(TAG, "Invalid MAC address");
+    return;
+  }
+
   esp_now_peer_info_t peer = {0};
   peer.channel = 1;
   peer.ifidx = ESP_IF_WIFI_AP;
@@ -77,12 +82,27 @@ void espnow_conn_add_peer(uint8_t *mac) {
   ESP_ERROR_CHECK(esp_now_add_peer(&peer));
 }
 
+void espnow_conn_send(uint8_t *addr, void *data, size_t len) {
+  if (memcmp(addr, espnow_conn_broadcast_mac, MAC_SIZE)) {
+    add_peer(addr);
+  }
+
+  esp_err_t err = esp_now_send(addr, data, len);
+  if (err != ESP_OK) {
+    ESP_LOGE(TAG, "%s\n", esp_err_to_name(err));
+  }
+
+  if (memcmp(addr, espnow_conn_broadcast_mac, MAC_SIZE)) {
+    remove_peer(addr);
+  }
+}
+
 static esp_err_t espnow_init() {
   ESP_ERROR_CHECK(esp_now_init());
   ESP_ERROR_CHECK(esp_now_register_recv_cb(espnow_recv_cb));
   ESP_ERROR_CHECK(esp_now_set_pmk((uint8_t *)ESPNOW_PMK));
 
-  espnow_conn_add_peer(broadcast_mac);
+  add_peer(espnow_conn_broadcast_mac);
   return ESP_OK;
 }
 
@@ -114,8 +134,6 @@ void espnow_conn_begin() {
   wifi_init();
   espnow_init();
 
-  vTaskDelay(pdMS_TO_TICKS(3000));
-  espnow_conn_deinit();
   // xTaskCreate(sender_task, "task", 2048, NULL, 10, NULL);
 }
 

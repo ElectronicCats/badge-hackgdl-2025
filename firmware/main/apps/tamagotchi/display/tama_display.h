@@ -15,5 +15,6 @@ void tama_display_update_screen();
 void tama_display_begin();
 
 void tama_display_set_nickname(char *new_nickname);
+char *tama_display_get_nickname();
 
 #endif // _TAMA_DISPLAY_H_

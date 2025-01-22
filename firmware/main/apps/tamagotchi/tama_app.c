@@ -31,6 +31,7 @@
 #include "tama_display.h"
 #include "tama_friends.h"
 #include "tama_input.h"
+#include "tama_now.h"
 #include "tama_scenes.h"
 #include "tama_state.h"
 
@@ -145,7 +146,8 @@ static void tama_app_task() {
 
 void tama_app_begin() {
   tamalib_begin();
-  tama_friends_begin();
+  tama_now_begin();
+
   xTaskCreatePinnedToCore(tama_app_task, "app_task", 4096, NULL, 15, NULL, 0);
 }
 

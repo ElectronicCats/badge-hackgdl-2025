@@ -4,6 +4,10 @@
 #include "esp_now.h"
 #include <stdint.h>
 
+#define MAC_SIZE 6
+uint8_t espnow_conn_broadcast_mac[MAC_SIZE] = {0xFF, 0xFF, 0xFF,
+                                               0xFF, 0xFF, 0xFF};
+
 typedef struct {
   esp_now_recv_info_t *rx_info;
   void *data;
