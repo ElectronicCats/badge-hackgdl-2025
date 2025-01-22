@@ -19,5 +19,6 @@ typedef struct {
 } tama_now_adv_res_cmd_t;
 
 void tama_now_begin();
+void tama_now_deinit();
 
 #endif // _TAMA_NOW_H_

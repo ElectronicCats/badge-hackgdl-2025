@@ -152,6 +152,8 @@ void tama_app_begin() {
 }
 
 void tama_app_exit() {
+  tama_now_deinit();
+  tama_display_deinit();
   is_running = false;
   vTaskDelay(pdMS_TO_TICKS(20));
   tama_scenes_main();

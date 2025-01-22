@@ -108,7 +108,7 @@ static esp_err_t espnow_init() {
 
 void espnow_conn_deinit() {
   esp_now_deinit();
-  // esp_wifi_deinit();
+  esp_wifi_deinit();
 }
 
 // static void sender_task()

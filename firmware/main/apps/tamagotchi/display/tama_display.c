@@ -17,6 +17,7 @@
 
 static char nickname[TAMA_DISPLAY_MAX_NICKNAME_LEN] = "NickName";
 static char header_str[20];
+static TaskHandle_t header_task_handle = NULL;
 
 static uint8_t matrix_buffer[LCD_HEIGHT][LCD_WIDTH / 8] = {{0}};
 static bool_t icon_buffer[ICON_NUM] = {0};
@@ -128,8 +129,10 @@ void tama_display_begin() {
   }
   strncpy(header_str, nickname, sizeof(header_str));
 
-  xTaskCreate(header_task, "header_task", 2048, NULL, 1, NULL);
+  xTaskCreate(header_task, "header_task", 2048, NULL, 1, &header_task_handle);
 }
+
+void tama_display_deinit() { vTaskDelete(header_task_handle); }
 
 void tama_display_set_nickname(char *new_nickname) {
   strncpy(nickname, new_nickname, TAMA_DISPLAY_MAX_NICKNAME_LEN - 1);
