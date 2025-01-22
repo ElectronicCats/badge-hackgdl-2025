@@ -29,11 +29,12 @@
 
 #include "tama_buzzer.h"
 #include "tama_display.h"
+#include "tama_friends.h"
 #include "tama_input.h"
+#include "tama_scenes.h"
 #include "tama_state.h"
 
 #include "preferences.h"
-#include "tama_scenes.h"
 
 #define SPEED 1
 #define SPEED_MEM "speed"
@@ -144,6 +145,7 @@ static void tama_app_task() {
 
 void tama_app_begin() {
   tamalib_begin();
+  tama_friends_begin();
   xTaskCreatePinnedToCore(tama_app_task, "app_task", 4096, NULL, 15, NULL, 0);
 }
 

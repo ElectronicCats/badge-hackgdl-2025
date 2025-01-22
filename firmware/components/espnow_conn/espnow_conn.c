@@ -88,7 +88,7 @@ static esp_err_t espnow_init() {
 
 void espnow_conn_deinit() {
   esp_now_deinit();
-  esp_wifi_deinit();
+  // esp_wifi_deinit();
 }
 
 // static void sender_task()
@@ -114,6 +114,8 @@ void espnow_conn_begin() {
   wifi_init();
   espnow_init();
 
+  vTaskDelay(pdMS_TO_TICKS(3000));
+  espnow_conn_deinit();
   // xTaskCreate(sender_task, "task", 2048, NULL, 10, NULL);
 }
 
