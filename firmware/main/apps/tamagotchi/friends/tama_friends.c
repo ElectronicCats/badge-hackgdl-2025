@@ -4,25 +4,8 @@
 
 #include "preferences.h"
 
-#define MAX_FRIENDS 300
-#define STR_SIZE 13
-#define MAC_SIZE 6
-
-#define FRIENDS_STR_MEM "fstr"
-#define FRIENDS_STR_SIZE MAX_FRIENDS *STR_SIZE
-#define FRIENDS_MAC_MEM "fmac"
-#define FRIENDS_MAC_SIZE MAX_FRIENDS *MAC_SIZE
-
-#define MAGIC_FRIEND_NUM 0x67
-#define MAGIC_FRIEND_MEM "mfriend"
-
-typedef struct {
-  uint16_t friends_count;
-  char friends_str[MAX_FRIENDS][STR_SIZE];
-  uint8_t friends_mac[MAX_FRIENDS][MAC_SIZE];
-} tama_friends_ctx_t;
-
 tama_friends_ctx_t *tama_friends_ctx = NULL;
+uint8_t empty_mac[MAC_SIZE] = {0, 0, 0, 0, 0, 0};
 
 static void dump_tama_friends_ctx(tama_friends_ctx_t *ctx) {
   printf("Friends Count: %u\n", ctx->friends_count);
@@ -55,7 +38,7 @@ uint16_t tama_friends_get_count() {
   uint16_t count = 0;
 
   for (uint8_t i = 0; i < MAX_FRIENDS; i++) {
-    if (strlen(tama_friends_ctx->friends_str[i]) > 0) {
+    if (memcmp(tama_friends_ctx->friends_mac[i], empty_mac, MAC_SIZE)) {
       count++;
     } else {
       break;
@@ -90,6 +73,11 @@ void tama_friends_add(const char *friend_name, const uint8_t *friend_mac) {
   if (tama_friends_ctx->friends_count >= MAX_FRIENDS) {
     return;
   }
+
+  if (memcmp(friend_mac, empty_mac, MAC_SIZE)) {
+    return;
+  }
+
   if (friend_exists(friend_mac)) {
     strncpy(tama_friends_ctx->friends_str[tama_friends_ctx->friends_count],
             friend_name, STR_SIZE);
@@ -111,3 +99,5 @@ void tama_friends_add(const char *friend_name, const uint8_t *friend_mac) {
   preferences_put_bytes(FRIENDS_MAC_MEM, tama_friends_ctx->friends_mac,
                         FRIENDS_MAC_SIZE);
 }
+
+tama_friends_ctx_t *tama_friends_get_ctx() { return tama_friends_ctx; }

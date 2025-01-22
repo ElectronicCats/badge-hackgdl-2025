@@ -3,19 +3,26 @@
 #include "bitmaps.h"
 #include "hw.h"
 
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
 #include <string.h>
 
 #include "oled_screen.h"
 #include "preferences.h"
+#include "tama_friends.h"
 
 #define NICKNAME_MEM "nickname"
 #define MAGIC_NICKNAME_MEM "mnickname"
 #define MAGIC_NICKNAME 12
 
 static char nickname[TAMA_DISPLAY_MAX_NICKNAME_LEN] = "NickName";
+static char header_str[20];
 
 static uint8_t matrix_buffer[LCD_HEIGHT][LCD_WIDTH / 8] = {{0}};
 static bool_t icon_buffer[ICON_NUM] = {0};
+
+static bool frame = false;
+static uint16_t friends = 0;
 
 static void print_matrix_buffer() {
   for (uint8_t y = 0; y < 16; y++) {
@@ -31,6 +38,19 @@ static void print_matrix_buffer() {
       printf(" ");
     }
     printf("\n");
+  }
+}
+
+static void header_task() {
+  while (1) {
+    if (!strcmp(header_str, nickname) && tama_friends_get_ctx()) {
+      snprintf(header_str, sizeof(header_str), "Find %03d/300",
+               tama_friends_get_count());
+      vTaskDelay(pdMS_TO_TICKS(3000));
+    } else {
+      strncpy(header_str, nickname, sizeof(header_str));
+      vTaskDelay(pdMS_TO_TICKS(5000));
+    }
   }
 }
 
@@ -65,6 +85,7 @@ static void drawTamaRow(uint8_t tamaLCD_y, uint8_t ActualLCD_y) {
     }
   }
 }
+
 static void displayTama() {
   oled_screen_clear_buffer();
   drawTamaSelection();
@@ -73,7 +94,7 @@ static void displayTama() {
     drawTamaRow(j, 3 * j);
   }
   oled_screen_draw_box(12, 0, 103, 8, OLED_DISPLAY_NORMAL);
-  oled_screen_display_text_center(nickname, 0, OLED_DISPLAY_INVERT);
+  oled_screen_display_text_center(header_str, 0, OLED_DISPLAY_INVERT);
   oled_screen_display_show();
   // vTaskDelay(65);
 }
@@ -105,6 +126,9 @@ void tama_display_begin() {
     preferences_get_bytes(NICKNAME_MEM, nickname,
                           TAMA_DISPLAY_MAX_NICKNAME_LEN);
   }
+  strncpy(header_str, nickname, sizeof(header_str));
+
+  xTaskCreate(header_task, "header_task", 2048, NULL, 1, NULL);
 }
 
 void tama_display_set_nickname(char *new_nickname) {
