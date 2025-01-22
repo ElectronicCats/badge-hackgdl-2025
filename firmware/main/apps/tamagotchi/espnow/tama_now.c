@@ -10,7 +10,7 @@
 #include "tama_friends.h"
 
 #define RSSI -100
-#define ADV_RATE_MS 2000
+#define ADV_RATE_MS 4000
 
 #define MAGIC *(uint8_t *)msg->data
 #define CMD *(uint8_t *)((msg->data) + 1)
@@ -64,10 +64,10 @@ static void adv_res_handler(espnow_conn_rx_data_t *msg) {
 /////////////////////////////////////////////////////////////
 
 static void cmd_handler(espnow_conn_rx_data_t *msg) {
-  if (MAGIC != TAMA_NOW_MAGIC || msg->rx_info->rx_ctrl->rssi < RSSI) {
+  if (MAGIC != TAMA_NOW_MAGIC) // || msg->rx_info->rx_ctrl->rssi < RSSI)
+  {
     return;
   }
-
   switch (CMD) {
   case ADV_REQ_CMD:
     adv_req_handler(msg);

@@ -74,7 +74,7 @@ void tama_friends_add(const char *friend_name, const uint8_t *friend_mac) {
     return;
   }
 
-  if (memcmp(friend_mac, empty_mac, MAC_SIZE)) {
+  if (!memcmp(friend_mac, empty_mac, MAC_SIZE)) {
     return;
   }
 
