@@ -45,7 +45,7 @@ static void print_matrix_buffer() {
 static void header_task() {
   while (1) {
     if (!strcmp(header_str, nickname) && tama_friends_get_ctx()) {
-      snprintf(header_str, sizeof(header_str), "Find %03d/300",
+      snprintf(header_str, sizeof(header_str), "Friends: %03d",
                tama_friends_get_count());
       vTaskDelay(pdMS_TO_TICKS(3000));
     } else {

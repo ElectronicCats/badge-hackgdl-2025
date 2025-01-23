@@ -17,8 +17,12 @@
 void tama_scenes_main();
 void tama_scenes_speed();
 void tama_scenes_friends_list(char **list_arr);
+void tama_scenes_help();
+
+static void show_help(const char *banner, char **help, uint16_t len);
 
 static uint8_t last_main_selection = 0;
+static uint8_t last_help_selection = 0;
 
 ///////////////////////////// MAIN MENU /////////////////////////////
 typedef enum {
@@ -26,13 +30,11 @@ typedef enum {
   MAIN_MENU_SPEED,
   MAIN_MENU_FRIENDS,
   MAIN_MENU_ERASE,
+  MAIN_MENU_HELP,
 } main_menu_options_t;
 
 static const char *main_menu_options[] = {
-    "Play",
-    "Speed",
-    "Friends",
-    "Erase",
+    "Play", "Speed", "Friends List", "Erase", "Help",
 };
 
 static void tama_scenes_handler(uint8_t option) {
@@ -49,6 +51,8 @@ static void tama_scenes_handler(uint8_t option) {
     break;
   case MAIN_MENU_ERASE:
     tama_state_erase();
+  case MAIN_MENU_HELP:
+    tama_scenes_help();
     break;
   }
 }
@@ -102,7 +106,7 @@ void tama_scenes_friends_list(char **list_arr) {
 
   static char list_banner[20];
   uint16_t friends_count = tama_friends_get_count();
-  snprintf(list_banner, sizeof(list_banner), "Friends %03d/300", friends_count);
+  snprintf(list_banner, sizeof(list_banner), "Friends: %03d", friends_count);
 
   friends_list = calloc(friends_count, sizeof(char *));
   for (uint16_t i = 0; i < friends_count; i++) {
@@ -115,6 +119,74 @@ void tama_scenes_friends_list(char **list_arr) {
   list.scroll_type = GENERAL_SCROLLING_TEXT_CLAMPED;
   list.window_type = GENERAL_SCROLLING_TEXT_WINDOW;
   list.exit_cb = friends_list_exit;
+
+  general_scrolling_text_array(list);
+}
+
+///////////////////////////// HELP MENU /////////////////////////////
+typedef enum {
+  HELP_MENU_TAMAGOTCHI,
+  HELP_MENU_NICKNAME,
+  HELP_MENU_FRIENDS,
+} help_menu_options_t;
+
+static const char *help_menu_options[] = {
+    "Tamagotchi",
+    "Nickname",
+    "Friends",
+};
+
+static const char *tamagotchi_help[] = {
+    "Its a classic", "Tamagotchi P1", "emulator.",    "Thanks to:",
+    "-jcrona",       "-Otrebor671",   "To activate",  "your pet,",
+    "configure the", "clock by",      "pressing the", "middle button"};
+static const char *nickname_help[] = {
+    "You can change", "your pets name", "over terminal", "using the cmd:", "",
+    "`tama_nickname'"};
+static const char *friends_help[] = {"Get close to", "other pets",
+                                     "to increase",  "your friends",
+                                     "list & your",  "friends count"};
+
+static void help_menu_handler(uint8_t option) {
+  last_help_selection = option;
+  switch (option) {
+  case HELP_MENU_TAMAGOTCHI:
+    show_help("Tamagotchi Help", tamagotchi_help,
+              sizeof(tamagotchi_help) / sizeof(char *));
+    break;
+  case HELP_MENU_NICKNAME:
+    show_help("NickName Help", nickname_help,
+              sizeof(nickname_help) / sizeof(char *));
+    break;
+  case HELP_MENU_FRIENDS:
+    show_help("Friends Help", friends_help,
+              sizeof(friends_help) / sizeof(char *));
+    break;
+  }
+}
+
+void tama_scenes_help() {
+  general_submenu_menu_t help_menu = {0};
+  help_menu.title = "Tamagotchi Help";
+  help_menu.options = help_menu_options;
+  help_menu.options_count = sizeof(help_menu_options) / sizeof(char *);
+  help_menu.selected_option = last_help_selection;
+  help_menu.select_cb = help_menu_handler;
+  help_menu.exit_cb = tama_scenes_main;
+  general_submenu(help_menu);
+}
+
+///////////////////////////// HELP ITEM /////////////////////////////
+
+static void show_help(const char *banner, char **help, uint16_t len) {
+  general_scrolling_text_ctx list = {0};
+
+  list.banner = banner;
+  list.text_arr = help;
+  list.text_len = len;
+  list.scroll_type = GENERAL_SCROLLING_TEXT_CLAMPED;
+  list.window_type = GENERAL_SCROLLING_TEXT_WINDOW;
+  list.exit_cb = tama_scenes_help;
 
   general_scrolling_text_array(list);
 }
