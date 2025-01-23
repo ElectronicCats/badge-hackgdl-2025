@@ -6212,7 +6212,7 @@
 						(type default)
 					)
 					(fill
-						(type none)
+						(type outline)
 					)
 				)
 				(arc
@@ -6224,7 +6224,7 @@
 						(type default)
 					)
 					(fill
-						(type outline)
+						(type none)
 					)
 				)
 				(arc
@@ -6334,6 +6334,17 @@
 						(type none)
 					)
 				)
+				(circle
+					(center 0 -5.842)
+					(radius 1.27)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
 				(polyline
 					(pts
 						(xy 0 -5.842) (xy 0 4.318)
@@ -6344,17 +6355,6 @@
 					)
 					(fill
 						(type none)
-					)
-				)
-				(circle
-					(center 0 -5.842)
-					(radius 1.27)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type outline)
 					)
 				)
 				(rectangle
@@ -11529,7 +11529,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C15725"
+		(property "LCSC#" "C66501"
 			(at 52.07 97.79 0)
 			(effects
 				(font
@@ -12089,7 +12089,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C15725"
+		(property "LCSC#" "C66501"
 			(at 210.82 105.41 0)
 			(effects
 				(font
@@ -12287,7 +12287,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C15725"
+		(property "LCSC#" "C66501"
 			(at 265.43 101.6 0)
 			(effects
 				(font
@@ -12636,7 +12636,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C15849"
+		(property "LCSC#" "C696901"
 			(at 156.21 22.987 0)
 			(effects
 				(font
@@ -12967,7 +12967,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C15725"
+		(property "LCSC#" "C66501"
 			(at 165.1 69.85 0)
 			(effects
 				(font
@@ -13063,7 +13063,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C15725"
+		(property "LCSC#" "C66501"
 			(at 236.22 116.84 0)
 			(effects
 				(font
@@ -13320,7 +13320,7 @@
 				(hide yes)
 			)
 		)
-		(property "manf#" "RC0603DR-07100KL"
+		(property "manf#" ""
 			(at 78.74 49.53 0)
 			(effects
 				(font
@@ -13729,7 +13729,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C15725"
+		(property "LCSC#" "C66501"
 			(at 269.24 135.89 0)
 			(effects
 				(font
@@ -16034,7 +16034,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C15849"
+		(property "LCSC#" "C696901"
 			(at 68.58 114.3 0)
 			(effects
 				(font
@@ -16189,7 +16189,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C15725"
+		(property "LCSC#" "C66501"
 			(at 164.719 50.165 0)
 			(effects
 				(font
@@ -16417,7 +16417,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C15725"
+		(property "LCSC#" "C66501"
 			(at 241.3 135.89 0)
 			(effects
 				(font
@@ -16578,7 +16578,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C110776"
+		(property "LCSC#" "C21190"
 			(at 152.908 120.65 0)
 			(effects
 				(font
@@ -16587,7 +16587,7 @@
 				(hide yes)
 			)
 		)
-		(property "manf#" "RC0603JR-071K1L"
+		(property "manf#" ""
 			(at 152.908 120.65 0)
 			(effects
 				(font
@@ -16672,7 +16672,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C103661"
+		(property "LCSC#" "C25241"
 			(at 199.39 148.59 0)
 			(effects
 				(font
@@ -18289,7 +18289,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C15849"
+		(property "LCSC#" "C696901"
 			(at 68.58 121.92 0)
 			(effects
 				(font
@@ -18530,7 +18530,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C15725"
+		(property "LCSC#" "C66501"
 			(at 237.49 96.52 0)
 			(effects
 				(font
@@ -19008,7 +19008,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C15725"
+		(property "LCSC#" "C66501"
 			(at 219.71 135.89 0)
 			(effects
 				(font
