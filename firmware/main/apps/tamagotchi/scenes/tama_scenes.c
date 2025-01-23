@@ -19,6 +19,7 @@ void tama_scenes_speed();
 void tama_scenes_friends_list(char **list_arr);
 void tama_scenes_help();
 
+static void tama_scenes_erase();
 static void show_help(const char *banner, char **help, uint16_t len);
 
 static uint8_t last_main_selection = 0;
@@ -50,7 +51,8 @@ static void tama_scenes_handler(uint8_t option) {
     tama_friends_show_list();
     break;
   case MAIN_MENU_ERASE:
-    tama_state_erase();
+    tama_scenes_erase();
+    break;
   case MAIN_MENU_HELP:
     tama_scenes_help();
     break;
@@ -90,6 +92,38 @@ void tama_scenes_speed() {
   speed_menu.value_handler = speed_handler;
   speed_menu.exit_cb = tama_scenes_main;
   general_knob(speed_menu);
+}
+
+///////////////////////////// ERASE MENU /////////////////////////////
+typedef enum {
+  ERASE_MENU_CANCEL,
+  ERASE_MENU_ERASE,
+} erase_menu_options_t;
+
+static const char *erase_menu_options[] = {
+    "Cancel",
+    "Erase",
+};
+
+static void erase_handler(uint8_t option) {
+  switch (option) {
+  case ERASE_MENU_ERASE:
+    tama_state_erase();
+  case ERASE_MENU_CANCEL:
+    tama_scenes_main();
+    break;
+  }
+}
+
+static void tama_scenes_erase() {
+  general_submenu_menu_t erase_menu = {0};
+  erase_menu.title = "Are you shure?";
+  erase_menu.options = erase_menu_options;
+  erase_menu.options_count = sizeof(erase_menu_options) / sizeof(char *);
+  erase_menu.selected_option = 0;
+  erase_menu.select_cb = erase_handler;
+  erase_menu.exit_cb = tama_scenes_main;
+  general_submenu(erase_menu);
 }
 
 //////////////////////// Friends List ////////////////////////
