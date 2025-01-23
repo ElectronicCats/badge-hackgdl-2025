@@ -6260,7 +6260,7 @@
 						(type default)
 					)
 					(fill
-						(type none)
+						(type outline)
 					)
 				)
 				(arc
@@ -6272,7 +6272,7 @@
 						(type default)
 					)
 					(fill
-						(type outline)
+						(type none)
 					)
 				)
 				(polyline
@@ -6334,17 +6334,6 @@
 						(type none)
 					)
 				)
-				(circle
-					(center 0 -5.842)
-					(radius 1.27)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
 				(polyline
 					(pts
 						(xy 0 -5.842) (xy 0 4.318)
@@ -6355,6 +6344,17 @@
 					)
 					(fill
 						(type none)
+					)
+				)
+				(circle
+					(center 0 -5.842)
+					(radius 1.27)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
 					)
 				)
 				(rectangle
@@ -12448,7 +12448,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Button_Switch_SMD:SW_SPST_TL3342"
+		(property "Footprint" "Footprints:Button_6.6x6.5"
 			(at 237.49 83.82 0)
 			(effects
 				(font
@@ -12475,7 +12475,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C318884"
+		(property "LCSC#" "C480263"
 			(at 237.49 88.9 0)
 			(effects
 				(font
@@ -13608,7 +13608,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Button_Switch_SMD:SW_SPST_TL3342"
+		(property "Footprint" "Footprints:Button_6.6x6.5"
 			(at 265.43 88.9 0)
 			(effects
 				(font
@@ -13635,7 +13635,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C318884"
+		(property "LCSC#" "C480263"
 			(at 265.43 93.98 0)
 			(effects
 				(font
@@ -13881,7 +13881,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Button_Switch_SMD:SW_SPST_TL3342"
+		(property "Footprint" "Footprints:Button_6.6x6.5"
 			(at 236.22 104.14 0)
 			(effects
 				(font
@@ -13908,7 +13908,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C318884"
+		(property "LCSC#" "C480263"
 			(at 236.22 109.22 0)
 			(effects
 				(font
@@ -14324,7 +14324,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Button_Switch_SMD:SW_SPST_TL3342"
+		(property "Footprint" "Footprints:Button_6.6x6.5"
 			(at 210.82 91.44 0)
 			(effects
 				(font
@@ -14351,7 +14351,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC#" "C318884"
+		(property "LCSC#" "C480263"
 			(at 210.82 96.52 0)
 			(effects
 				(font
