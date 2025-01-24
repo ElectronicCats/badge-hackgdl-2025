@@ -35,6 +35,6 @@ void tama_anim_splah_screen() {
   animation.pos_draw_cb = pos_splash_screen_draw;
 
   animations_module_run(animation);
-  vTaskDelay(pdMS_TO_TICKS(2000));
+  vTaskDelay(pdMS_TO_TICKS(2500));
   animations_module_stop();
 }

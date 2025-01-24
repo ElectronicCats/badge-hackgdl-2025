@@ -236,4 +236,10 @@ void oled_screen_display_loading_bar(uint8_t value, uint8_t page) {
                              OLED_DISPLAY_NORMAL);
 }
 
+void oled_screen_fade_out() {
+  xSemaphoreTake(oled_mutex, portMAX_DELAY);
+  oled_driver_fadeout(&dev);
+  xSemaphoreGive(oled_mutex);
+}
+
 uint8_t oled_screen_get_pages() { return dev._pages; }

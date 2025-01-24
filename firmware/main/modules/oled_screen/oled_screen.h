@@ -138,6 +138,8 @@ void oled_screen_draw_vline(int x, int y, int height, bool invert);
 void oled_screen_draw_hline(int x, int y, int width, bool invert);
 void oled_screen_draw_box(int x, int y, int width, int height, bool invert);
 
+void oled_screen_fade_out();
+
 void oled_screen_buffer_bitmap(const uint8_t *bitmap, int x, int y, int width,
                                int height, bool invert);
 
