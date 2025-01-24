@@ -17,6 +17,7 @@
 
 void tama_scenes_main();
 void tama_scenes_speed();
+void tama_scenes_friends();
 void tama_scenes_friends_list(char **list_arr);
 void tama_scenes_help();
 
@@ -25,6 +26,7 @@ static void show_help(const char *banner, char **help, uint16_t len);
 
 static uint8_t last_main_selection = 0;
 static uint8_t last_help_selection = 0;
+static uint8_t last_friends_selection = 0;
 
 ///////////////////////////// MAIN MENU /////////////////////////////
 typedef enum {
@@ -36,7 +38,7 @@ typedef enum {
 } main_menu_options_t;
 
 static const char *main_menu_options[] = {
-    "Play", "Speed", "Friends List", "Erase", "Help",
+    "Play", "Speed", "Friends", "Erase", "Help",
 };
 
 static void tama_scenes_handler(uint8_t option) {
@@ -49,7 +51,7 @@ static void tama_scenes_handler(uint8_t option) {
     tama_scenes_speed();
     break;
   case MAIN_MENU_FRIENDS:
-    tama_friends_show_list();
+    tama_scenes_friends();
     break;
   case MAIN_MENU_ERASE:
     tama_scenes_erase();
@@ -127,13 +129,47 @@ static void tama_scenes_erase() {
   general_submenu(erase_menu);
 }
 
+///////////////////////////// FRIENDS MENU /////////////////////////////
+typedef enum {
+  FRIENDS_SCAN,
+  FRIENDS_LIST,
+} friends_menu_options_t;
+
+static const char *friends_menu_options[] = {
+    "Scan",
+    "List",
+};
+
+static void friends_menu_handler(uint8_t option) {
+  last_friends_selection = option;
+  switch (option) {
+  case FRIENDS_SCAN:
+    // tama_app_begin();
+    break;
+  case FRIENDS_LIST:
+    tama_friends_show_list();
+    break;
+  }
+}
+
+void tama_scenes_friends() {
+  general_submenu_menu_t friends_menu = {0};
+  friends_menu.title = "Tamagotchi App";
+  friends_menu.options = friends_menu_options;
+  friends_menu.options_count = sizeof(friends_menu_options) / sizeof(char *);
+  friends_menu.selected_option = last_friends_selection;
+  friends_menu.select_cb = friends_menu_handler;
+  friends_menu.exit_cb = tama_scenes_friends;
+  general_submenu(friends_menu);
+}
+
 //////////////////////// Friends List ////////////////////////
 
 char **friends_list;
 
 static void friends_list_exit() {
   free(friends_list);
-  tama_scenes_main();
+  tama_scenes_friends();
 }
 
 void tama_scenes_friends_list(char **list_arr) {

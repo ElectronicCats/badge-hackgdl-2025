@@ -57,12 +57,16 @@ static bool get_paused() {
   return _is_paused;
 }
 
-static void set_pos(uint8_t x, uint8_t y) {
+void animations_module_set_pos(uint8_t x, uint8_t y) {
   // if (x >= OLED_WIDTH || y >= OLED_HEIGHT)
   // {
   //     return;
   // }
   xSemaphoreTake(anim_mutex, portMAX_DELAY);
+  if (!anim_ctx) {
+    xSemaphoreGive(anim_mutex);
+    return;
+  }
   anim_ctx->x = x;
   anim_ctx->y = y;
   xSemaphoreGive(anim_mutex);

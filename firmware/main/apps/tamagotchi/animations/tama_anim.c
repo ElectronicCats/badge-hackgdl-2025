@@ -5,6 +5,7 @@
 #include "oled_screen.h"
 
 #include "bitmaps.h"
+#include "get_random.h"
 #include "tama_bmps.h"
 
 static void draw_tama_ui(const char *str) {
@@ -84,4 +85,41 @@ void tama_anim_scan() {
   // xTaskCreate(time_bar_task, "time_bar_task", 2048, NULL, 3, NULL);
   vTaskDelay(pdMS_TO_TICKS(100000));
   animations_module_stop();
+}
+
+////////////////////// NEW FRIEND ANIM /////////////////////
+const uint16_t pinata_new_friend_order[] = {0, 5, 0, 5, 0, 6, 0, 6,
+                                            0, 6, 0, 6, 0, 5, 0, 5};
+const uint32_t pinata_new_friend_durations_ms[] = {
+    600, 600, 600, 600, 600, 50, 80, 50, 80, 50, 80, 50, 80, 600, 600, 600};
+
+const animation_t pinata_new_friend_animation = {
+    .bitmaps = pinata_bitmaps,
+    .bitmaps_len = sizeof(pinata_bitmaps) / sizeof(bitmap_t),
+    .order = pinata_new_friend_order,
+    .duration_ms = pinata_new_friend_durations_ms,
+    .frames_len =
+        MIN(sizeof(pinata_new_friend_order) / sizeof(uint16_t),
+            sizeof(pinata_new_friend_durations_ms) / sizeof(uint32_t))};
+
+static void pos_new_friend_draw() { draw_tama_ui("New Friend x"); }
+
+static void new_friend_anim_shake() {
+  for (uint8_t i = 0; i < 15; i++) {
+    animations_module_set_pos(get_random_uint8() % 10, get_random_uint8() % 10);
+    vTaskDelay(pdMS_TO_TICKS(pinata_new_friend_durations_ms[i]));
+  }
+  vTaskDelete(NULL);
+}
+
+static void new_friend_exit_cb() {}
+
+void tama_anim_new_friend() {
+  animations_module_ctx_t animation = {0};
+  animation.animation = &pinata_new_friend_animation;
+  animation.loop = false;
+  animation.pos_draw_cb = pos_new_friend_draw;
+  animation.exit_cb = new_friend_exit_cb;
+
+  animations_module_run(animation);
 }
