@@ -3,6 +3,6 @@
 
 #include <stdio.h>
 
-#include "animations_module.h"
+void tama_anim_start();
 
 #endif // _TAMA_ANIM_H_

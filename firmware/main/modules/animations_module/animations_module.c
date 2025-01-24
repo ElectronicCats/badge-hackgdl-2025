@@ -1,8 +1,11 @@
 #include "animations_module.h"
 
+#include "esp_log.h"
 #include "freertos/semphr.h"
 
 #include "oled_screen.h"
+
+#define TAG "ANIMATIONS_MODULE"
 
 #define OLED_WIDTH 128
 #define OLED_HEIGHT 64
@@ -37,8 +40,9 @@ static void set_running(bool val) {
 }
 static bool get_running() {
   xSemaphoreTake(anim_mutex, portMAX_DELAY);
-  return anim_ctx->_is_runing;
+  bool _is_running = anim_ctx->_is_runing;
   xSemaphoreGive(anim_mutex);
+  return _is_running;
 }
 
 static void set_paused(bool val) {
@@ -48,8 +52,9 @@ static void set_paused(bool val) {
 }
 static bool get_paused() {
   xSemaphoreTake(anim_mutex, portMAX_DELAY);
-  return anim_ctx->_is_paused;
+  bool _is_paused = anim_ctx->_is_paused;
   xSemaphoreGive(anim_mutex);
+  return _is_paused;
 }
 
 static void set_pos(uint8_t x, uint8_t y) {
@@ -83,6 +88,10 @@ static void increment_frame() {
 
 static void draw_frame() {
   xSemaphoreTake(anim_mutex, portMAX_DELAY);
+  if (!anim_ctx->manual_clear) {
+    oled_screen_clear_buffer();
+  }
+
   if (anim_ctx->pre_draw_cb) {
     anim_ctx->pre_draw_cb();
   }
@@ -101,7 +110,10 @@ static void draw_frame() {
   if (anim_ctx->pos_draw_cb) {
     anim_ctx->pos_draw_cb();
   }
-  oled_screen_display_show();
+
+  if (!anim_ctx->manual_show) {
+    oled_screen_display_show();
+  }
   xSemaphoreGive(anim_mutex);
 }
 
@@ -109,10 +121,10 @@ static void animation_task() {
   set_running(true);
   while (get_running()) {
     draw_frame();
+    increment_frame();
     if (!get_running()) {
       break;
     }
-    increment_frame();
     task_delay();
   }
   anim_ctx_free();
@@ -121,6 +133,7 @@ static void animation_task() {
 
 void animations_module_pause() {
   if (!anim_mutex) {
+    ESP_LOGW(TAG, "Run any animation first");
     return;
   }
   xSemaphoreTake(anim_mutex, portMAX_DELAY);
@@ -131,24 +144,30 @@ void animations_module_pause() {
     }
     xSemaphoreTake(anim_mutex, portMAX_DELAY);
     vTaskSuspend(anim_ctx->task_handle);
+  } else {
+    ESP_LOGW(TAG, "There is not any running Task");
   }
   xSemaphoreGive(anim_mutex);
 }
 
 void animations_module_resume() {
   if (!anim_mutex) {
+    ESP_LOGW(TAG, "Run any animation first");
     return;
   }
   xSemaphoreTake(anim_mutex, portMAX_DELAY);
   if (anim_ctx && anim_ctx->task_handle && anim_ctx->_is_paused &&
       anim_ctx->_is_runing) {
     vTaskResume(anim_ctx->task_handle);
+  } else {
+    ESP_LOGW(TAG, "There is not any paused Task");
   }
   xSemaphoreGive(anim_mutex);
 }
 
 void animations_module_stop() {
   if (!anim_mutex) {
+    ESP_LOGW(TAG, "Run any animation first");
     return;
   }
   xSemaphoreTake(anim_mutex, portMAX_DELAY);
@@ -158,20 +177,17 @@ void animations_module_stop() {
   xSemaphoreGive(anim_mutex);
 }
 
-void animations_module_run() {
-  if (!anim_mutex) {
+void animations_module_run(animations_module_ctx_t ctx) {
+  anim_mutex_alloc();
+
+  xSemaphoreTake(anim_mutex, portMAX_DELAY);
+  if (anim_ctx) {
+    xSemaphoreGive(anim_mutex);
+    ESP_LOGW(TAG, "Another animation is running, stop it first by calling "
+                  "animations_module_stop()");
     return;
   }
-  xSemaphoreTake(anim_mutex, portMAX_DELAY);
-  if (anim_ctx && !anim_ctx->_is_runing) {
-    xTaskCreate(animation_task, "animation_task", 4096, NULL, 10,
-                &anim_ctx->task_handle);
-  }
   xSemaphoreGive(anim_mutex);
-}
-
-void animations_module_set_ctx(animations_module_ctx_t ctx) {
-  anim_mutex_alloc();
 
   anim_ctx_free();
   xSemaphoreTake(anim_mutex, portMAX_DELAY);
@@ -186,5 +202,11 @@ void animations_module_set_ctx(animations_module_ctx_t ctx) {
   anim_ctx->loop = ctx.loop;
   anim_ctx->x = ctx.x;
   anim_ctx->y = ctx.y;
+  anim_ctx->manual_clear = ctx.manual_clear;
+  anim_ctx->manual_show = ctx.manual_show;
+
+  xTaskCreate(animation_task, "animation_task", 4096, NULL, 10,
+              &anim_ctx->task_handle);
+
   xSemaphoreGive(anim_mutex);
 }

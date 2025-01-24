@@ -6,9 +6,9 @@
 #include "bitmap_t.h"
 
 typedef struct {
-  bitmap_t *bitmaps;
-  uint16_t *order;
-  uint32_t *duration_ms;
+  const bitmap_t *bitmaps;
+  const uint16_t *order;
+  const uint32_t *duration_ms;
   size_t frames_len;
   size_t bitmaps_len;
 } animation_t;

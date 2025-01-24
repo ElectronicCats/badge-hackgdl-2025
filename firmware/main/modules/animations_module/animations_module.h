@@ -8,7 +8,7 @@
 #include "animation_t.h"
 
 typedef struct {
-  animation_t *animation;
+  const animation_t *animation;
   uint8_t x;
   uint8_t y;
   uint16_t current_frame;
@@ -17,9 +17,16 @@ typedef struct {
   void (*pos_draw_cb)();
   void (*exit_cb)();
   bool invert;
-  volatile bool loop;
+  bool loop;
+  bool manual_clear;
+  bool manual_show;
   volatile bool _is_runing;
   volatile bool _is_paused;
 } animations_module_ctx_t;
+
+void animations_module_run(animations_module_ctx_t ctx);
+void animations_module_stop();
+void animations_module_resume();
+void animations_module_pause();
 
 #endif // ANIMATIONS_MODULE_H_

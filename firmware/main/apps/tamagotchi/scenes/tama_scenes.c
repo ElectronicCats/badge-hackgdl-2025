@@ -7,6 +7,7 @@
 #include "menus_module.h"
 #include "preferences.h"
 
+#include "tama_anim.h"
 #include "tama_app.h"
 #include "tama_friends.h"
 #include "tama_state.h"
