@@ -27,6 +27,7 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 
+#include "tama_anim.h"
 #include "tama_buzzer.h"
 #include "tama_display.h"
 #include "tama_friends.h"
@@ -145,6 +146,7 @@ static void tama_app_task() {
 }
 
 void tama_app_begin() {
+  tama_anim_splah_screen();
   tamalib_begin();
   tama_now_begin();
 
