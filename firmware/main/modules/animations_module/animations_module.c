@@ -127,7 +127,11 @@ static void animation_task() {
     }
     task_delay();
   }
+  void (*exit_cb)() = anim_ctx->exit_cb;
   anim_ctx_free();
+  if (exit_cb) {
+    exit_cb();
+  }
   vTaskDelete(NULL);
 }
 
