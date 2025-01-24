@@ -223,17 +223,11 @@ void oled_screen_display_text_splited(char *p_text, int *p_started_page,
   }
 }
 
-void oled_screen_display_loading_bar(uint8_t value, uint8_t page) {
-  uint8_t bar_bitmap[8][16];
-  uint8_t active_cols = (uint32_t)value * 128 / 100;
-  memset(bar_bitmap, 0, sizeof(bar_bitmap));
-  for (int y = 0; y < 8; y++) {
-    for (int x = 0; x < active_cols; x++) {
-      bar_bitmap[y][x / 8] |= (1 << (7 - (x % 8)));
-    }
-  }
-  oled_screen_display_bitmap(bar_bitmap, 0, page * 8, 128, 8,
-                             OLED_DISPLAY_NORMAL);
+void oled_screen_draw_loading_bar(uint8_t value, uint8_t x, uint8_t y,
+                                  uint8_t w, uint8_t h) {
+  uint8_t widht = (uint32_t)value * (w - 4) / 100;
+  oled_screen_draw_rect(x, y, w, h, OLED_DISPLAY_NORMAL);
+  oled_screen_draw_box(x + 2, y + 2, widht, h - 4, OLED_DISPLAY_NORMAL);
 }
 
 void oled_screen_fade_out() {
