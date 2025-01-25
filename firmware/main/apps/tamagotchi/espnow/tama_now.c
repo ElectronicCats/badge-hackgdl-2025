@@ -10,7 +10,7 @@
 #include "tama_friends.h"
 
 #define RSSI -100
-#define ADV_RATE_MS 4000
+#define ADV_RATE_MS 2000
 
 #define MAGIC *(uint8_t *)msg->data
 #define CMD *(uint8_t *)((msg->data) + 1)

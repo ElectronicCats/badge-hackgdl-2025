@@ -3,6 +3,7 @@
  *
  * Copyright (C) 2022 Gary Kwok - Arduino Uno Implementation
  * Copyright (C) 2022 Marcel Ochsendorf - ESP32 Plattform Support
+ * Copyright (C) 2025 Roberto Arellano - ESP32 Plattform Support
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -148,13 +149,11 @@ static void tama_app_task() {
 void tama_app_begin() {
   tama_anim_splah_screen();
   tamalib_begin();
-  tama_now_begin();
 
   xTaskCreatePinnedToCore(tama_app_task, "app_task", 4096, NULL, 15, NULL, 0);
 }
 
 void tama_app_exit() {
-  tama_now_deinit();
   tama_display_deinit();
   is_running = false;
   vTaskDelay(pdMS_TO_TICKS(20));

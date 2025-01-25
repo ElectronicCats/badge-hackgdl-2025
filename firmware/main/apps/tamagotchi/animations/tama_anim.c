@@ -7,6 +7,7 @@
 #include "bitmaps.h"
 #include "get_random.h"
 #include "tama_bmps.h"
+#include "tama_scan.h"
 
 static void draw_tama_ui(const char *str) {
   for (uint8_t i = 0; i < 8; i++) {
@@ -82,8 +83,6 @@ void tama_anim_scan() {
   animation.pos_draw_cb = pos_scan_draw;
 
   animations_module_run(animation);
-  // xTaskCreate(time_bar_task, "time_bar_task", 2048, NULL, 3, NULL);
-  vTaskDelay(pdMS_TO_TICKS(100000));
   animations_module_stop();
 }
 
@@ -114,12 +113,14 @@ static void new_friend_anim_shake() {
 
 static void new_friend_exit_cb() {}
 
-void tama_anim_new_friend() {
+void tama_anim_new_friend(void (*new_friend_exit)()) {
   animations_module_ctx_t animation = {0};
   animation.animation = &pinata_new_friend_animation;
   animation.loop = false;
   animation.pos_draw_cb = pos_new_friend_draw;
-  animation.exit_cb = new_friend_exit_cb;
+  animation.exit_cb = new_friend_exit;
 
   animations_module_run(animation);
 }
+
+void tama_anim_stop_any() { animations_module_stop(); }

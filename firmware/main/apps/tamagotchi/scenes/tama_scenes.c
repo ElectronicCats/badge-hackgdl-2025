@@ -10,6 +10,7 @@
 #include "tama_anim.h"
 #include "tama_app.h"
 #include "tama_friends.h"
+#include "tama_scan.h"
 #include "tama_state.h"
 
 #define SPEED 1
@@ -144,7 +145,7 @@ static void friends_menu_handler(uint8_t option) {
   last_friends_selection = option;
   switch (option) {
   case FRIENDS_SCAN:
-    // tama_app_begin();
+    tama_scan_begin();
     break;
   case FRIENDS_LIST:
     tama_friends_show_list();
@@ -159,7 +160,7 @@ void tama_scenes_friends() {
   friends_menu.options_count = sizeof(friends_menu_options) / sizeof(char *);
   friends_menu.selected_option = last_friends_selection;
   friends_menu.select_cb = friends_menu_handler;
-  friends_menu.exit_cb = tama_scenes_friends;
+  friends_menu.exit_cb = tama_scenes_main;
   general_submenu(friends_menu);
 }
 

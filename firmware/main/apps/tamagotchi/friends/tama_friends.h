@@ -1,6 +1,7 @@
 #ifndef _TAMA_FRIENDS_H_
 #define _TAMA_FRIENDS_H_
 
+#include <stdbool.h>
 #include <stdio.h>
 
 #define MAX_FRIENDS 300
@@ -21,10 +22,13 @@ typedef struct {
   uint8_t friends_mac[MAX_FRIENDS][MAC_SIZE];
 } tama_friends_ctx_t;
 
+typedef void (*tama_friend_detected_cb_t)(bool new);
+
 void tama_friends_begin();
 uint16_t tama_friends_get_count();
 void tama_friends_add(const char *friend_name, const uint8_t *friend_mac);
 tama_friends_ctx_t *tama_friends_get_ctx();
 void tama_friends_show_list();
+void tama_friend_set_detected_cb(tama_friend_detected_cb_t cb);
 
 #endif
