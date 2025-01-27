@@ -217,9 +217,10 @@ static const char *tamagotchi_help[] = {
 static const char *nickname_help[] = {
     "You can change", "your pets name", "over terminal", "using the cmd:", "",
     "`tama_nickname'"};
-static const char *friends_help[] = {"Get close to", "other pets",
-                                     "to increase",  "your friends",
-                                     "list & your",  "friends count"};
+static const char *friends_help[] = {
+    "Open the scan", "menu at:",    "FRIENDS->SCAN,",
+    "Get close to",  "other pets",  "to increase",
+    "your friends",  "list & your", "friends count"};
 
 static void help_menu_handler(uint8_t option) {
   last_help_selection = option;
