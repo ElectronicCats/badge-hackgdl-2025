@@ -13,17 +13,33 @@
 void tama_scan_deinit();
 
 static bool scanning = false;
+static bool new_friend_anim = false;
 
 static void on_new_friend_animation_end() {
+  if (!scanning) {
+    return;
+  }
+
   tama_anim_stop_any();
-  vTaskDelay(pdMS_TO_TICKS(500));
   tama_anim_scan();
+  new_friend_anim = false;
 }
 
-static void on_friend_detected(bool new) {
-  tama_anim_stop_any();
-  vTaskDelay(pdMS_TO_TICKS(500));
-  tama_anim_new_friend(on_new_friend_animation_end);
+static void on_friend_detected(char *name, bool new) {
+  if (!scanning) {
+    return;
+  }
+  if (new) {
+    new_friend_anim = true;
+    tama_anim_stop_any();
+    tama_anim_new_friend(on_new_friend_animation_end);
+  } else {
+    if (new_friend_anim) {
+      return;
+    }
+    tama_anim_stop_any();
+    tama_anim_friend(name, on_new_friend_animation_end);
+  }
 }
 
 static void tama_scan_input_cb(uint8_t button, uint8_t event) {
@@ -46,5 +62,6 @@ void tama_scan_deinit() {
   tama_anim_stop_any();
   scanning = false;
   tama_now_deinit();
+  vTaskDelay(pdMS_TO_TICKS(200));
   tama_scenes_friends();
 }

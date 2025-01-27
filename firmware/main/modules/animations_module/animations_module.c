@@ -158,6 +158,17 @@ void animations_module_pause() {
   xSemaphoreGive(anim_mutex);
 }
 
+void animations_module_delete() {
+  animations_module_pause();
+  xSemaphoreTake(anim_mutex, portMAX_DELAY);
+  if (anim_ctx && anim_ctx->task_handle) {
+    vTaskDelete(anim_ctx->task_handle);
+    xSemaphoreGive(anim_mutex);
+    anim_ctx_free();
+  }
+  xSemaphoreGive(anim_mutex);
+}
+
 void animations_module_resume() {
   if (!anim_mutex) {
     ESP_LOGW(TAG, "Run any animation first");

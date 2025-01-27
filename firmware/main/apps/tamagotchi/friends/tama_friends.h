@@ -22,7 +22,7 @@ typedef struct {
   uint8_t friends_mac[MAX_FRIENDS][MAC_SIZE];
 } tama_friends_ctx_t;
 
-typedef void (*tama_friend_detected_cb_t)(bool new);
+typedef void (*tama_friend_detected_cb_t)(char *name, bool new);
 
 void tama_friends_begin();
 uint16_t tama_friends_get_count();

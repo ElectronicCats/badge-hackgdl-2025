@@ -9,14 +9,15 @@
 #include "tama_display.h"
 #include "tama_friends.h"
 
-#define RSSI -100
-#define ADV_RATE_MS 2000
+#define RSSI -50
+#define ADV_RATE_MS 5000
 
 #define MAGIC *(uint8_t *)msg->data
 #define CMD *(uint8_t *)((msg->data) + 1)
 
 static TaskHandle_t adv_task_handler = NULL;
 static bool is_running = false;
+static bool is_active = false;
 
 static void adv_res_send(uint8_t *mac, char *nickname);
 
@@ -67,8 +68,10 @@ static void adv_res_handler(espnow_conn_rx_data_t *msg) {
 /////////////////////////////////////////////////////////////
 
 static void cmd_handler(espnow_conn_rx_data_t *msg) {
-  if (MAGIC != TAMA_NOW_MAGIC) // || msg->rx_info->rx_ctrl->rssi < RSSI)
-  {
+  if (!is_active) {
+    return;
+  }
+  if (MAGIC != TAMA_NOW_MAGIC || msg->rx_info->rx_ctrl->rssi < RSSI) {
     return;
   }
   switch (CMD) {
@@ -97,6 +100,7 @@ void tama_now_begin() {
     is_running = true;
     espnow_conn_begin();
   }
+  is_active = true;
   espnow_conn_set_rx_cb(cmd_handler);
 
   xTaskCreate(adv_task, "adv_task", 2048, NULL, 5, &adv_task_handler);
@@ -104,7 +108,7 @@ void tama_now_begin() {
 
 void tama_now_deinit() {
   vTaskDelete(adv_task_handler);
-
+  is_active = false;
   // espnow_conn_set_rx_cb(NULL);
   // espnow_conn_deinit();
 }

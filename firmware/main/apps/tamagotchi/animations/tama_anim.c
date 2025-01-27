@@ -1,5 +1,7 @@
 #include "tama_anim.h"
 
+#include <string.h>
+
 #include "animation_t.h"
 #include "animations_module.h"
 #include "oled_screen.h"
@@ -9,7 +11,12 @@
 #include "tama_bmps.h"
 #include "tama_scan.h"
 
+static char friend_detected_name[13];
+
 static void draw_tama_ui(const char *str) {
+  if (!str) {
+    return;
+  }
   for (uint8_t i = 0; i < 8; i++) {
     oled_screen_buffer_bitmap(bitmaps + i * 18, i / 4 ? 109 : -9,
                               i % 4 * 16 + 6, 16, 9, OLED_DISPLAY_NORMAL);
@@ -17,7 +24,9 @@ static void draw_tama_ui(const char *str) {
   oled_screen_draw_rect(12, 8, 103, 55, OLED_DISPLAY_NORMAL);
   oled_screen_draw_box(12, 0, 103, 8, OLED_DISPLAY_NORMAL);
   oled_screen_display_text_center(str, 0, OLED_DISPLAY_INVERT);
-  oled_screen_draw_vline(100, 1, 7, OLED_DISPLAY_INVERT);
+  if (str[11] == 'x') {
+    oled_screen_draw_vline(100, 1, 7, OLED_DISPLAY_INVERT);
+  }
 }
 
 const uint16_t pinata_splash_order[] = {9, 10, 11};
@@ -83,7 +92,6 @@ void tama_anim_scan() {
   animation.pos_draw_cb = pos_scan_draw;
 
   animations_module_run(animation);
-  animations_module_stop();
 }
 
 ////////////////////// NEW FRIEND ANIM /////////////////////
@@ -120,7 +128,34 @@ void tama_anim_new_friend(void (*new_friend_exit)()) {
   animation.pos_draw_cb = pos_new_friend_draw;
   animation.exit_cb = new_friend_exit;
 
+  xTaskCreate(new_friend_anim_shake, "shake_task", 2048, NULL, 3, NULL);
   animations_module_run(animation);
 }
 
-void tama_anim_stop_any() { animations_module_stop(); }
+////////////////////// FRIEND ANIM /////////////////////
+const uint16_t pinata_friend_order[] = {0, 5, 0, 5, 0};
+const uint32_t pinata_friend_durations_ms[] = {600, 600, 600, 600, 600};
+
+const animation_t pinata_friend_animation = {
+    .bitmaps = pinata_bitmaps,
+    .bitmaps_len = sizeof(pinata_bitmaps) / sizeof(bitmap_t),
+    .order = pinata_friend_order,
+    .duration_ms = pinata_friend_durations_ms,
+    .frames_len = MIN(sizeof(pinata_friend_order) / sizeof(uint16_t),
+                      sizeof(pinata_friend_durations_ms) / sizeof(uint32_t))};
+
+static void pos_friend_draw() { draw_tama_ui(friend_detected_name); }
+
+void tama_anim_friend(char *name, void (*friend_exit)()) {
+  strncpy(friend_detected_name, name, 13);
+
+  animations_module_ctx_t animation = {0};
+  animation.animation = &pinata_friend_animation;
+  animation.loop = false;
+  animation.pos_draw_cb = pos_friend_draw;
+  animation.exit_cb = friend_exit;
+
+  animations_module_run(animation);
+}
+
+void tama_anim_stop_any() { animations_module_delete(); }

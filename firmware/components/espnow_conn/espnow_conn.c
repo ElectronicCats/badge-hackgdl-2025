@@ -44,9 +44,6 @@ static void espnow_recv_cb(const esp_now_recv_info_t *recv_info,
   uint8_t *mac_addr = recv_info->src_addr;
   uint8_t *des_addr = recv_info->des_addr;
 
-  // dump_mac(des_addr, "DES MAC");
-  // dump_mac(mac_addr, "SRC MAC");
-
   espnow_conn_rx_data_t msg = {0};
   msg.rx_info = recv_info;
   msg.data = data;

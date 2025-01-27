@@ -28,6 +28,7 @@ void animations_module_run(animations_module_ctx_t ctx);
 void animations_module_stop();
 void animations_module_resume();
 void animations_module_pause();
+void animations_module_delete();
 void animations_module_set_pos(uint8_t x, uint8_t y);
 
 #endif // ANIMATIONS_MODULE_H_

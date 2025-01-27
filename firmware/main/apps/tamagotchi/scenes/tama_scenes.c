@@ -9,6 +9,7 @@
 
 #include "tama_anim.h"
 #include "tama_app.h"
+#include "tama_display.h"
 #include "tama_friends.h"
 #include "tama_scan.h"
 #include "tama_state.h"
@@ -72,7 +73,7 @@ void tama_scenes_main() {
   main_menu.options_count = sizeof(main_menu_options) / sizeof(char *);
   main_menu.selected_option = last_main_selection;
   main_menu.select_cb = tama_scenes_handler;
-  main_menu.exit_cb = menus_module_exit_app;
+  main_menu.exit_cb = menus_module_restart;
   general_submenu(main_menu);
 }
 
@@ -145,6 +146,7 @@ static void friends_menu_handler(uint8_t option) {
   last_friends_selection = option;
   switch (option) {
   case FRIENDS_SCAN:
+    tama_display_load_nickname();
     tama_scan_begin();
     break;
   case FRIENDS_LIST:

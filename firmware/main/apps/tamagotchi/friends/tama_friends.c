@@ -28,9 +28,11 @@ static void dump_tama_friends_ctx(tama_friends_ctx_t *ctx) {
   }
 }
 
-static bool friend_exists(const uint8_t *mac) {
+static bool friend_exists(const uint8_t *mac, int8_t *friend_idx) {
+  *friend_idx = -1;
   for (int i = 0; i < tama_friends_ctx->friends_count; i++) {
     if (!memcmp(tama_friends_ctx->friends_mac[i], mac, MAC_SIZE)) {
+      *friend_idx = i;
       return true;
     }
   }
@@ -73,7 +75,7 @@ void tama_friends_begin() {
   preferences_get_bytes(FRIENDS_MAC_MEM, tama_friends_ctx->friends_mac,
                         FRIENDS_MAC_SIZE);
   tama_friends_ctx->friends_count = tama_friends_get_count();
-  dump_tama_friends_ctx(tama_friends_ctx);
+  // dump_tama_friends_ctx(tama_friends_ctx);
 }
 
 void tama_friends_add(const char *friend_name, const uint8_t *friend_mac) {
@@ -85,21 +87,19 @@ void tama_friends_add(const char *friend_name, const uint8_t *friend_mac) {
     return;
   }
   // friend_detected_cb(false);
-  if (friend_exists(friend_mac)) {
-    friend_detected_cb(false);
-    strncpy(tama_friends_ctx->friends_str[tama_friends_ctx->friends_count],
-            friend_name, STR_SIZE);
+  int8_t friend_idx;
+  if (friend_exists(friend_mac, &friend_idx)) {
+    friend_detected_cb(friend_name, false);
+    strncpy(tama_friends_ctx->friends_str[friend_idx], friend_name, STR_SIZE);
     preferences_put_bytes(FRIENDS_STR_MEM, tama_friends_ctx->friends_str,
                           FRIENDS_STR_SIZE);
     return;
   }
-  friend_detected_cb(true);
-
+  friend_detected_cb(friend_name, true);
   strncpy(tama_friends_ctx->friends_str[tama_friends_ctx->friends_count],
           friend_name, STR_SIZE);
   memcpy(tama_friends_ctx->friends_mac[tama_friends_ctx->friends_count],
          friend_mac, MAC_SIZE);
-
   tama_friends_ctx->friends_count++;
 
   preferences_put_uchar(MAGIC_FRIEND_MEM, MAGIC_FRIEND_NUM);
