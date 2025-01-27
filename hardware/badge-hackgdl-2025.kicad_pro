@@ -189,6 +189,7 @@
       "track_widths": [
         0.0,
         0.2,
+        0.25,
         0.3,
         0.4,
         0.5
@@ -525,7 +526,7 @@
       "plot": "Gerbers2/",
       "pos_files": "",
       "specctra_dsn": "",
-      "step": "../../../TestingKiCAD/nuevos botones.step",
+      "step": "../../../TestingKiCAD/NewHole.step",
       "svg": "",
       "vrml": ""
     },
