@@ -215,8 +215,8 @@ static const char *tamagotchi_help[] = {
     "-jcrona",       "-Otrebor671",   "To activate",  "your pet,",
     "configure the", "clock by",      "pressing the", "middle button"};
 static const char *nickname_help[] = {
-    "You can change", "your pets name", "over terminal", "using the cmd:", "",
-    "`tama_nickname'"};
+    "Connect to your", "computer, open", "the serial port", "and change your",
+    "pet's nickname",  "by using the",   "next command:",   "`tama_nickname'"};
 static const char *friends_help[] = {
     "Open the scan", "menu at:",    "FRIENDS->SCAN,",
     "Get close to",  "other pets",  "to increase",
