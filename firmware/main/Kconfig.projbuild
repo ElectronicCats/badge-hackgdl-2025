@@ -273,6 +273,8 @@ menu "General project"
 
 		choice DRIVER
 			prompt "Driver"
+			default SSD1306 if IDF_TARGET_ESP32S3
+			default SH1106 if IDF_TARGET_ESP32C6
 			default SSD1306
 			help
 				Select Driver.
@@ -455,24 +457,28 @@ menu "General project"
 			int "GPIO BACK Button Pin"
 			range 0 GPIO_RANGE_MAX
 			default 5 if IDF_TARGET_ESP32S3
+			default 23 if IDF_TARGET_ESP32C6
 			help
 				Select the GPIO pin number for the BACK button.
 		config GPIO_LEFT_BUTTON
 			int "GPIO LEFT Button Pin"
 			range 0 GPIO_RANGE_MAX
 			default 17 if IDF_TARGET_ESP32S3
+			default 22 if IDF_TARGET_ESP32C6
 			help
 				Select the GPIO pin number for the LEFT button.
 		config GPIO_MIDDLE_BUTTON
 			int "GPIO MIDDLE Button Pin"
 			range 0 GPIO_RANGE_MAX
 			default 18 if IDF_TARGET_ESP32S3
+			default 15 if IDF_TARGET_ESP32C6
 			help
 				Select the GPIO pin number for the MIDDLE button.
 		config GPIO_RIGHT_BUTTON
 			int "GPIO RIGHT Button Pin"
 			range 0 GPIO_RANGE_MAX
 			default 12 if IDF_TARGET_ESP32S3
+			default 1 if IDF_TARGET_ESP32C6
 			help
 				Select the GPIO pin number for the RIGHT button.
 	endmenu
@@ -481,17 +487,21 @@ menu "General project"
 
 		menu "Hardware components"
 	
-			config LEDS_COMPONENT_ENABLED
-				bool "Enable LEDs component"
-				default true
+			config GPIO_NEOPIXEL
+				int "Neopixel GPIO Pin"
+				range 0 GPIO_RANGE_MAX
+				default 10 if IDF_TARGET_ESP32S3
+				default 11 if IDF_TARGET_ESP32C6
 				help
-					Enable the LEDs component.
+					Select the GPIO pin number for Neopixel.
 	
-			config BUZZER_COMPONENT_ENABLED
-				bool "Enable buzzer component"
-				default true
+			config GPIO_BUZZER
+				int "Buzzer GPIO Pin"
+				range 0 GPIO_RANGE_MAX
+				default 13 if IDF_TARGET_ESP32S3
+				default 2 if IDF_TARGET_ESP32C6
 				help
-					Enable the buzzer component.
+					Select the GPIO pin number for the Buzzer.
 		endmenu
 	endmenu
 

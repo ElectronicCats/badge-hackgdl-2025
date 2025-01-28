@@ -8,7 +8,7 @@
 #include "oled_screen.h"
 #include "preferences.h"
 
-#define PIN_BUZZER GPIO_NUM_2
+#define PIN_BUZZER CONFIG_GPIO_BUZZER
 
 void app_main(void) {
   buzzer_begin(PIN_BUZZER);
