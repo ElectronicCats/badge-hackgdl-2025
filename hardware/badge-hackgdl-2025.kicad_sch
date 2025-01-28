@@ -6212,7 +6212,7 @@
 						(type default)
 					)
 					(fill
-						(type outline)
+						(type none)
 					)
 				)
 				(arc
@@ -6224,7 +6224,7 @@
 						(type default)
 					)
 					(fill
-						(type none)
+						(type outline)
 					)
 				)
 				(arc
@@ -17270,7 +17270,7 @@
 				)
 			)
 		)
-		(property "Value" "ESP32-S3-WROOM-1-N16"
+		(property "Value" "ESP32-S3-WROOM-1-N4"
 			(at 212.09 16.51 0)
 			(effects
 				(font
