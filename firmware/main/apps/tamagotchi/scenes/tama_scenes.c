@@ -10,7 +10,6 @@
 #include "tama_anim.h"
 #include "tama_app.h"
 #include "tama_display.h"
-#include "tama_friends.h"
 #include "tama_scan.h"
 #include "tama_state.h"
 
@@ -20,7 +19,7 @@
 void tama_scenes_main();
 void tama_scenes_speed();
 void tama_scenes_friends();
-void tama_scenes_friends_list(char **list_arr);
+void tama_scenes_friends_list(tama_friends_ctx_t *ctx);
 void tama_scenes_help();
 
 static void tama_scenes_erase();
@@ -175,7 +174,7 @@ static void friends_list_exit() {
   tama_scenes_friends();
 }
 
-void tama_scenes_friends_list(char **list_arr) {
+void tama_scenes_friends_list(tama_friends_ctx_t *ctx) {
   general_scrolling_text_ctx list = {0};
 
   static char list_banner[20];
@@ -184,7 +183,7 @@ void tama_scenes_friends_list(char **list_arr) {
 
   friends_list = calloc(friends_count, sizeof(char *));
   for (uint16_t i = 0; i < friends_count; i++) {
-    friends_list[i] = &list_arr[i];
+    friends_list[i] = ctx->friends_str[i];
   }
 
   list.banner = list_banner;

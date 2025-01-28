@@ -86,7 +86,6 @@ void tama_friends_add(const char *friend_name, const uint8_t *friend_mac) {
   if (!memcmp(friend_mac, empty_mac, MAC_SIZE)) {
     return;
   }
-  // friend_detected_cb(false);
   int8_t friend_idx;
   if (friend_exists(friend_mac, &friend_idx)) {
     friend_detected_cb(friend_name, false);
@@ -111,9 +110,7 @@ void tama_friends_add(const char *friend_name, const uint8_t *friend_mac) {
 
 tama_friends_ctx_t *tama_friends_get_ctx() { return tama_friends_ctx; }
 
-void tama_friends_show_list() {
-  tama_scenes_friends_list(tama_friends_ctx->friends_str);
-}
+void tama_friends_show_list() { tama_scenes_friends_list(tama_friends_ctx); }
 
 void tama_friend_set_detected_cb(tama_friend_detected_cb_t cb) {
   friend_detected_cb = cb;
