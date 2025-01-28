@@ -37,8 +37,7 @@ const animation_t pinata_splash_animation = {
     .bitmaps_len = sizeof(pinata_bitmaps) / sizeof(bitmap_t),
     .order = pinata_splash_order,
     .duration_ms = pinata_splash_durations_ms,
-    .frames_len = MIN(sizeof(pinata_splash_order) / sizeof(uint16_t),
-                      sizeof(pinata_splash_durations_ms) / sizeof(uint32_t))};
+    .frames_len = sizeof(pinata_splash_order) / sizeof(uint16_t)};
 
 static void pos_splash_screen_draw() { draw_tama_ui("Loading... x"); }
 
@@ -80,8 +79,7 @@ const animation_t pinata_scan_animation = {
     .bitmaps_len = sizeof(pinata_bitmaps) / sizeof(bitmap_t),
     .order = pinata_scan_order,
     .duration_ms = pinata_scan_durations_ms,
-    .frames_len = MIN(sizeof(pinata_scan_order) / sizeof(uint16_t),
-                      sizeof(pinata_scan_durations_ms) / sizeof(uint32_t))};
+    .frames_len = sizeof(pinata_scan_order) / sizeof(uint16_t)};
 
 static void pos_scan_draw() { draw_tama_ui("Scanning.. x"); }
 
@@ -105,9 +103,7 @@ const animation_t pinata_new_friend_animation = {
     .bitmaps_len = sizeof(pinata_bitmaps) / sizeof(bitmap_t),
     .order = pinata_new_friend_order,
     .duration_ms = pinata_new_friend_durations_ms,
-    .frames_len =
-        MIN(sizeof(pinata_new_friend_order) / sizeof(uint16_t),
-            sizeof(pinata_new_friend_durations_ms) / sizeof(uint32_t))};
+    .frames_len = sizeof(pinata_new_friend_order) / sizeof(uint16_t)};
 
 static void pos_new_friend_draw() { draw_tama_ui("New Friend x"); }
 
@@ -141,8 +137,7 @@ const animation_t pinata_friend_animation = {
     .bitmaps_len = sizeof(pinata_bitmaps) / sizeof(bitmap_t),
     .order = pinata_friend_order,
     .duration_ms = pinata_friend_durations_ms,
-    .frames_len = MIN(sizeof(pinata_friend_order) / sizeof(uint16_t),
-                      sizeof(pinata_friend_durations_ms) / sizeof(uint32_t))};
+    .frames_len = sizeof(pinata_friend_order) / sizeof(uint16_t)};
 
 static void pos_friend_draw() { draw_tama_ui(friend_detected_name); }
 
