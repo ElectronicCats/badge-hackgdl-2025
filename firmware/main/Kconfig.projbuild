@@ -273,8 +273,7 @@ menu "General project"
 
 		choice DRIVER
 			prompt "Driver"
-			default SSD1306 if BOARD_BADGE
-			default SH1106 if BOARD_MININO
+			default SSD1306
 			help
 				Select Driver.
 			config SSD1306
@@ -289,8 +288,7 @@ menu "General project"
 
 		choice RESOLUTION
 			prompt "Panel resolution"
-			default RESOLUTION_128X32 if BOARD_BADGE
-			default RESOLUTION_128X64 if BOARD_MININO
+			default RESOLUTION_128X64
 			help
 				Select Panel resolution.
 			config RESOLUTION_128X32
@@ -315,7 +313,7 @@ menu "General project"
 			range 0 GPIO_RANGE_MAX
 			default 22 if IDF_TARGET_ESP32
 			default 12 if IDF_TARGET_ESP32S2
-			default 12 if IDF_TARGET_ESP32S3
+			default 9 if IDF_TARGET_ESP32S3
 			default 7 if IDF_TARGET_ESP32C6
 			default  6 # C3 and others
 			help
@@ -329,7 +327,7 @@ menu "General project"
 			range 0 GPIO_RANGE_MAX
 			default 21 if IDF_TARGET_ESP32
 			default 11 if IDF_TARGET_ESP32S2
-			default 11 if IDF_TARGET_ESP32S3
+			default 8 if IDF_TARGET_ESP32S3
 			default 6 if IDF_TARGET_ESP32C6
 			default  5 # C3 and others
 			help
@@ -456,21 +454,25 @@ menu "General project"
 		config GPIO_BACK_BUTTON
 			int "GPIO BACK Button Pin"
 			range 0 GPIO_RANGE_MAX
+			default 5 if IDF_TARGET_ESP32S3
 			help
 				Select the GPIO pin number for the BACK button.
 		config GPIO_LEFT_BUTTON
 			int "GPIO LEFT Button Pin"
 			range 0 GPIO_RANGE_MAX
+			default 17 if IDF_TARGET_ESP32S3
 			help
 				Select the GPIO pin number for the LEFT button.
 		config GPIO_MIDDLE_BUTTON
 			int "GPIO MIDDLE Button Pin"
 			range 0 GPIO_RANGE_MAX
+			default 18 if IDF_TARGET_ESP32S3
 			help
 				Select the GPIO pin number for the MIDDLE button.
 		config GPIO_RIGHT_BUTTON
 			int "GPIO RIGHT Button Pin"
 			range 0 GPIO_RANGE_MAX
+			default 12 if IDF_TARGET_ESP32S3
 			help
 				Select the GPIO pin number for the RIGHT button.
 	endmenu
