@@ -459,17 +459,17 @@ menu "General project"
 			help
 				Select the GPIO pin number for the BACK button.
 		config GPIO_LEFT_BUTTON
-			int "GPIO RIGHT Button Pin"
+			int "GPIO LEFT Button Pin"
 			range 0 GPIO_RANGE_MAX
 			help
 				Select the GPIO pin number for the LEFT button.
 		config GPIO_MIDDLE_BUTTON
-			int "GPIO UP Button Pin"
+			int "GPIO MIDDLE Button Pin"
 			range 0 GPIO_RANGE_MAX
 			help
 				Select the GPIO pin number for the MIDDLE button.
 		config GPIO_RIGHT_BUTTON
-			int "GPIO DOWN Button Pin"
+			int "GPIO RIGHT Button Pin"
 			range 0 GPIO_RANGE_MAX
 			help
 				Select the GPIO pin number for the RIGHT button.
