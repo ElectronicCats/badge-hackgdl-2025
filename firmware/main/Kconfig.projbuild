@@ -498,7 +498,7 @@ menu "General project"
 			config GPIO_BUZZER
 				int "Buzzer GPIO Pin"
 				range 0 GPIO_RANGE_MAX
-				default 13 if IDF_TARGET_ESP32S3
+				default 11 if IDF_TARGET_ESP32S3
 				default 2 if IDF_TARGET_ESP32C6
 				help
 					Select the GPIO pin number for the Buzzer.

@@ -39,7 +39,9 @@ void neopixel_scanning_event() {
 void neopixel_events_stop_event() {
   neopixels_set_pixels(MAX_LED_NUMBER, 0, 0, 0);
   neopixels_refresh();
-  vTaskDelete(neopixel_event_handler);
+  if (neopixel_event_handler) {
+    vTaskDelete(neopixel_event_handler);
+  }
   neopixel_event_handler = NULL;
 }
 

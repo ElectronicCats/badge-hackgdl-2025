@@ -55,6 +55,8 @@ static void deauth_run_scan_task();
 static void deauth_handle_attacks();
 
 static void scanning_task() {
+  neopixel_events_run_event(neopixel_scanning_event);
+  menus_module_disable_input();
   uint8_t scan_count = 0;
   while (ap_records->count < (DEFAULT_SCAN_LIST_SIZE / 2) &&
          scan_count < SCAN_RETRIES) {
@@ -68,9 +70,10 @@ static void scanning_task() {
 
   ESP_LOGI("deauth", "Scanning done: %d", ap_records->count);
   // deauth_display_menu(current_item, menu_stadistics);
-  deauth_scenes_main_menu();
   current_wifi_state.state = DEAUTH_STATE_MENU;
   neopixel_events_stop_event();
+  menus_module_enable_input();
+  deauth_scenes_main_menu();
   // led_control_stop();
   vTaskDelete(NULL);
 }
@@ -139,7 +142,6 @@ void deauth_module_begin() {
   // menu_stadistics.attack = 99;
 
   // led_control_run_effect(led_control_wifi_scanning);
-  neopixel_events_run_event(neopixel_scanning_event);
 }
 
 void deauth_module_scan() {
