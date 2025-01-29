@@ -1,5 +1,6 @@
 #include "menus_screens.h"
 
+#include "general_notification.h"
 #include "menus.h"
 #include "menus_icons.h"
 #include "oled_screen.h"
@@ -33,4 +34,10 @@ void menus_screens_display_menus(menus_manager_t *ctx) {
   oled_screen_display_text_center(parent_name, 0, OLED_DISPLAY_INVERT);
   oled_screen_display_text_center(display_name, 6, OLED_DISPLAY_NORMAL);
   oled_screen_display_show();
+}
+
+void menus_screens_show_exiting() {
+  general_notification_ctx_t exiting = {0};
+  exiting.body = "Exiting...";
+  general_notification(exiting);
 }

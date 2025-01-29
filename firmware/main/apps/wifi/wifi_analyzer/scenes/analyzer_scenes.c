@@ -43,7 +43,7 @@ static void main_menu_selection_handler(uint8_t selection) {
   }
 }
 
-static void main_menu_exit_handler() { menus_module_exit_app(); }
+static void main_menu_exit_handler() { menus_module_restart(); }
 
 void analyzer_scenes_main_menu() {
   current_scene = ANALYZER_MAIN_SCENE;

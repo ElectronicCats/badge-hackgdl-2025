@@ -72,7 +72,7 @@ static void main_menu_handler(uint8_t selection) {
   }
 }
 
-static void main_menu_exit() { menus_module_exit_app(); }
+static void main_menu_exit() { menus_module_restart(); }
 
 void detector_scenes_main_menu() {
   general_submenu_menu_t main_menu = {0};
