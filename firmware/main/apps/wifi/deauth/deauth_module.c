@@ -55,6 +55,7 @@ static void deauth_run_scan_task();
 static void deauth_handle_attacks();
 
 static void scanning_task() {
+  vTaskDelay(20);
   neopixel_events_run_event(neopixel_scanning_event);
   menus_module_disable_input();
   uint8_t scan_count = 0;
@@ -134,7 +135,7 @@ void deauth_module_begin() {
   }
   ap_records->count = 0;
 
-  xTaskCreate(scanning_task, "wifi_scan", 4096, NULL, 5, NULL);
+  xTaskCreate(scanning_task, "wifi_scan", 8096, NULL, 5, NULL);
   deauth_run_scan_task();
 
   // menus_module_set_app_state(true, deauth_module_cb_event);

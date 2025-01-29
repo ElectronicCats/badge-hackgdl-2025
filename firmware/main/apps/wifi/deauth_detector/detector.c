@@ -98,7 +98,7 @@ void deauth_detector_begin() {
   esp_wifi_set_channel(current_channel, WIFI_SECOND_CHAN_NONE);
   running = true;
   if (channel_hopping) {
-    xTaskCreate(channel_hopper, "channel_hopper", 2048, NULL, 10, NULL);
+    xTaskCreate(channel_hopper, "channel_hopper", 4096, NULL, 10, NULL);
   }
 }
 
