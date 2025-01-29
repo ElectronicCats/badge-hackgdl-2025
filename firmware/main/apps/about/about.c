@@ -17,8 +17,9 @@ static uint8_t last_main_selection = 0;
 static char *credits_text[] = {
     "Developed by",   "Electronic Cats", "",
     "With love from", "Mexico...",       "",
-    "Thanks",         "-Roberto:",       "  Otrebor671",
+    "Thanks",         "-Roberto A.S:",   "  Otrebor671",
     "Thanks",         "-Carlos Adonai:", "  Donuts Diaz",
+    "Thanks",         "-Carlos A:",      "  xpeqex",
     "Thanks",         "-JeanCristophe:", "  jcrona",
     "and Electronic", "Cats team",
 };
@@ -49,7 +50,7 @@ static void about_main_handler(uint8_t selection) {
     show_notification("License", "GNU GPL 3.0");
     break;
   case ABOUT_CREDITS:
-    show_scrolling_text("Creditos", credits_text,
+    show_scrolling_text("Credits", credits_text,
                         sizeof(credits_text) / sizeof(char *));
     break;
   case ABOUT_LEGAL:

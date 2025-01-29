@@ -8,14 +8,13 @@
 #define LEDC_TIMER LEDC_TIMER_1
 #define LEDC_MODE LEDC_LOW_SPEED_MODE
 #define LEDC_CHANNEL LEDC_CHANNEL_2
-#define LEDC_DUTY_RES LEDC_TIMER_13_BIT    // Set duty resolution to 13 bits
-#define BUZZER_DEFAULT_DUTTY (4096)        // Set duty to 50%. (2 ** 13) * 50% = 4096
+#define LEDC_DUTY_RES LEDC_TIMER_13_BIT // Set duty resolution to 13 bits
+#define BUZZER_DEFAULT_DUTTY (4096) // Set duty to 50%. (2 ** 13) * 50% = 4096
 #define BUZZER_DEFAULT_FREQUENCY_HZ (4000) // Set frequency at 4 kHz
 
 static const char *TAG = "buzzer";
 
-typedef struct
-{
+typedef struct {
   uint8_t pin;
   uint32_t freq;
   uint32_t duty;
@@ -24,25 +23,17 @@ typedef struct
 
 static buzzer_t buzzer;
 
-void buzzer_enable()
-{
-  buzzer.enabled = true;
-}
+void buzzer_enable() { buzzer.enabled = true; }
 
-void buzzer_disable()
-{
-  buzzer.enabled = false;
-}
+void buzzer_disable() { buzzer.enabled = false; }
 
-void buzzer_begin(uint8_t pin)
-{
+void buzzer_begin(uint8_t pin) {
   buzzer.pin = pin;
   buzzer.freq = BUZZER_DEFAULT_FREQUENCY_HZ;
   buzzer.duty = BUZZER_DEFAULT_DUTTY;
 }
 
-void buzzer_configure()
-{
+void buzzer_configure() {
   // Prepare and then apply the LEDC PWM timer configuration
   ledc_timer_config_t ledc_timer = {.speed_mode = LEDC_MODE,
                                     .duty_resolution = LEDC_DUTY_RES,
@@ -62,18 +53,11 @@ void buzzer_configure()
   ESP_ERROR_CHECK(ledc_channel_config(&ledc_channel));
 }
 
-void buzzer_set_freq(uint32_t freq)
-{
-  buzzer.freq = freq;
-}
+void buzzer_set_freq(uint32_t freq) { buzzer.freq = freq; }
 
-void buzzer_set_duty(uint32_t duty)
-{
-  buzzer.duty = duty;
-}
+void buzzer_set_duty(uint32_t duty) { buzzer.duty = duty; }
 
-void buzzer_play()
-{
+void buzzer_play() {
   buzzer_enable();
   buzzer_configure();
   // Set the duty cycle
@@ -81,8 +65,7 @@ void buzzer_play()
   ESP_ERROR_CHECK(ledc_update_duty(LEDC_MODE, LEDC_CHANNEL));
 }
 
-void buzzer_play_for_task(void *duration)
-{
+void buzzer_play_for_task(void *duration) {
   uint32_t dur = *(uint32_t *)duration;
   buzzer_play();
   vTaskDelay(*(uint32_t *)duration / portTICK_PERIOD_MS);
@@ -90,18 +73,15 @@ void buzzer_play_for_task(void *duration)
   vTaskDelete(NULL);
 }
 
-void buzzer_play_for(uint32_t duration)
-{
+void buzzer_play_for(uint32_t duration) {
   uint32_t *duration_ptr = malloc(sizeof(uint32_t));
   *duration_ptr = duration;
-  xTaskCreate(buzzer_play_for_task, "buzzer_play_for_task", 2048, duration_ptr,
+  xTaskCreate(buzzer_play_for_task, "buzzer_play_for_task", 4096, duration_ptr,
               5, NULL);
 }
 
-void buzzer_stop()
-{
-  if (!buzzer.enabled)
-  {
+void buzzer_stop() {
+  if (!buzzer.enabled) {
     return;
   }
   buzzer_disable();
