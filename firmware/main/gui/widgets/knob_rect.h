@@ -36,5 +36,6 @@ int16_t knob_rect_increase_step(knob_rect_t *knob);
 int16_t knob_rect_decrease_step(knob_rect_t *knob);
 
 void knob_rect_draw(knob_rect_t *knob);
+void knob_rect_set_focus(knob_rect_t *knob, bool focused);
 
 #endif // _KNOB_RECT_H_

@@ -43,7 +43,7 @@ static void pos_splash_screen_draw() { draw_tama_ui("Loading... x"); }
 
 static void time_bar_task() {
   for (uint8_t i = 0; i < 100; i++) {
-    oled_screen_draw_loading_bar(i + 1, 15, 55, 97, 5);
+    oled_screen_draw_loading_bar(i + 1, 15, 55, 97, 5, OLED_DISPLAY_NORMAL);
     oled_screen_display_show();
   }
 

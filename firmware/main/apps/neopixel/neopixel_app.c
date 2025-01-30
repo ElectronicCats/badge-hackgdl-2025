@@ -11,14 +11,7 @@ static uint8_t main_last_selection = 0;
 
 void neopixel_app();
 
-static void build_neopixel_ctr(uint8_t idx) {
-  neopixel_ctrl_t npx_ctrl = {0};
-  npx_ctrl.buf = neopixels_buffer;
-  npx_ctrl.npx_idx = idx;
-  npx_ctrl.exit_cb = neopixel_app;
-
-  neopixel_ctrl(npx_ctrl);
-}
+static void build_neopixel_ctr(uint8_t idx);
 
 typedef enum { NEOPIXEL_OPTION, PRESETS_OPTION = 3 } neopixel_options_e;
 
@@ -49,3 +42,13 @@ void neopixel_app() {
 }
 
 uint8_t *neopixel_app_get_buffer() { return neopixels_buffer; }
+
+static void build_neopixel_ctr(uint8_t idx) {
+  neopixel_ctrl_t npx_ctrl = {0};
+  npx_ctrl.title = main_options[idx];
+  npx_ctrl.buf = neopixels_buffer;
+  npx_ctrl.npx_idx = idx;
+  npx_ctrl.exit_cb = neopixel_app;
+
+  neopixel_ctrl(npx_ctrl);
+}

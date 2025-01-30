@@ -67,10 +67,11 @@ void knob_rect_draw(knob_rect_t *knob) {
                            100);
 
   oled_screen_draw_loading_bar(fill, knob->transform.x, knob->transform.y,
-                               knob->transform.width, knob->transform.height);
+                               knob->transform.width, knob->transform.height,
+                               knob->focused);
 }
 
-void knob_rect_set_focus(knob_rect_t *knob) {
-  knob->focused = true;
+void knob_rect_set_focus(knob_rect_t *knob, bool focused) {
+  knob->focused = focused;
   knob_rect_draw(knob);
 }

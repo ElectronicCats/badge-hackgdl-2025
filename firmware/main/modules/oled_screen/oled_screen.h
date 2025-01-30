@@ -127,7 +127,7 @@ void oled_screen_display_text_splited(char *p_text, int *p_started_page,
                                       int invert);
 
 void oled_screen_draw_loading_bar(uint8_t value, uint8_t x, uint8_t y,
-                                  uint8_t w, uint8_t h);
+                                  uint8_t w, uint8_t h, bool invert);
 void oled_screen_display_card_border();
 void oled_screen_clear_buffer();
 void oled_screen_display_show();

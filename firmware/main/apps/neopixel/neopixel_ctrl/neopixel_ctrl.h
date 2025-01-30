@@ -7,6 +7,7 @@
 #include "neopixels_t.h"
 
 typedef struct {
+  const char *title;
   uint8_t npx_idx;
   uint8_t _color_idx;
   uint8_t *buf;

@@ -224,10 +224,14 @@ void oled_screen_display_text_splited(char *p_text, int *p_started_page,
 }
 
 void oled_screen_draw_loading_bar(uint8_t value, uint8_t x, uint8_t y,
-                                  uint8_t w, uint8_t h) {
+                                  uint8_t w, uint8_t h, bool invert) {
   uint8_t widht = (uint32_t)value * (w - 4) / 100;
-  oled_screen_draw_rect(x, y, w, h, OLED_DISPLAY_NORMAL);
-  oled_screen_draw_box(x + 2, y + 2, widht, h - 4, OLED_DISPLAY_NORMAL);
+  if (invert) {
+    oled_screen_draw_box(x, y, w, h, OLED_DISPLAY_NORMAL);
+  } else {
+    oled_screen_draw_rect(x, y, w, h, OLED_DISPLAY_NORMAL);
+  }
+  oled_screen_draw_box(x + 2, y + 2, widht, h - 4, invert);
 }
 
 void oled_screen_fade_out() {
