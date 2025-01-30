@@ -4,6 +4,8 @@
 #include "menus_module.h"
 #include "oled_screen.h"
 
+#include "neopixels_module.h"
+
 #define COLORS_COUNT 3
 
 static neopixel_ctrl_t *npx_ctx = NULL;
@@ -47,6 +49,10 @@ static void draw_cb() {
 
 static void on_color_changed(int16_t value) {
   npx_ctx->buf[npx_ctx->npx_idx * COLORS_COUNT + npx_ctx->_color_idx] = value;
+  neopixels_set_pixel(npx_ctx->npx_idx, npx_ctx->buf[npx_ctx->npx_idx * 3],
+                      npx_ctx->buf[npx_ctx->npx_idx * 3 + 1],
+                      npx_ctx->buf[npx_ctx->npx_idx * 3 + 2]);
+  neopixels_refresh();
 }
 
 static void input_cb(uint8_t button, uint8_t event) {
