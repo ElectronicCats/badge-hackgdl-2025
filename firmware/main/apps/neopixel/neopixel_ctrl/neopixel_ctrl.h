@@ -7,11 +7,14 @@
 #include "neopixels_t.h"
 
 typedef struct {
-  neopixel_t neopixel;
-  knob_rect_t *r;
-  knob_rect_t *g;
-  knob_rect_t *b;
-  uint8_t current_idx;
+  uint8_t npx_idx;
+  uint8_t _color_idx;
+  uint8_t *buf;
+  knob_rect_t **_rgb;
+
+  void (*exit_cb)(void);
 } neopixel_ctrl_t;
+
+void neopixel_ctrl(neopixel_ctrl_t ctx);
 
 #endif // _NEOPIXEL_CTRL_H_

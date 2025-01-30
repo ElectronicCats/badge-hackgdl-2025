@@ -1,6 +1,7 @@
 #ifndef _KNOB_RECT_H_
-#define _KBOB_RECT_H_
+#define _KNOB_RECT_H_
 
+#include <stdbool.h>
 #include <stdio.h>
 
 typedef struct {
@@ -20,6 +21,7 @@ typedef struct {
 typedef struct {
   knob_params_config_t params;
   knob_transform_config_t transform;
+  bool focused;
 } knob_rect_t;
 
 knob_rect_t *knob_rect_alloc();

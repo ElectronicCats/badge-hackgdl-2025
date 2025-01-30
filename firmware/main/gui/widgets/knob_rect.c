@@ -62,9 +62,15 @@ int16_t knob_rect_decrease_step(knob_rect_t *knob) {
 void knob_rect_free(knob_rect_t *knob) { free(knob); }
 
 void knob_rect_draw(knob_rect_t *knob) {
-  uint8_t fill = (knob->params.value - knob->params.min) /
-                 (knob->params.max - knob->params.min) * 100;
+  uint8_t fill = (uint8_t)(((float)(knob->params.value - knob->params.min) /
+                            (knob->params.max - knob->params.min)) *
+                           100);
 
   oled_screen_draw_loading_bar(fill, knob->transform.x, knob->transform.y,
                                knob->transform.width, knob->transform.height);
+}
+
+void knob_rect_set_focus(knob_rect_t *knob) {
+  knob->focused = true;
+  knob_rect_draw(knob);
 }
