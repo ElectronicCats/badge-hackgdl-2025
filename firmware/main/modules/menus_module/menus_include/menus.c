@@ -8,6 +8,7 @@
 #include "detector_scenes.h"
 #include "hid_module.h"
 #include "menus_icons.h"
+#include "neopixel_app.h"
 #include "spam_module.h"
 #include "ssid_spam.h"
 #include "tama_scenes.h"
@@ -123,6 +124,14 @@ menu_t menus[] = { //////////////////////////////////
      .icon = &menu_icon_tama,
      .last_selected_submenu = 0,
      .on_enter_cb = tama_scenes_main,
+     .on_exit_cb = NULL,
+     .is_visible = true},
+    {.display_name = "Neopixel Control",
+     .menu_idx = MENU_NEOPIXELS,
+     .parent_idx = MENU_MAIN,
+     .icon = NULL,
+     .last_selected_submenu = 0,
+     .on_enter_cb = neopixel_app,
      .on_exit_cb = NULL,
      .is_visible = true},
     {.display_name = "About",
