@@ -7,8 +7,11 @@
 #include "neopixels_module.h"
 
 #define COLORS_COUNT 3
+#define NEOPIXELS_COUNT 3
 
 static neopixel_ctrl_t *npx_ctx = NULL;
+
+static void refresh_neopixels();
 
 static void npx_ctx_free() {
   if (npx_ctx != NULL) {
@@ -23,11 +26,12 @@ static void npx_ctx_free() {
 }
 
 static void npx_color_alloc() {
+  uint8_t npx_idx = npx_ctx->npx_idx >= NEOPIXELS_COUNT ? 0 : npx_ctx->npx_idx;
   for (uint8_t i = 0; i < COLORS_COUNT; i++) {
-    int16_t value = npx_ctx->buf[npx_ctx->npx_idx * COLORS_COUNT + i];
+    int16_t value = npx_ctx->buf[npx_idx * COLORS_COUNT + i];
     knob_params_config_t params = knob_rect_build_params(0, 255, 1, value);
     knob_transform_config_t transform =
-        knob_rect_build_transform(0, 16 * i + 16, 128, 8);
+        knob_rect_build_transform(0, 16 * i + 16, 128, 7);
     npx_ctx->_rgb[i] = knob_rect_alloc(&params, &transform);
   }
 }
@@ -39,20 +43,32 @@ static void draw_cb() {
   }
   oled_screen_draw_box(0, 0, 128, 8, OLED_DISPLAY_NORMAL);
   oled_screen_display_text_center(npx_ctx->title, 0, OLED_DISPLAY_INVERT);
-  oled_screen_display_text("--->        <---", 0, npx_ctx->_color_idx * 2 + 1,
+  oled_screen_display_text("    <      >    ", 0, npx_ctx->_color_idx * 2 + 1,
                            OLED_DISPLAY_NORMAL);
-  oled_screen_display_text_center("[RED]", 1, OLED_DISPLAY_NORMAL);
-  oled_screen_display_text_center("[GREEN]", 3, OLED_DISPLAY_NORMAL);
-  oled_screen_display_text_center("[BLUE]", 5, OLED_DISPLAY_NORMAL);
+  oled_screen_display_text_center("RED", 1, OLED_DISPLAY_NORMAL);
+  oled_screen_display_text_center("GREEN", 3, OLED_DISPLAY_NORMAL);
+  oled_screen_display_text_center("BLUE", 5, OLED_DISPLAY_NORMAL);
   oled_screen_display_show();
 }
 
-static void on_color_changed(int16_t value) {
-  npx_ctx->buf[npx_ctx->npx_idx * COLORS_COUNT + npx_ctx->_color_idx] = value;
-  neopixels_set_pixel(npx_ctx->npx_idx, npx_ctx->buf[npx_ctx->npx_idx * 3],
-                      npx_ctx->buf[npx_ctx->npx_idx * 3 + 1],
-                      npx_ctx->buf[npx_ctx->npx_idx * 3 + 2]);
+static void refresh_neopixels() {
+
+  for (uint8_t i = 0; i < NEOPIXELS_COUNT; i++) {
+    neopixels_set_pixel(i, npx_ctx->buf[i * 3], npx_ctx->buf[i * 3 + 1],
+                        npx_ctx->buf[i * 3 + 2]);
+  }
   neopixels_refresh();
+}
+
+static void on_color_changed(int16_t value) {
+  if (npx_ctx->npx_idx >= NEOPIXELS_COUNT) {
+    for (uint8_t i = 0; i < NEOPIXELS_COUNT; i++) {
+      npx_ctx->buf[i * COLORS_COUNT + npx_ctx->_color_idx] = value;
+    }
+  } else {
+    npx_ctx->buf[npx_ctx->npx_idx * COLORS_COUNT + npx_ctx->_color_idx] = value;
+  }
+  refresh_neopixels();
 }
 
 static void input_cb(uint8_t button, uint8_t event) {
@@ -105,4 +121,5 @@ void neopixel_ctrl(neopixel_ctrl_t ctx) {
   menus_module_set_app_state(true, input_cb);
   // knob_rect_set_focus(npx_ctx->_rgb[npx_ctx->_color_idx], true);
   draw_cb();
+  refresh_neopixels();
 }

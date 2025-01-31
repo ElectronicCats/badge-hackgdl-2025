@@ -6,6 +6,7 @@
 extern const unsigned char menu_wifi_bmp_32x32[];
 extern const unsigned char menu_bt_bmp_32x32[];
 extern const unsigned char menu_tama_bmp_32x32[];
+extern const unsigned char menu_neopixels_bmp_32x32[];
 extern const unsigned char menu_about_bmp_32x32[];
 
 extern const unsigned char menu_wifi_analyzer_bmp_32x32[];
