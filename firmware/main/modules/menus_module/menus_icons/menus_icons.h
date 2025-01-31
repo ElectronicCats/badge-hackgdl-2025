@@ -14,6 +14,7 @@ extern menu_icon_t menu_icon_wifi;
 extern menu_icon_t menu_icon_bt;
 extern menu_icon_t menu_icon_tama;
 extern menu_icon_t menu_icon_neopixels;
+extern menu_icon_t menu_icon_file_manager;
 extern menu_icon_t menu_icon_about;
 
 extern menu_icon_t menu_icon_analyzer;

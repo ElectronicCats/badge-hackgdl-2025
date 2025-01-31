@@ -13,6 +13,7 @@
 #include "ssid_spam.h"
 #include "tama_scenes.h"
 #include "trackers_module.h"
+#include "web_file_browser_module.h"
 
 menu_t menus[] = { //////////////////////////////////
     {.display_name = "Main Menu",
@@ -132,6 +133,14 @@ menu_t menus[] = { //////////////////////////////////
      .icon = &menu_icon_neopixels,
      .last_selected_submenu = 0,
      .on_enter_cb = neopixel_app,
+     .on_exit_cb = NULL,
+     .is_visible = true},
+    {.display_name = "File Manager",
+     .menu_idx = MENU_FILE_MANAGER,
+     .parent_idx = MENU_MAIN,
+     .icon = &menu_icon_file_manager,
+     .last_selected_submenu = 0,
+     .on_enter_cb = web_file_browser_module_begin,
      .on_exit_cb = NULL,
      .is_visible = true},
     {.display_name = "About",

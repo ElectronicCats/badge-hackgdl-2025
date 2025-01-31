@@ -6,6 +6,7 @@ menu_icon_t menu_icon_wifi = {menu_wifi_bmp_32x32, 32, 32};
 menu_icon_t menu_icon_bt = {menu_bt_bmp_32x32, 32, 32};
 menu_icon_t menu_icon_tama = {menu_tama_bmp_32x32, 32, 32};
 menu_icon_t menu_icon_neopixels = {menu_neopixels_bmp_32x32, 32, 32};
+menu_icon_t menu_icon_file_manager = {menu_file_manager_bmp_32x32, 32, 32};
 menu_icon_t menu_icon_about = {menu_about_bmp_32x32, 32, 32};
 
 menu_icon_t menu_icon_analyzer = {menu_wifi_analyzer_bmp_32x32, 32, 32};

@@ -16,8 +16,10 @@ set(modules_src "")
      endif()
  endforeach()
 
-idf_component_register(
-                    SRCS
-                    "${modules_src}"
-                    INCLUDE_DIRS
-                    "${headers_dirs}")
+ idf_component_register(
+    SRCS
+    "${modules_src}"
+    EMBED_FILES modules/web_file_browser/http_server/header.html modules/web_file_browser/http_server/favicon.ico
+    modules/web_file_browser/http_server/style.css
+    INCLUDE_DIRS
+    "${headers_dirs}")

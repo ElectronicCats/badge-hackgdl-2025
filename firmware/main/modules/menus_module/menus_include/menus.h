@@ -21,8 +21,9 @@ typedef enum {
 
   MENU_BLUETOOTH_ADV,
   MENU_TAMAGOTCHI,
+  MENU_NEOPIXELS,
+  MENU_FILE_MANAGER,
   MENU_ABOUT,
-  MENU_NEOPIXELS
 } menu_idx_t;
 
 typedef struct {
