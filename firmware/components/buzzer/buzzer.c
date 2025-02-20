@@ -58,6 +58,9 @@ void buzzer_set_freq(uint32_t freq) { buzzer.freq = freq; }
 void buzzer_set_duty(uint32_t duty) { buzzer.duty = duty; }
 
 void buzzer_play() {
+  if (!buzzer.freq) {
+    return;
+  }
   buzzer_enable();
   buzzer_configure();
   // Set the duty cycle
