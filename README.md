@@ -15,7 +15,7 @@
 Do you want to say thank you? Tag these companies on social networks and show them your badge, thanks to them it is possible
 
 - [ElectronicCats](https://electroniccats.com/)
-- [BsidesSanDiego](https://www.bsidessd.org/)
+- [HackGDL](https://hackgdl.net/)
 
 ## License
 
