@@ -2,7 +2,7 @@ test_port:
 	@if [ -z "$(PORT)" ]; then echo "PORT is not set, please set PORT using export, example: 'export PORT=/dev/ttyACM0'"; exit 1; fi
 
 setup:
-	idf.py set-target esp32c6
+	idf.py set-target esp32s3
 	pre-commit install
 
 compile:
