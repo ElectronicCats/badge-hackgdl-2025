@@ -9,6 +9,7 @@
 - Shitty Addon Connector
 - 4 x Button
 - Case
+- USB C
 - 1 x Buzzer
 
 ## Gratitude
