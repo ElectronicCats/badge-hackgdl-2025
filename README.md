@@ -17,6 +17,7 @@ Do you want to say thank you? Tag these companies on social networks and show th
 
 - [ElectronicCats](https://electroniccats.com/)
 - [HackGDL](https://hackgdl.net/)
+- [Project TamaLib: A hardware agnostic first-gen Tamagotchi emulation library](https://github.com/jcrona/tamalib)
 
 ## License
 
