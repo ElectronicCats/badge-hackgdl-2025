@@ -28,3 +28,11 @@ hardware/**/*.csv
 
 #Ignore backups
 /hardware/badge-hackgdl-2025-backups
+/firmware/build
+firmware/sdkconfig
+firmware/sdkconfig.old
+.vscode/c_cpp_properties.json
+firmware/dependencies.lock
+firmware/managed_components/espressif__button/.component_hash
+/firmware/managed_components
+.vscode/settings.json

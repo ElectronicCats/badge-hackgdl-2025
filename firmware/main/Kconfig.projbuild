@@ -1,0 +1,508 @@
+menu "General project"
+
+	config PROJECT_VERSION
+		string "Firmware version"
+		default "1.1.0.0"
+		help
+			Firmware version.
+
+	menu "Debug"
+
+		menu "Modules"
+
+			config CMD_UART_BRIDGE_DEBUG
+				bool "CMD UART Bridge debug"
+				default false
+				help
+					Enable CMD UART Bridge debug.
+
+			config CONFIGURATION_DEBUG
+				bool "Configuration debug"
+				default false
+				help
+					Enable Configuration debug.
+
+			config BLE_MODULE_DEBUG
+				bool "BLE module debug"
+				default false
+				help
+					Enable BLE module debug.
+
+			config CAT_CONSOLE_DEBUG
+				bool "Cat console debug"
+				default false
+				help
+					Enable Cat console debug.
+
+			config CATDOS_MODULE_DEBUG
+				bool "Cat DOS module debug"
+				default false
+				help
+					Enable Cat DOS module debug.
+
+			config GPS_MODULE_DEBUG
+				bool "GPS module debug"
+				default false
+				help
+					Enable GPS module debug.
+
+			config KEYBOARD_DEBUG
+				bool "Keyboard debug"
+				default false
+				help
+					Enable Keyboard debug.
+
+			config MAIN_DEBUG
+				bool "Main debug"
+				default false
+				help
+					Enable Main debug.
+
+			config MENU_SCREENS_DEBUG
+				bool "Menu screens module debug"
+				default false
+				help
+					Enable Menu screens module debug.
+
+			config OLED_DRIVER_DEBUG
+				bool "OLED driver debug"
+				default false
+				help
+					Enable OLED driver debug.
+
+			config OLED_MODULE_DEBUG
+				bool "OLED module debug"
+				default false
+				help
+					Enable OLED module debug.
+
+			config OPEN_THREAD_MODULE_DEBUG
+				bool "OpenThread module debug"
+				default false
+				help
+					Enable OpenThread module debug.
+
+			config SETTINGS_MODULE_DEBUG
+				bool "Settings module debug"
+				default false
+				help
+					Enable Settings module debug.
+
+			config WARDRIVING_MODULE_DEBUG
+				bool "Wardriving module debug"
+				default false
+				help
+					Enable Wardriving module debug.
+
+			config WEB_FILE_BROWSER_DEBUG
+				bool "Web file browser debug"
+				default false
+				help
+					Enable Web file browser debug.
+
+			config WIFI_MODULE_DEBUG
+				bool "WiFi module debug"
+				default false
+				help
+					Enable WiFi module debug.
+
+			config ZIGBEE_MODULE_DEBUG
+				bool "Zigbee module debug"
+				default false
+				help
+					Enable Zigbee module debug.
+
+		endmenu
+
+			menu "Components"
+
+				config BT_GATTC_DEBUG
+					bool "BT GATTC debug"
+					default false
+					help
+						Enable BT GATTC debug.
+
+				config BT_GATTS_DEBUG
+					bool "BT GATTS debug"
+					default false
+					help
+						Enable BT GATTS debug.
+
+				config BT_SPAM_APP_DEBUG
+					bool "BT Spam app debug"
+					default false
+					help
+						Enable BT Spam app debug.
+
+				config CAPTIVE_PORTAL_DEBUG
+					bool "Captive Portal debug"
+					default false
+					help
+						Enable Captive Portal debug.
+
+				config CMD_SNIFFER_DEBUG
+					bool "CMD Sniffer debug"
+					default false
+					help
+						Enable CMD Sniffer debug.
+
+				config CMD_PCAP_DEBUG
+					bool "CMD PCAP debug"
+					default false
+					help
+						Enable CMD PCAP debug.
+
+				config CMD_WIFI_DEBUG
+					bool "CMD WiFi debug"
+					default false
+					help
+						Enable CMD WiFi debug.
+
+				config DNS_SERVER_DEBUG
+					bool "DNS Server debug"
+					default false
+					help
+						Enable DNS Server debug.
+
+				config IEEE_SNIFFER_DEBUG
+					bool "IEEE Sniffer debug"
+					default false
+					help
+						Enable IEEE Sniffer debug.
+
+				config LEDC_CONTROLLER_DEBUG
+					bool "LEDC Controller debug"
+					default false
+					help
+						Enable LEDC Controller debug.
+
+				config NMEA_PARSER_DEBUG
+					bool "NMEA Parser debug"
+					default false
+					help
+						Enable NMEA Parser debug.
+
+				config OPEN_THREAD_DEBUG
+					bool "Open Thread debug"
+					default false
+					help
+						Enable Open Thread debug.
+
+				config PREFERENCES_DEBUG
+					bool "Preferences debug"
+					default false
+					help
+						Enable Preferences debug.
+
+				config SD_CARD_DEBUG
+					bool "SD Card debug"
+					default false
+					help
+						Enable SD Card debug.
+
+				config TRACKERS_SCANNER_DEBUG
+					bool "Trackers Scanner debug"
+					default false
+					help
+						Enable Trackers Scanner debug.
+
+				config UART_BRIDGE_DEBUG
+					bool "UART Bridge debug"
+					default false
+					help
+						Enable UART Bridge debug.
+
+				config WIFI_ATTACKS_DEBUG
+					bool "WiFi Attacks debug"
+					default false
+					help
+						Enable WiFi Attacks debug.
+
+				config WIFI_CONTROLLER_DEBUG
+					bool "WiFi Controller debug"
+					default false
+					help
+						Enable WiFi Controller debug.
+
+				config WIFI_SCANNER_DEBUG
+					bool "WiFi Scanner debug"
+					default false
+					help
+						Enable WiFi Scanner debug.
+
+				config WIFI_SNIFFER_DEBUG
+					bool "WiFi Sniffer debug"
+					default false
+					help
+						Enable WiFi Sniffer debug.
+
+				config ZIGBEE_SWITCH_DEBUG
+					bool "Zigbee Switch debug"
+					default false
+					help
+						Enable Zigbee Switch debug.
+
+		endmenu
+	endmenu
+
+	menu "OLED Screen Configuration"
+
+		config GPIO_RANGE_MAX
+			int
+			default 33 if IDF_TARGET_ESP32
+			default 46 if IDF_TARGET_ESP32S2
+			default 48 if IDF_TARGET_ESP32S3
+			default 18 if IDF_TARGET_ESP32C2
+			default 19 if IDF_TARGET_ESP32C3
+			default 30 if IDF_TARGET_ESP32C6
+
+		choice INTERFACE
+			prompt "Interface"
+			default I2C_INTERFACE
+			help
+				Select Interface.
+			config I2C_INTERFACE
+				bool "I2C Interface"
+				help
+					I2C Interface.
+			config SPI_INTERFACE
+				bool "SPI Interface"
+				help
+					SPI Interface.
+		endchoice
+
+		choice DRIVER
+			prompt "Driver"
+			default SSD1306 if IDF_TARGET_ESP32S3
+			default SH1106 if IDF_TARGET_ESP32C6
+			default SSD1306
+			help
+				Select Driver.
+			config SSD1306
+				bool "SSD1306"
+				help
+					SSD1306 Driver.
+			config SH1106
+				bool "SH1106"
+				help
+					SH1106 Driver.
+		endchoice
+
+		choice RESOLUTION
+			prompt "Panel resolution"
+			default RESOLUTION_128X64
+			help
+				Select Panel resolution.
+			config RESOLUTION_128X32
+				bool "128x32 Panel"
+				help
+					Panel is 128x32.
+			config RESOLUTION_128X64
+				bool "128x64 Panel"
+				help
+					Panel is 128x64.
+		endchoice
+
+		config FLIP
+			bool "Flip upside down"
+			default false
+			help
+				Flip upside down.
+
+		config SCL_GPIO
+			depends on I2C_INTERFACE
+			int "SCL GPIO number"
+			range 0 GPIO_RANGE_MAX
+			default 22 if IDF_TARGET_ESP32
+			default 12 if IDF_TARGET_ESP32S2
+			default 9 if IDF_TARGET_ESP32S3
+			default 7 if IDF_TARGET_ESP32C6
+			default  6 # C3 and others
+			help
+				GPIO number (IOxx) to I2C SCL.
+				Some GPIOs are used for other purposes (flash connections, etc.) and cannot be used to I2C.
+				GPIOs 35-39 are input-only so cannot be used as outputs.
+
+		config SDA_GPIO
+			depends on I2C_INTERFACE
+			int "SDA GPIO number"
+			range 0 GPIO_RANGE_MAX
+			default 21 if IDF_TARGET_ESP32
+			default 11 if IDF_TARGET_ESP32S2
+			default 8 if IDF_TARGET_ESP32S3
+			default 6 if IDF_TARGET_ESP32C6
+			default  5 # C3 and others
+			help
+				GPIO number (IOxx) to I2C SDA.
+				Some GPIOs are used for other purposes (flash connections, etc.) and cannot be used to I2C.
+				GPIOs 35-39 are input-only so cannot be used as outputs.
+
+		config MOSI_GPIO
+			depends on SPI_INTERFACE
+			int "MOSI GPIO number"
+			range 0 GPIO_RANGE_MAX
+			default 23 if IDF_TARGET_ESP32
+			default 35 if IDF_TARGET_ESP32S2
+			default 35 if IDF_TARGET_ESP32S3
+			default  1 # C3 and others
+			help
+				GPIO number (IOxx) to SPI MOSI.
+				Some GPIOs are used for other purposes (flash connections, etc.) and cannot be used to MOSI.
+				On the ESP32, GPIOs 35-39 are input-only so cannot be used as outputs.
+				On the ESP32-S2, GPIO 46 is input-only so cannot be used as outputs.
+
+		config SCLK_GPIO
+			depends on SPI_INTERFACE
+			int "SCLK GPIO number"
+			range 0 GPIO_RANGE_MAX
+			default 18 if IDF_TARGET_ESP32
+			default 36 if IDF_TARGET_ESP32S2
+			default 36 if IDF_TARGET_ESP32S3
+			default  2 # C3 and others
+			help
+				GPIO number (IOxx) to SPI SCLK.
+				Some GPIOs are used for other purposes (flash connections, etc.) and cannot be used to SCLK.
+				On the ESP32, GPIOs 35-39 are input-only so cannot be used as outputs.
+				On the ESP32-S2, GPIO 46 is input-only so cannot be used as outputs.
+
+		config CS_GPIO
+			depends on SPI_INTERFACE
+			int "CS GPIO number"
+			range 0 GPIO_RANGE_MAX
+			default  5 if IDF_TARGET_ESP32
+			default 34 if IDF_TARGET_ESP32S2
+			default 34 if IDF_TARGET_ESP32S3
+			default 10 # C3 and others
+			help
+				GPIO number (IOxx) to SPI CS.
+				Some GPIOs are used for other purposes (flash connections, etc.) and cannot be used to CS.
+				GPIOs 35-39 are input-only so cannot be used as outputs.
+
+		config DC_GPIO
+			depends on SPI_INTERFACE
+			int "DC GPIO number"
+			range 0 GPIO_RANGE_MAX
+			default  4 if IDF_TARGET_ESP32
+			default 37 if IDF_TARGET_ESP32S2
+			default 37 if IDF_TARGET_ESP32S3
+			default  3 # C3 and others
+			help
+				GPIO number (IOxx) to SPI DC.
+				Some GPIOs are used for other purposes (flash connections, etc.) and cannot be used to DC.
+				GPIOs 35-39 are input-only so cannot be used as outputs.
+
+		config RESET_GPIO
+			int "RESET GPIO number"
+			range -1 GPIO_RANGE_MAX
+			default 15 if IDF_TARGET_ESP32
+			default 38 if IDF_TARGET_ESP32S2
+			default 38 if IDF_TARGET_ESP32S3
+			default -1 if IDF_TARGET_ESP32C6
+			default  4 # C3 and others
+			help
+				GPIO number (IOxx) to RESET.
+				When it is -1, RESET isn't performed.
+				Some GPIOs are used for other purposes (flash connections, etc.) and cannot be used to RESET.
+				GPIOs 35-39 are input-only so cannot be used as outputs.
+
+		choice I2C_PORT
+			depends on I2C_INTERFACE
+			prompt "I2C port that controls this bus"
+			default I2C_PORT_0
+			help
+				Select I2C port that controls this bus.
+			config I2C_PORT_0
+				bool "I2C_PORT_0"
+				help
+					Use I2C_PORT_0.
+			config I2C_PORT_1
+				depends on IDF_TARGET_ESP32 || IDF_TARGET_ESP32S2 || IDF_TARGET_ESP32S3
+				bool "I2C_PORT_1"
+				help
+					Use I2C_PORT_1.
+		endchoice
+
+		choice SPI_HOST
+			depends on SPI_INTERFACE
+			prompt "SPI peripheral that controls this bus"
+			default SPI2_HOST
+			help
+				Select SPI peripheral that controls this bus.
+			config SPI2_HOST
+				bool "SPI2_HOST"
+				help
+					Use SPI2_HOST. This is also called HSPI_HOST.
+			config SPI3_HOST
+				depends on IDF_TARGET_ESP32 || IDF_TARGET_ESP32S2 || IDF_TARGET_ESP32S3
+				bool "SPI3_HOST"
+				help
+					USE SPI3_HOST. This is also called VSPI_HOST
+		endchoice
+
+	endmenu
+
+	menu "Keyboard Configuration"
+
+		config GPIO_RANGE_MAX
+			int
+			default 33 if IDF_TARGET_ESP32
+			default 46 if IDF_TARGET_ESP32S2
+			default 48 if IDF_TARGET_ESP32S3
+			default 18 if IDF_TARGET_ESP32C2
+			default 19 if IDF_TARGET_ESP32C3
+			default 30 if IDF_TARGET_ESP32C6
+			default 27 if IDF_TARGET_ESP32H2
+
+		config GPIO_BACK_BUTTON
+			int "GPIO BACK Button Pin"
+			range 0 GPIO_RANGE_MAX
+			default 5 if IDF_TARGET_ESP32S3
+			default 23 if IDF_TARGET_ESP32C6
+			help
+				Select the GPIO pin number for the BACK button.
+		config GPIO_LEFT_BUTTON
+			int "GPIO LEFT Button Pin"
+			range 0 GPIO_RANGE_MAX
+			default 17 if IDF_TARGET_ESP32S3
+			default 22 if IDF_TARGET_ESP32C6
+			help
+				Select the GPIO pin number for the LEFT button.
+		config GPIO_MIDDLE_BUTTON
+			int "GPIO MIDDLE Button Pin"
+			range 0 GPIO_RANGE_MAX
+			default 18 if IDF_TARGET_ESP32S3
+			default 15 if IDF_TARGET_ESP32C6
+			help
+				Select the GPIO pin number for the MIDDLE button.
+		config GPIO_RIGHT_BUTTON
+			int "GPIO RIGHT Button Pin"
+			range 0 GPIO_RANGE_MAX
+			default 12 if IDF_TARGET_ESP32S3
+			default 1 if IDF_TARGET_ESP32C6
+			help
+				Select the GPIO pin number for the RIGHT button.
+	endmenu
+
+	menu "Enable Apps & Features"
+
+		menu "Hardware components"
+	
+			config GPIO_NEOPIXEL
+				int "Neopixel GPIO Pin"
+				range 0 GPIO_RANGE_MAX
+				default 10 if IDF_TARGET_ESP32S3
+				default 11 if IDF_TARGET_ESP32C6
+				help
+					Select the GPIO pin number for Neopixel.
+	
+			config GPIO_BUZZER
+				int "Buzzer GPIO Pin"
+				range 0 GPIO_RANGE_MAX
+				default 11 if IDF_TARGET_ESP32S3
+				default 2 if IDF_TARGET_ESP32C6
+				help
+					Select the GPIO pin number for the Buzzer.
+		endmenu
+	endmenu
+
+endmenu
