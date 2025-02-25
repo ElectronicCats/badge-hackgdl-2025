@@ -19,11 +19,16 @@ static void refresh_neopixels();
 
 typedef enum { NEOPIXEL_OPTION, PRESETS_OPTION = 3 } neopixel_options_e;
 
-static char *main_options[] = {"Neopixel 1", "Neopixel 2", "Neopixel 3", "All"};
+static char *main_options[] = {"All", "Neopixel 1", "Neopixel 2", "Neopixel 3"};
+static char *_main_options[] = {"Neopixel 1", "Neopixel 2", "Neopixel 3",
+                                "All"};
 
 static void neopixel_main_handler(uint8_t selection) {
   main_last_selection = selection;
-  build_neopixel_ctr(selection);
+  if (!selection) {
+    selection = 4;
+  }
+  build_neopixel_ctr(selection - 1);
 }
 
 void neopixel_app() {
@@ -41,7 +46,7 @@ void neopixel_app() {
 
 static void build_neopixel_ctr(uint8_t idx) {
   neopixel_ctrl_t npx_ctrl = {0};
-  npx_ctrl.title = main_options[idx];
+  npx_ctrl.title = _main_options[idx];
   npx_ctrl.buf = neopixels_buffer;
   npx_ctrl.npx_idx = idx;
   npx_ctrl.exit_cb = neopixel_app;
