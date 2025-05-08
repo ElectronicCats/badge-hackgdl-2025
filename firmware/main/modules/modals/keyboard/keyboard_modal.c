@@ -12,17 +12,17 @@ static keyboard_modal_ctx_t *kb_ctx;
 
 static void keyboard_event_press_down(uint8_t button_name) {
   switch (button_name) {
-  case BUTTON_BACK:
+  case BUTTON_LEFT:
     kb_ctx->current_char = kb_ctx->current_char == 0 ? kb_ctx->text_length - 1
                                                      : kb_ctx->current_char - 1;
     keyboard_screens_update_text(kb_ctx);
     break;
-  case BUTTON_MIDDLE:
+  case BUTTON_RIGHT:
     kb_ctx->current_char =
         ++kb_ctx->current_char < kb_ctx->text_length ? kb_ctx->current_char : 0;
     keyboard_screens_update_text(kb_ctx);
     break;
-  case BUTTON_LEFT:
+  case BUTTON_BACK:
     kb_ctx->new_text[kb_ctx->current_char] =
         ++kb_ctx->new_text[kb_ctx->current_char] > 'z' ||
                 kb_ctx->new_text[kb_ctx->current_char] < '0'
@@ -33,7 +33,7 @@ static void keyboard_event_press_down(uint8_t button_name) {
             : kb_ctx->new_text[kb_ctx->current_char];
     keyboard_screens_update_text(kb_ctx);
     break;
-  case BUTTON_RIGHT:
+  case BUTTON_MIDDLE:
     kb_ctx->new_text[kb_ctx->current_char] =
         --kb_ctx->new_text[kb_ctx->current_char] < '0' ||
                 kb_ctx->new_text[kb_ctx->current_char] > 'z'

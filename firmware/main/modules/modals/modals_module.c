@@ -35,21 +35,21 @@ static void get_user_selection_input_cb(uint8_t button_name,
     return;
   }
   switch (button_name) {
-  case BUTTON_BACK:
+  case BUTTON_LEFT:
     modal_get_user_selection_ctx->selected_option = -1;
     modal_get_user_selection_ctx->consumed = true;
     break;
-  case BUTTON_MIDDLE:
+  case BUTTON_RIGHT:
     modal_get_user_selection_ctx->consumed = true;
     break;
-  case BUTTON_LEFT:
+  case BUTTON_BACK:
     modal_get_user_selection_ctx->selected_option =
         modal_get_user_selection_ctx->selected_option == 0
             ? modal_get_user_selection_ctx->options_count - 1
             : modal_get_user_selection_ctx->selected_option - 1;
     list_options();
     break;
-  case BUTTON_RIGHT:
+  case BUTTON_MIDDLE:
     modal_get_user_selection_ctx->selected_option =
         ++modal_get_user_selection_ctx->selected_option <
                 modal_get_user_selection_ctx->options_count
@@ -68,22 +68,22 @@ static void get_radio_selection_input_cb(uint8_t button_name,
     return;
   }
   switch (button_name) {
-  case BUTTON_BACK:
+  case BUTTON_LEFT:
     modal_get_radio_selection_ctx->consumed = true;
     break;
-  case BUTTON_MIDDLE:
+  case BUTTON_RIGHT:
     modal_get_radio_selection_ctx->current_option =
         modal_get_radio_selection_ctx->selected_option;
     list_radio_options();
     break;
-  case BUTTON_LEFT:
+  case BUTTON_BACK:
     modal_get_radio_selection_ctx->selected_option =
         modal_get_radio_selection_ctx->selected_option == 0
             ? modal_get_radio_selection_ctx->options_count - 1
             : modal_get_radio_selection_ctx->selected_option - 1;
     list_radio_options();
     break;
-  case BUTTON_RIGHT:
+  case BUTTON_MIDDLE:
     modal_get_radio_selection_ctx->selected_option =
         ++modal_get_radio_selection_ctx->selected_option <
                 modal_get_radio_selection_ctx->options_count

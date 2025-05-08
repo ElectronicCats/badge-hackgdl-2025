@@ -238,16 +238,16 @@ static void file_manager_input_cb(uint8_t button_name, uint8_t button_event) {
     return;
   }
   switch (button_name) {
-  case BUTTON_BACK:
+  case BUTTON_LEFT:
     navigation_back();
     break;
-  case BUTTON_MIDDLE:
+  case BUTTON_RIGHT:
     navigation_enter();
     break;
-  case BUTTON_LEFT:
+  case BUTTON_BACK:
     navigation_up();
     break;
-  case BUTTON_RIGHT:
+  case BUTTON_MIDDLE:
     navigation_down();
     break;
   default:
