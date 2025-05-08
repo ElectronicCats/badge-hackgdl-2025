@@ -23,6 +23,7 @@ typedef enum {
   MENU_TAMAGOTCHI,
   MENU_NEOPIXELS,
   MENU_FILE_MANAGER,
+  MENU_FILE_MANAGER_LOCAL,
   MENU_ABOUT,
 } menu_idx_t;
 

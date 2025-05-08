@@ -1,3 +1,3 @@
 #pragma once
 
-void start_coroutine(void* routine, void* ctx);
+void start_coroutine(void *routine, void *ctx);

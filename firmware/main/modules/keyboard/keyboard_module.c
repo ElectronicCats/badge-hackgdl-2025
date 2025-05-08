@@ -17,35 +17,21 @@ static const char *button_to_name[] = {
 };
 
 static const char *event_to_name[] = {
-    "PRESS_DOWN",
-    "PRESS_UP",
-    "PRESS_REPEAT",
-    "PRESS_REPEAT_DONE",
-    "SINGLE_CLICK",
-    "DOUBLE_CLICK",
-    "MULTIPLE_CLICK",
-    "LONG_PRESS_START",
-    "LONG_PRESS_HOLD",
-    "LONG_PRESS_UP",
-    "PRESS_END",
-    "NONE_PRESS",
+    "PRESS_DOWN",      "PRESS_UP",      "PRESS_REPEAT",   "PRESS_REPEAT_DONE",
+    "SINGLE_CLICK",    "DOUBLE_CLICK",  "MULTIPLE_CLICK", "LONG_PRESS_START",
+    "LONG_PRESS_HOLD", "LONG_PRESS_UP", "PRESS_END",      "NONE_PRESS",
 };
 
 static void button_event_cb(void *arg, void *data);
 
-void keyboard_module_reset_idle_timer()
-{
+void keyboard_module_reset_idle_timer() {
   esp_timer_stop(idle_timer);
   esp_timer_start_once(idle_timer, IDLE_TIMEOUT_S * 1000 * 1000);
 }
 
-void keyboard_module_set_lock(bool lock)
-{
-  lock_input = lock;
-}
+void keyboard_module_set_lock(bool lock) { lock_input = lock; }
 
-void button_init(uint32_t button_num, uint8_t mask)
-{
+void button_init(uint32_t button_num, uint8_t mask) {
   button_config_t btn_cfg = {
       .type = BUTTON_TYPE_GPIO,
       .gpio_button_config =
@@ -86,8 +72,7 @@ void button_init(uint32_t button_num, uint8_t mask)
  *
  * @return void
  */
-static void button_event_cb(void *arg, void *data)
-{
+static void button_event_cb(void *arg, void *data) {
   // >> 4 to get the button number
   uint8_t button_name = (((button_event_t)data) >> 4);
   // & 0x0F to get the event number without the mask
@@ -96,24 +81,20 @@ static void button_event_cb(void *arg, void *data)
   ESP_LOGI(TAG, "Button %s event %s", button_to_name[button_name],
            event_to_name[button_event]);
 
-  if (lock_input)
-  {
+  if (lock_input) {
     return;
   }
 
-  if (input_callback)
-  {
+  if (input_callback) {
     input_callback(button_name, button_event);
     return;
   }
 }
 
-void keyboard_module_set_input_callback(input_callback_t input_cb)
-{
+void keyboard_module_set_input_callback(input_callback_t input_cb) {
   input_callback = input_cb;
 }
-void keyboard_module_begin()
-{
+void keyboard_module_begin() {
 #if !defined(CONFIG_KEYBOARD_DEBUG)
   esp_log_level_set(TAG, ESP_LOG_NONE);
 #endif

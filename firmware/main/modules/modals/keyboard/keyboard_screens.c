@@ -6,12 +6,12 @@
 #define MAX_CHARS 16
 
 #ifdef CONFIG_RESOLUTION_128X64
-  #define TEXT_PAGE 2
-#else  // CONFIG_RESOLUTION_128X32
-  #define TEXT_PAGE 1
+#define TEXT_PAGE 2
+#else // CONFIG_RESOLUTION_128X32
+#define TEXT_PAGE 1
 #endif
 
-void keyboard_screens_update_text(keyboard_modal_ctx_t* ctx) {
+void keyboard_screens_update_text(keyboard_modal_ctx_t *ctx) {
   static uint8_t chars_offset = 0;
   chars_offset = MAX(ctx->current_char - 14, chars_offset);
   chars_offset = MIN(ctx->current_char, chars_offset);
@@ -25,7 +25,7 @@ void keyboard_screens_update_text(keyboard_modal_ctx_t* ctx) {
 }
 
 #ifdef CONFIG_RESOLUTION_128X64
-void keyboard_screens_show(keyboard_modal_ctx_t* ctx) {
+void keyboard_screens_show(keyboard_modal_ctx_t *ctx) {
   oled_screen_clear();
   oled_screen_display_text(ctx->banner, 0, 0, OLED_DISPLAY_NORMAL);
   oled_screen_display_text("----------------", 0, 1, OLED_DISPLAY_NORMAL);
@@ -33,8 +33,8 @@ void keyboard_screens_show(keyboard_modal_ctx_t* ctx) {
   oled_screen_display_text("Hold > to Save", 0, 5, OLED_DISPLAY_NORMAL);
   oled_screen_display_text("Hold < to Cancel", 0, 6, OLED_DISPLAY_NORMAL);
 }
-#else  // CONFIG_RESOLUTION_128X32
-void keyboard_screens_show(keyboard_modal_ctx_t* ctx) {
+#else // CONFIG_RESOLUTION_128X32
+void keyboard_screens_show(keyboard_modal_ctx_t *ctx) {
   oled_screen_clear();
   oled_screen_display_text(ctx->banner, 0, 0, OLED_DISPLAY_NORMAL);
   oled_screen_display_text("Hold > to Save", 0, 2, OLED_DISPLAY_NORMAL);

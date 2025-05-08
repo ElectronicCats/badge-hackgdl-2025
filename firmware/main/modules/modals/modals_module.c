@@ -1,16 +1,16 @@
 #include "modals_module.h"
 
-#include <string.h>
 #include "menus_module.h"
 #include "modals_screens.h"
+#include <string.h>
 
-static modal_get_user_selection_t* modal_get_user_selection_ctx;
-static modal_get_radio_selection_t* modal_get_radio_selection_ctx;
+static modal_get_user_selection_t *modal_get_user_selection_ctx;
+static modal_get_radio_selection_t *modal_get_radio_selection_ctx;
 
-static char* yes_no_options[] = {"NO", "YES", NULL};
+static char *yes_no_options[] = {"NO", "YES", NULL};
 
-static void (*custom_list_options_cb)(modal_get_user_selection_t*) = NULL;
-static void (*custom_list_radio_options_cb)(modal_get_radio_selection_t*) =
+static void (*custom_list_options_cb)(modal_get_user_selection_t *) = NULL;
+static void (*custom_list_radio_options_cb)(modal_get_radio_selection_t *) =
     NULL;
 
 static void list_options() {
@@ -35,30 +35,30 @@ static void get_user_selection_input_cb(uint8_t button_name,
     return;
   }
   switch (button_name) {
-    case BUTTON_LEFT:
-      modal_get_user_selection_ctx->selected_option = -1;
-      modal_get_user_selection_ctx->consumed = true;
-      break;
-    case BUTTON_RIGHT:
-      modal_get_user_selection_ctx->consumed = true;
-      break;
-    case BUTTON_UP:
-      modal_get_user_selection_ctx->selected_option =
-          modal_get_user_selection_ctx->selected_option == 0
-              ? modal_get_user_selection_ctx->options_count - 1
-              : modal_get_user_selection_ctx->selected_option - 1;
-      list_options();
-      break;
-    case BUTTON_DOWN:
-      modal_get_user_selection_ctx->selected_option =
-          ++modal_get_user_selection_ctx->selected_option <
-                  modal_get_user_selection_ctx->options_count
-              ? modal_get_user_selection_ctx->selected_option
-              : 0;
-      list_options();
-      break;
-    default:
-      break;
+  case BUTTON_BACK:
+    modal_get_user_selection_ctx->selected_option = -1;
+    modal_get_user_selection_ctx->consumed = true;
+    break;
+  case BUTTON_MIDDLE:
+    modal_get_user_selection_ctx->consumed = true;
+    break;
+  case BUTTON_LEFT:
+    modal_get_user_selection_ctx->selected_option =
+        modal_get_user_selection_ctx->selected_option == 0
+            ? modal_get_user_selection_ctx->options_count - 1
+            : modal_get_user_selection_ctx->selected_option - 1;
+    list_options();
+    break;
+  case BUTTON_RIGHT:
+    modal_get_user_selection_ctx->selected_option =
+        ++modal_get_user_selection_ctx->selected_option <
+                modal_get_user_selection_ctx->options_count
+            ? modal_get_user_selection_ctx->selected_option
+            : 0;
+    list_options();
+    break;
+  default:
+    break;
   }
 }
 
@@ -68,35 +68,35 @@ static void get_radio_selection_input_cb(uint8_t button_name,
     return;
   }
   switch (button_name) {
-    case BUTTON_LEFT:
-      modal_get_radio_selection_ctx->consumed = true;
-      break;
-    case BUTTON_RIGHT:
-      modal_get_radio_selection_ctx->current_option =
-          modal_get_radio_selection_ctx->selected_option;
-      list_radio_options();
-      break;
-    case BUTTON_UP:
-      modal_get_radio_selection_ctx->selected_option =
-          modal_get_radio_selection_ctx->selected_option == 0
-              ? modal_get_radio_selection_ctx->options_count - 1
-              : modal_get_radio_selection_ctx->selected_option - 1;
-      list_radio_options();
-      break;
-    case BUTTON_DOWN:
-      modal_get_radio_selection_ctx->selected_option =
-          ++modal_get_radio_selection_ctx->selected_option <
-                  modal_get_radio_selection_ctx->options_count
-              ? modal_get_radio_selection_ctx->selected_option
-              : 0;
-      list_radio_options();
-      break;
-    default:
-      break;
+  case BUTTON_BACK:
+    modal_get_radio_selection_ctx->consumed = true;
+    break;
+  case BUTTON_MIDDLE:
+    modal_get_radio_selection_ctx->current_option =
+        modal_get_radio_selection_ctx->selected_option;
+    list_radio_options();
+    break;
+  case BUTTON_LEFT:
+    modal_get_radio_selection_ctx->selected_option =
+        modal_get_radio_selection_ctx->selected_option == 0
+            ? modal_get_radio_selection_ctx->options_count - 1
+            : modal_get_radio_selection_ctx->selected_option - 1;
+    list_radio_options();
+    break;
+  case BUTTON_RIGHT:
+    modal_get_radio_selection_ctx->selected_option =
+        ++modal_get_radio_selection_ctx->selected_option <
+                modal_get_radio_selection_ctx->options_count
+            ? modal_get_radio_selection_ctx->selected_option
+            : 0;
+    list_radio_options();
+    break;
+  default:
+    break;
   }
 }
 
-int count_items(char** items) {
+int count_items(char **items) {
   int count = 0;
   while (items[count] != NULL) {
     count++;
@@ -104,7 +104,7 @@ int count_items(char** items) {
   return count;
 }
 
-int8_t modals_module_get_user_selection(char** options, char* banner) {
+int8_t modals_module_get_user_selection(char **options, char *banner) {
   modal_get_user_selection_ctx = malloc(sizeof(modal_get_user_selection_t));
   memset(modal_get_user_selection_ctx, 0, sizeof(modal_get_user_selection_t));
   modal_get_user_selection_ctx->options = options;
@@ -118,7 +118,7 @@ int8_t modals_module_get_user_selection(char** options, char* banner) {
   free(modal_get_user_selection_ctx);
   return selection;
 }
-int8_t modals_module_get_user_y_n_selection(char* banner) {
+int8_t modals_module_get_user_y_n_selection(char *banner) {
   modal_get_user_selection_ctx = malloc(sizeof(modal_get_user_selection_t));
   memset(modal_get_user_selection_ctx, 0, sizeof(modal_get_user_selection_t));
   modal_get_user_selection_ctx->options = yes_no_options;
@@ -135,8 +135,7 @@ int8_t modals_module_get_user_y_n_selection(char* banner) {
   return selection;
 }
 
-uint8_t modals_module_get_radio_selection(char** options,
-                                          char* banner,
+uint8_t modals_module_get_radio_selection(char **options, char *banner,
                                           uint8_t current_option) {
   modal_get_radio_selection_ctx = malloc(sizeof(modal_get_radio_selection_t));
   memset(modal_get_radio_selection_ctx, 0, sizeof(modal_get_radio_selection_t));
@@ -154,9 +153,7 @@ uint8_t modals_module_get_radio_selection(char** options,
   return selection;
 }
 
-void modals_module_show_info(char* head,
-                             char* body,
-                             size_t time_ms,
+void modals_module_show_info(char *head, char *body, size_t time_ms,
                              bool lock_input) {
   if (lock_input) {
     menus_module_disable_input();
@@ -167,6 +164,4 @@ void modals_module_show_info(char* head,
   }
 }
 
-void modals_module_show_banner(char* text) {
-  modals_screens_show_banner(text);
-}
+void modals_module_show_banner(char *text) { modals_screens_show_banner(text); }
