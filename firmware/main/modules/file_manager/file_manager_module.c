@@ -148,7 +148,7 @@ static void navigation_down() {
 
 static void navigation_back() {
   if (fm_ctx->is_root) {
-    start_coroutine(open_root_options, NULL);
+    file_manager_module_exit();
   } else {
     get_parent_path(fm_ctx->current_path, fm_ctx->current_path);
     fm_ctx->selected_item = 0;
