@@ -6,6 +6,7 @@
 #include "catdos_module.h"
 #include "deauth_module.h"
 #include "detector_scenes.h"
+#include "file_manager_module.h"
 #include "hid_module.h"
 #include "menus_icons.h"
 #include "neopixel_app.h"
@@ -140,7 +141,23 @@ menu_t menus[] = { //////////////////////////////////
      .parent_idx = MENU_MAIN,
      .icon = &menu_icon_file_manager,
      .last_selected_submenu = 0,
+     .on_enter_cb = NULL,
+     .on_exit_cb = NULL,
+     .is_visible = true},
+    {.display_name = "Web",
+     .menu_idx = MENU_FILE_MANAGER_WEB,
+     .parent_idx = MENU_FILE_MANAGER,
+     .icon = &menu_icon_file_manager,
+     .last_selected_submenu = 0,
      .on_enter_cb = web_file_browser_module_begin,
+     .on_exit_cb = NULL,
+     .is_visible = true},
+    {.display_name = "Local",
+     .menu_idx = MENU_FILE_MANAGER_LOCAL,
+     .icon = &menu_icon_file_manager,
+     .parent_idx = MENU_FILE_MANAGER,
+     .last_selected_submenu = 0,
+     .on_enter_cb = file_manager_module_init,
      .on_exit_cb = NULL,
      .is_visible = true},
     {.display_name = "About",
