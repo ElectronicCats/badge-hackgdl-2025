@@ -117,13 +117,16 @@ Flash and monitor commands
 
 ## FAQs
 **Does the badge work out of the box?**
+
 Yes. It comes with functional BLE and WiFi-based apps pre-installed.
 
-Can I develop my own app?
+**Can I develop my own app?**
+
 Absolutely! Use Minino’s modular system and examples as a starting point.
 
-Where can I get help?
-Check the Minino wiki or open an issue here.
+**Where can I get help?**
+
+Check the Minino wiki or open an issue [here](https://github.com/ElectronicCats/badge-hackgdl-2025/issues).
 
 
 ## Gratitude
