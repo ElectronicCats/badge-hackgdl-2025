@@ -12,11 +12,11 @@
     </a>
 </p>
 
-Welcome to the official repository of the Hack GDL 2025 event badge, developed by Electronic Cats. This portable device is designed to be interactive, educational, and hackable. It is based on the [Minino](https://github.com/ElectronicCats/Minino) platform, which uses ESP-IDF as the development environment and offers a modular system for creating BLE and WiFi applications.
+Welcome to the official repository of the Hack GDL 2025 event badge, developed by Electronic Cats. This portable device is designed to be interactive, educational, and hackable. It is based on the [Minino](https://github.com/ElectronicCats/Minino) platform, which uses ESP-IDF as the development environment and offers a modular system for creating BLE and Wi-Fi applications.
 
 ## Features:
 - ESP32-S3
-- Bluetooth Low Energy (BLE) + WiFi
+- Bluetooth Low Energy (BLE) + Wi-Fi
 - USB-C for power and programming
 - 4 x physical buttons for interaction
 - 3 neopixel
@@ -130,11 +130,11 @@ Check the Minino wiki or open an issue [here](https://github.com/ElectronicCats/
 
 
 ## Gratitude
-Do you want to say thank you? Tag these companies on social networks and show them your badge, thanks to them it is possible
+Do you want to say thank you? Tag these companies on social networks and show them your badge, thanks to them, it is possible
 
 - [ElectronicCats](https://electroniccats.com/)
 - [HackGDL](https://hackgdl.net/)
-- [Project TamaLib: A hardware agnostic first-gen Tamagotchi emulation library](https://github.com/jcrona/tamalib)
+- [Project TamaLib: A hardware-agnostic first-gen Tamagotchi emulation library](https://github.com/jcrona/tamalib)
 
 ## License
 
@@ -148,7 +148,7 @@ Designed by Electronic Cats.
 
 Firmware released under an GNU AGPL v3.0 license. See the LICENSE file for more information.
 
-Hardware released under an CERN Open Hardware Licence v1.2. See the LICENSE_HARDWARE file for more information.
+Hardware released under an CERN Open Hardware License v1.2. See the LICENSE_HARDWARE file for more information.
 
 Electronic Cats is a registered trademark, please do not use if you sell these PCBs.
 
